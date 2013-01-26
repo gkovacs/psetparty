@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>PsetParty</title>
+
+  <link rel='stylesheet' type='text/css' href='libs/css/smoothness/jquery-ui-1.8.11.custom.css' />
+  <link rel='stylesheet' type='text/css' href='jquery.weekcalendar.css' />
+  <link rel="stylesheet" type="text/css" href="skins/default.css" />
+  <style type='text/css'>
+  body {
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    margin: 0;
+	background-color: #544937;
+	background-image: url('tea-cup1.png');
+	background-repeat: repeat-x repeat-y;
+	background-position: left top;
+  }
+
+  h1 {
+    margin:0 0 2em;
+    padding: 0.5em;
+    font-size: 1.3em;
+  }
+
+  p.description {
+    font-size: 0.8em;
+    padding: 1em;
+    position: absolute;
+    top: 3.2em;
+    margin-right: 400px;
+  }
+
+  .clearer {
+    clear: both;
+  }
+  
+  .search {
+	  -webkit-border-radius: 30px;
+    border-radius: 30px;
+	float: right;
+	margin-right: 50px;
+  }
+  
+  .search-icon{
+	  color:white;
+	  float:right;
+	  margin-right:10px;
+  }
+
+  #calendar_selection {
+	font-size: 0.7em;
+	position: absolute;
+	top: 87px;
+	right: 1370px;
+	padding: 1em;
+	background: #ffc;
+	border: 1px solid #dda;
+	width: 190px;
+	height: 27px;
+  }
+
+  #message {
+    font-size: 0.7em;
+    padding: 1em;
+    margin-right: 1em;
+    margin-bottom: 10px;
+    background: #ddf;
+    border: 1px solid #aad;
+    width: 270px;
+    float: right;
+  }
+  </style>
+  <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+
+  <script type='text/javascript' src='libs/jquery-1.4.4.min.js'></script>
+  <script type='text/javascript' src='libs/jquery-ui-1.8.11.custom.min.js'></script>
+  <script type='text/javascript' src='/nowjs/now.js'></script>
+
+  <script type="text/javascript" src="libs/date.js"></script>
+  <script type='text/javascript' src='jquery.weekcalendar.js'></script>
+  <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+ 
+  <script type='text/javascript'>
+
+
+  var year = new Date().getFullYear();
+  var month = new Date().getMonth();
+  var day = new Date().getDate();
+
+  var eventData1 = {
+    options: {
+      timeslotsPerHour: 4,
+      timeslotHeight: 20
+    },
+    events : [
+       {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 30),'title':'Lunch with Mike'},
+       {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 45),'title':'Dev Meeting'},
+       {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 45),'title':'Hair cut'},
+       {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 30),'title':'Team breakfast'},
+       {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 15),'title':'Product showcase'}
+    ]
+  };
+
+  var eventData2 = {
+    options: {
+      timeslotsPerHour: 3,
+      timeslotHeight: 30
+    },
+    events : [
+       {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 00),'title':'Lunch with Sarah'},
+       {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 40),'title':'Team Meeting'},
+       {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 40),'title':'Meet with Joe'},
+       {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 20),'title':'Coffee with Alison'},
+       {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 15),'title':'Product showcase'}
+    ]
+  };
+
+
+  // data set 3 : using event delete features
+  var eventData3 = {
+    options: {
+      allowEventDelete: true,
+      eventDelete: function(calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
+        if (confirm('You want to delete this event?')) {
+          calendar.weekCalendar('removeEvent',calEvent.id);
+        }
+      },
+      deletable: function(calEvent, element) {
+        return calEvent.start > Date.today();
+      }
+    },
+    events : [
+       {'id':1, 'start': new Date(year, month, day, 12), 'end': new Date(year, month, day, 13, 00),'title':'Lunch with Ashley'},
+       {'id':2, 'start': new Date(year, month, day, 14), 'end': new Date(year, month, day, 14, 40),'title':'Team Picnic'},
+       {'id':3, 'start': new Date(year, month, day + 1, 18), 'end': new Date(year, month, day + 1, 18, 40),'title':'Meet with Cathy'},
+       {'id':4, 'start': new Date(year, month, day - 1, 8), 'end': new Date(year, month, day - 1, 9, 20),'title':'Coffee with Alyssa'},
+       {'id':5, 'start': new Date(year, month, day + 1, 14), 'end': new Date(year, month, day + 1, 15),'title':'Product kickoff'}
+    ]
+  };
+
+  email = 'gkovacs@MIT.EDU'
+  fullname = 'Geza Kovacs'
+
+  function getUrlParameters() {
+    var map = {}
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      map[key] = decodeURI(value)
+    })
+    return map
+  }
+
+  $(document).ready(function() {
+    if (isdefined(getUrlParameters()['email'])) {
+      email = getUrlParameters()['email']
+    }
+    if (isdefined(getUrlParameters()['name'])) {
+      fullname = getUrlParameters()['name']
+    }
+    var $calendar = $('#calendar').weekCalendar({
+      timeslotsPerHour: 4,
+      scrollToHourMillis : 0,
+      height: function($calendar){
+        return $(window).height() - $('h1').outerHeight(true);
+      },
+      eventRender : function(calEvent, $event) {
+        if(calEvent.end.getTime() < new Date().getTime()) {
+          $event.css('backgroundColor', '#aaa');
+          $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
+        }
+      },
+      eventNew : function(calEvent, $event) {
+        alert('here is where the logic for creating a new event goes. the region of the calendar selected was:\n ' + JSON.stringify(calEvent))
+        //alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+      },
+      eventClick: function(calEvent, $event) {
+        alert('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+      },
+      data: function(start, end, callback) {
+        var dataSource = $('#data_source').val();
+
+        if (dataSource === '1') {
+          callback(eventData1);
+        } else if(dataSource === '2') {
+          callback(eventData2);
+        } else if(dataSource === '3') {
+          callback(eventData3);
+        } else {
+          callback([]);
+        }
+      }
+    });
+
+    $('#data_source').change(function() {
+      $calendar.weekCalendar('refresh');
+      updateMessage();
+    });
+
+    function updateMessage() {
+      var dataSource = $('#data_source').val();
+      $('#message').fadeOut(function(){
+        if(dataSource === '1') {
+          $('#message').text('Displaying event data set 1 with timeslots per hour of 4 and timeslot height of 20px');
+        } else if(dataSource === '2') {
+          $('#message').text('Displaying event data set 2 with timeslots per hour of 3 and timeslot height of 30px');
+        } else if(dataSource === '3') {
+          $('#message').text('Displaying event data set 3 with allowEventDelete enabled. Events before today will not be deletable. A confirmation dialog is opened when you delete an event.');
+        } else {
+          $('#message').text('Displaying no events.');
+        }
+        $(this).fadeIn();
+      });
+    }
+
+    updateMessage();
+  });
+  
+  classlist = []
+  
+  now.ready(function() {
+    now.getClassesWithPrefix('', function(nclasslist) {
+      classlist = nclasslist
+      for (var i = 0; i < classlist.length; ++i) {
+        $('#classDataList').append($('<option>').attr('value', classlist[i]))
+      }
+      $('#classDataList').autocomplete({source: classlist})
+    })
+    now.getClasses(email, function(classes) {
+      $.map(classes, function(classname) {
+        addClassWidget(classname)
+      })
+    })
+  })
+  
+  function isdefined(x) {
+    return (typeof x !== 'undefined' && x !== null)
+  }
+  
+  function sanitizeClassName(x) {
+    return x.split('.').join('-')
+  }
+  
+  function activeClasses() {
+    return $.map($('.classitem'), function(x) { return $(x).attr('classname') })
+  }
+  
+  function addClassWidget(classname) {
+    $('#classlist')
+      .append(
+        $('<div>')
+          .addClass('C' + sanitizeClassName(classname))
+          .addClass('classitem')
+          .attr('classname', classname)
+          .append(
+            $('<span>')
+              .text(classname)
+              .css('background-color', 'black')
+              .css('color', 'white')
+          )
+          .append(
+            $('<button>')
+              .text('X')
+              .click(function() {
+                $('.C' + sanitizeClassName(classname)).remove()
+                now.removeClass(email, classname)
+                return false
+              })
+          )
+      )
+  }
+  
+  function classAdded() {
+    var classname = $('#classSearchBox').val()
+    console.log(classname)
+    $('#classSearchBox').val('')
+    var active = activeClasses()
+    if (active.length > 0 && active.indexOf(classname) != -1)
+      return false
+    if (!isdefined(classlist[classname])) {
+      now.addClassType(classname)
+    }
+    addClassWidget(classname)
+    now.addClass(email, classname)
+    return false
+  }
+  </script>
+</head>
+<body>
+  
+  <h1>PsetParty</h1>
+  
+  <div style="float: right; margin-right: 50px">
+    
+    <form style="float: right; margin-right: 0px" action="javascript:void(0)" onsubmit="classAdded()" class="search" id="search from" dir="ltr" lang="en">
+    <input type="text" id="classSearchBox" list="classDataList" value="search for classes" onblur="if(this.value=='')this.value='search for classes'" onfocus="if(this.value=='search for classes')this.value=''" />
+    <datalist id="classDataList"></datalist>
+	  <input type="hidden" value="submit"/>
+    </form>
+    
+    <br/>
+
+    <div id="classlist" style="float: right; margin-right: 0px;"></div>
+    
+</div>
+  <img class="search-icon" src="search-icon.png" width="23" height="24" alt="Search" />
+  
+  
+  
+  </div>
+  
+  <!--<div id="message" class="ui-corner-all"></div>-->
+   
+<div class="clearer"></div>
+
+<!--
+<div id="calendar_selection" class="ui-corner-all">
+    <strong>Classes: </strong>
+    <select id="data_source">
+      <option value="">Select your class</option>
+      <option value="1">6.857</option>
+      <option value="2">6.804</option>
+      <option value="3">6.831</option>
+    </select>
+  </div>
+-->
+
+<div id="TabbedPanels1" class="TabbedPanels">
+  <ul class="TabbedPanelsTabGroup">
+    <li class="TabbedPanelsTab" tabindex="0">Calendar</li>
+    <li class="TabbedPanelsTab" tabindex="0">Map</li>
+  </ul>
+  <div class="TabbedPanelsContentGroup">
+    <div class="TabbedPanelsContent"><div id="calendar"></div></div>
+
+    <div class="TabbedPanelsContent">Map here</div>
+  </div>
+<script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+
+</script></div>
+</div>
+
+
+</body>
+</html>
