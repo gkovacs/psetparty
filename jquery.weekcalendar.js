@@ -65,9 +65,9 @@
         },
         switchDisplay: {},
         scrollToHourMillis: 500,
-        allowEventDelete: false,
-        allowCalEventOverlap: false,
-        overlapEventsSeparate: false,
+        allowEventDelete: true,
+        allowCalEventOverlap: true,
+        overlapEventsSeparate: true,
         totalEventsWidthPercentInOneColumn: 100,
         readonly: false,
         allowEventCreation: true,
@@ -248,7 +248,7 @@
          * class
          * @type {boolean}
          */
-        displayOddEven: false,
+        displayOddEven: true,
         textSize: 13,
         /**
          * the title attribute for the calendar. possible placeholders are:

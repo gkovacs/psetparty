@@ -70,6 +70,11 @@
     width: 270px;
     float: right;
   }
+    label, input { display: inline-block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:10px; }
+    .ui-dialog .ui-state-error { padding: .1em; }
+	#personal-public_1, #personal-public_0 {cursor: pointer;}
   </style>
   <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
 
@@ -151,6 +156,7 @@
   }
 
   $(document).ready(function() {
+	  $( "#dialog-modal" ).hide();
     if (isdefined(getUrlParameters()['email'])) {
       email = getUrlParameters()['email']
     }
@@ -169,8 +175,12 @@
           $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
         }
       },
+	  
       eventNew : function(calEvent, $event) {
-        alert('here is where the logic for creating a new event goes. the region of the calendar selected was:\n ' + JSON.stringify(calEvent))
+        $( "#dialog-modal" ).dialog({
+      height: 300,
+      modal: true
+    });//alert('here is where the logic for creating a new event goes. the region of the calendar selected was:\n ' + JSON.stringify(calEvent))
         //alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
       },
       eventClick: function(calEvent, $event) {
@@ -246,20 +256,27 @@
   
   function addClassWidget(classname) {
     $('#classlist')
-      .append(
+      .prepend(
         $('<div>')
+          .css('float', 'left')
           .addClass('C' + sanitizeClassName(classname))
           .addClass('classitem')
           .attr('classname', classname)
           .append(
             $('<span>')
               .text(classname)
-              .css('background-color', 'black')
+              .css('background-color', '#fba52c')
               .css('color', 'white')
+			  .css('border-radius', '10px')
+			  .css('padding', '10px')
           )
           .append(
             $('<button>')
               .text('X')
+              .css('cursor', 'pointer')
+			  .css('background-color', 'transparent')
+			  .css('color', '#fba52c')
+			  .css('border', 'none')
               .click(function() {
                 $('.C' + sanitizeClassName(classname)).remove()
                 now.removeClass(email, classname)
@@ -285,24 +302,27 @@
   }
   </script>
 </head>
+
+<!--BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY BODY-->
 <body>
   
-  <h1>PsetParty</h1>
+
+<h1>PsetParty</h1>
   
-  <div style="float: right; margin-right: 50px">
+  <div style="float: right; margin-right: 100px">
     
-    <form style="float: right; margin-right: 0px" action="javascript:void(0)" onsubmit="classAdded()" class="search" id="search from" dir="ltr" lang="en">
-    <input type="text" id="classSearchBox" list="classDataList" value="search for classes" onblur="if(this.value=='')this.value='search for classes'" onfocus="if(this.value=='search for classes')this.value=''" />
+    <form style="float: right; margin-right: 0px;" action="javascript:void(0)" onsubmit="classAdded()" class="search" id="search from" dir="ltr" lang="en">
+    <input type="text" id="classSearchBox" list="classDataList" value="search for classes" onblur="if(this.value=='')this.value='search for classes'" onfocus="if(this.value=='search for classes')this.value=''" style="background-color: #FFF; color: #544937; -webkit-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: inset 1px 1px 6px 0px #ccc; box-shadow: inset 1px 1px 6px 0px #ccc; text-align:left; padding-left: 5px;"/>
     <datalist id="classDataList"></datalist>
 	  <input type="hidden" value="submit"/>
     </form>
     
     <br/>
 
-    <div id="classlist" style="float: right; margin-right: 0px;"></div>
+    <div id="classlist" style="float: right; margin-right: 0px; margin-top:0px; text-align: center; padding-top:20px;"></div>
     
 </div>
-  <img class="search-icon" src="search-icon.png" width="23" height="24" alt="Search" />
+  <!--<img class="search-icon" src="search-icon.png" width="23" height="24" alt="Search" />-->
   
   
   
@@ -340,6 +360,24 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
 </script></div>
 </div>
 
+<div id="dialog-modal" title="Create a party">
+  <form>
+  <fieldset>
+    <label for="location" style="color: #544937">Location</label>
+    <input type="text" name="location" id="location" class="text ui-widget-content ui-corner-all" />
+    <label for="limit" style="color: #544937">Limit</label>
+    <input type="number" name="limit" id="limit" value="" class="text ui-widget-content ui-corner-all" />
+    <table width="259" height="66">
+      <tr>
+        <td width="135"><label><input type="radio" name="personal-public" value="public" id="personal-public_1" style="color: #544937">
+Public</label></td>
+        <td width="135"><label>
+          <input type="radio" name="personal-public" value="personal" id="personal-public_0" style="color: #544937">
+          Personal</label></td>
+      </tr>
+    </table>
+  </form>
+</div>
 
 </body>
 </html>
