@@ -40,6 +40,17 @@ for line in classdata.split('\n')
     classlist.push subjectnum
 classlist.sort()
 
+buildingdata = fs.readFileSync('buildings.txt', 'utf-8')
+location_list = []
+location_addresses = {}
+for line in buildingdata.split('\n')
+  [buildingname,buildingaddress] = line.split('\t')
+  location_list.push buildingname
+  location_addresses[buildingname] = buildingaddress
+
+everyone.now.location_list = location_list
+everyone.now.location_addresses = location_addresses
+
 everyone.now.addClassType = (classname) ->
   if typeof classname != typeof ''
     return

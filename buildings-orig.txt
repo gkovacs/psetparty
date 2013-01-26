@@ -1,0 +1,164 @@
+1          PIERCE LABORATORY                  33  MASSACHUSETTS AVENUE         ACADEMIC   12/31/1917                                
+2          BUILDING 2                         182  MEMORIAL DRIVE              ACADEMIC   12/31/1916                                
+3          MACLAURIN BUILDINGS (3)            33  MASSACHUSETTS AVE            ACADEMIC   12/31/1916                                
+4          MACLAURIN BUILDINGS (4)            182  MEMORIAL DRIVE              ACADEMIC   12/31/1916                                
+5          PRATT SCHOOL                       55  MASSACHUSETTS AVENUE         ACADEMIC   12/31/1920                                
+6          EASTMAN LABORATORIES               182  MEMORIAL DRIVE              ACADEMIC   12/31/1933                                
+6B         SOLVENT STORAGE                    182  MEMORIAL DRIVE              SERVICE    12/31/1921                                
+6C         BUILDING 6C                        182  MEMORIAL DRIVE              ACADEMIC   05/01/2007                                
+7          ROGERS BUILDING                    77  MASSACHUSETTS AVENUE         ACADEMIC   12/31/1938                                
+7A         ROTCH LIBRARY EXTENSION            77  MASSACHUSETTS AVENUE         ACADEMIC   07/11/1990                                
+8          BUILDING 8                         21  AMES ST                      ACADEMIC   12/31/1916                                
+9          BUILDING 9                         105  MASSACHUSETTS AVENUE        ACADEMIC   12/01/1967                                
+10         MACLAURIN BUILDINGS (10)           222  MEMORIAL DRIVE              ACADEMIC   12/31/1916                                
+11         HOMBERG BUILDING                   77  MASSACHUSETTS AVE            ACADEMIC   12/31/1928                                
+12         BUILDING 12                        60  VASSAR STREET                ACADEMIC   07/01/1942                                
+12A        WASTE CHEMICAL STORAGE             60  VASSAR STREET                SERVICE    12/31/1917                                
+13         BUSH BUILDING                      105  MASSACHUSETTS AVE           ACADEMIC   06/01/1965                                
+14         HAYDEN MEMORIAL LIBRARY            160  MEMORIAL DRIVE              ACADEMIC   12/31/1951                                
+14E        HAYDEN MEMORIAL LIBRARY            160  MEMORIAL DRIVE              ACADEMIC   12/31/1951                                
+14N        HAYDEN MEMORIAL LIBRARY            160  MEMORIAL DRIVE              ACADEMIC   12/31/1951                                
+16         DORRANCE BUILDING                  21  AMES ST                      ACADEMIC   06/01/1952                                
+17         WRIGHT BROTHERS WIND TUNNEL        76  VASSAR STREET                ACADEMIC   01/01/1939                                
+18         DREYFUS BUILDING                   21  AMES ST                      ACADEMIC   12/15/1969                                
+24         BUILDING 24                        60  VASSAR STREET                ACADEMIC   12/31/1941                                
+26         COMPTON LABORATORIES               60  VASSAR STREET                ACADEMIC   02/01/1957                                
+31         SLOAN LABORATORIES                 70  VASSAR STREET                ACADEMIC   12/31/1928                                
+32         STATA CENTER                       32 VASSAR STREET                 ACADEMIC   03/19/2004                                
+32P        STATA CENTER GARAGE                32 VASSAR STREET                 SERVICE    06/02/2003                                
+33         GUGGENHEIM LABORATORY              125  MASSACHUSETTS AVENUE        ACADEMIC   07/01/1928                                
+34         EG&G EDUCATION CENTER              50  VASSAR STREET                ACADEMIC   12/31/1983                                
+35         SLOAN LABORATORY                   127  MASSACHUSETTS AVENUE        ACADEMIC   06/01/1952                                
+36         FAIRCHILD BUILDING (36)            50  VASSAR STREET                ACADEMIC   10/01/1973                                
+37         MCNAIR BUILDING                    70  VASSAR STREET                ACADEMIC   12/31/1969                                
+38         FAIRCHILD BUILDING (38)            50  VASSAR STREET                ACADEMIC   10/01/1973                                
+39         BROWN BUILDING                     60  VASSAR STREET                ACADEMIC   12/31/1968                                
+41         BUILDING 41                        77  VASSAR STREET                ACADEMIC   12/31/1917                                
+42         COGENERATION PLANT                 59  VASSAR STREET                SERVICE    12/31/1916                                
+43         POWER PLANT ANNEX                  57  VASSAR STREET                SERVICE    08/01/1916                                
+44         CYCLOTRON                          51  VASSAR STREET                ACADEMIC   12/31/1939                                
+46         BCSC                               43 VASSAR STREET                 ACADEMIC   09/01/2005                                
+48         PARSONS LABORATORY                 15  VASSAR STREET                ACADEMIC   12/31/1951                                
+50         WALKER MEMORIAL                    142  MEMORIAL DRIVE              SERVICE    09/01/1917                                
+51         WOOD SAILING PAVILION              134  MEMORIAL DRIVE              SERVICE    12/31/1937                                
+54         GREEN BUILDING                     21  AMES ST                      ACADEMIC   07/01/1964                                
+56         WHITAKER BUILDING                  21  AMES ST                      ACADEMIC   04/01/1965                                
+57         MIT ALUMNI POOL                    6  VASSAR ST                     SERVICE    05/01/1940                                
+62         ALUM HOUSE: MUNROE HAYDEN WOOD     3  AMES STREET                   RESIDENT   09/01/1931                                
+64         ALUM HOUSE: WALCOTT BEMIS GOODALE  3  AMES STREET                   RESIDENT   04/01/1924                                
+66         LANDAU BUILDING                    25  AMES STREET                  ACADEMIC   12/31/1976                                
+68         KOCH BIOLOGY BUILDING              31  AMES STREET                  ACADEMIC   10/07/1994                                
+76         D H KOCH IN FICR                   500 MAIN STREET                  ACADEMIC                                             
+E1         GRAY HOUSE                         111  MEMORIAL DRIVE              RESIDENT   07/01/1917                                
+E2         SENIOR HOUSE                       4  AMES STREET                   RESIDENT   07/01/1916                                
+E14        BUILDING E14                       75  AMHERST STREET               ACADEMIC                                             
+E15        WIESNER BUILDING                   20  AMES STREET                  ACADEMIC   09/01/1984                                
+E17        MUDD BUILDING                      40  AMES STREET                  ACADEMIC   03/06/1975                                
+E18        FORD BUILDING (E18)                50  AMES STREET                  ACADEMIC   10/01/1964                                
+E19        FORD BUILDING (E19)                400  MAIN STREET                 SERVICE    10/01/1964                                
+E23        HEALTH SERVICES                    25  CARLETON STREET              SERVICE    02/15/1982                                
+E25        WHITAKER COLLEGE                   45  CARLETON STREET              ACADEMIC   02/15/1982                                
+E33        RINALDI TILE                       34  CARLETON STREET              ACADEMIC                                             
+E34        BUILDING E34                       42-44  CARLETON STREET           ACADEMIC   03/01/1975                                
+E38        SUFFOLK BUILDING                   292  MAIN STREET                 ACADEMIC   09/01/1968                                
+E40        MUCKLEY BUILDING                   1  AMHERST STREET                ACADEMIC   12/31/1969                                
+E51        TANG CENTER                        70  MEMORIAL DRIVE               ACADEMIC   12/31/1980                                
+E52        SLOAN BUILDING                     50  MEMORIAL DRIVE               ACADEMIC   05/01/1952                                
+E53        HERMANN BUILDING                   30  WADSWORTH STREET             ACADEMIC   10/01/1965                                
+E55        EASTGATE                           60  WADSWORTH STREET             RESIDENT   08/01/1967                                
+E60        ARTHUR D LITTLE BUILDING           30  MEMORIAL DRIVE               ACADEMIC   03/01/1994                                
+E62        BUILDING E62                       100 MAIN STREET                  ACADEMIC                                             
+N4         ALBANY GARAGE                      32  ALBANY STREET                SERVICE    10/01/1966                                
+N9         SUPERCONDUCTING TEST FACILITY      68  ALBANY STREET                ACADEMIC   12/31/1978                                
+N10        HIGH VOLTAGE RESEARCH LAB          155  MASSACHUSETTS AVENUE        ACADEMIC   02/01/1965                                
+N16        COOLING TOWER & OIL RESERVE        60  ALBANY STREET                SERVICE    12/31/1972                                
+N16A       BUILDING N16A                      60  ALBANY STREET                SERVICE                                              
+N16B       FIRE PUMP ROOM                     60  ALBANY STREET                SERVICE                                              
+N16C       BUILDING N16C                      60  ALBANY STREET                SERVICE                                              
+N51        BUILDING N51                       275  MASSACHUSETTS AVENUE        ACADEMIC   01/01/1964                                
+N52        MIT MUSEUM                         265  MASSACHUSETTS AVENUE        ACADEMIC   01/01/1964                                
+N57        BUILDING N57                       1 STATE STREET                   SERVICE                                              
+NW10       EDGERTON HOUSE                     143  ALBANY STREET               RESIDENT                                             
+NW12       NUCLEAR REACTOR LAB                138  ALBANY STREET               ACADEMIC   12/31/1955                                
+NW12A      Nuclear Reactor Laboratories       138 ALBANY ST                    ACADEMIC                                             
+NW13       BUILDING NW13                      144  ALBANY STREET               ACADEMIC   12/31/1963                                
+NW14       FRANCIS BITTER MAGNET LAB (NW14)   150  ALBANY STREET               ACADEMIC   09/01/1962                                
+NW15       FRANCIS BITTER MAGNET LAB (NW15)   166-170  ALBANY STREET           ACADEMIC   12/31/1962                                
+NW16       PLASMA SCIENCE & FUSION CENTER     167  ALBANY STREET               ACADEMIC   05/01/1981                                
+NW17       PLASMA SCIENCE & FUSION CENTER     175  ALBANY STREET               ACADEMIC                                             
+NW20       ALBANY ST GENERATOR SHELTER        180  ALBANY STREET               ACADEMIC                                             
+NW21       PLASMA SCIENCE & FUSION CENTER     190  ALBANY STREET               ACADEMIC   05/01/1980                                
+NW22       PLASMA SCIENCE & FUSION CENTER     185  ALBANY STREET               ACADEMIC   01/17/1992                                
+NW30       224 ALBANY STREET                  224 ALBANY STREET                RESIDENT   11/01/1958                                
+NW35       ASHDOWN HOUSE                      235  ALBANY STREET               RESIDENT   07/01/2008                                
+NW61       RANDOM HALL                        292-290  MASSACHUSETTS AVE       RESIDENT   12/31/1968                                
+NW62       VOLVO GARAGE                       310-314  MASSACHUSETTS AVE       SERVICE                                              
+NW86       70 PACIFIC STREET DORMITORY        70 PACIFIC STREET                RESIDENT   08/01/2002                                
+OC1        ENDICOTT HOUSE                     80  HAVEN ST                     ACADEMIC   07/01/1955                                
+OC1A       EDWARD PENNELL BROOKS CENTER       80  HAVEN ST                     ACADEMIC   12/31/1983                                
+OC19       BATES LINEAR ACCELERATOR           21 MANNING AVE                   ACADEMIC   04/07/1972                                
+OC19A      BATES LINAC: ADMINISTRATION BLDG   21 MANNING AVE                   ACADEMIC                                             
+OC19B      BATES LINAC: RESEARCH BLDG         21 MANNING AVE                   ACADEMIC                                             
+OC19C      BATES LINAC: ENGINEERING BLDG      21 MANNING AVE                   ACADEMIC                                             
+OC19D      BATES LINAC: LAB SERVICE           21 MANNING AVE                   ACADEMIC                                             
+OC19E      BATES LINAC: WAREHOUSE #2          21 MANNING AVE                   ACADEMIC                                             
+OC19F      BATES LINAC: WAREHOUSE #3          21 MANNING AVE                   ACADEMIC                                             
+OC19G      BATES LINAC: BARN                  21 MANNING AVE                   ACADEMIC                                             
+OC21       WALLACE ASTROPHYSICAL OBSERVATORY  50  GROTON RD                    ACADEMIC   10/14/1971                                
+OC22       WESTFORD OPTICS FACILITY           50  GROTON RD                    ACADEMIC                                             
+OC23       WALLACE GEOPHYSICAL OBSERVATORY    50  GROTON RD                    ACADEMIC   05/20/1970                                
+OC25       HAYSTACK OBSERVATORY               50  GROTON RD                    ACADEMIC                                             
+OC26       HAYSTACK ATMOSPHERIC SCIENCES      50  GROTON RD                    ACADEMIC                                             
+OC31       KATAHDIN HILL 1                    244  WOOD STREET                 ACADEMIC                                             
+OC31A      KATAHDIN HILL 1A                   244  WOOD STREET                 ACADEMIC                                             
+OC32       LEXINGTON FIELD HOUSE              244  WOOD STREET                 ACADEMIC                                             
+OC32A      BALLOON HOUSE A                    244  WOOD STREET                 SERVICE                                              
+OC32B      BALLOON HOUSE B                    244  WOOD STREET                 SERVICE                                              
+OC33       ANNEX 3                            244  WOOD STREET                 ACADEMIC                                             
+OC35       ANNEX V                            244  WOOD STREET                 ACADEMIC                                             
+OC36       ANNEX 6                            244  WOOD STREET                 ACADEMIC                                             
+OC36A      ANNEX 6 TRAILER                    244  WOOD STREET                 ACADEMIC                                             
+W1         FARIBORZ MASEEH HALL               305  MEMORIAL DRIVE              RESIDENT   12/31/1939                                
+W2         BUILDING W2                        311  MEMORIAL DRIVE              RESIDENT   12/31/1967                                
+W4         MCCORMICK HALL                     320  MEMORIAL DRIVE              RESIDENT   09/01/1963                                
+W5         GREEN HALL                         350  MEMORIAL DRIVE              RESIDENT   12/31/1970                                
+W7         BAKER HOUSE                        362  MEMORIAL DRIVE              RESIDENT   12/31/1949                                
+W8         PIERCE BOATHOUSE                   405  MEMORIAL DRIVE              SERVICE    12/31/1967                                
+W11        RELIGIOUS ACTIVITIES CENTER        40  MASSACHUSETTS AVENUE         SERVICE    01/01/1967                                
+W13        BEXLEY HALL                        46-52  MASSACHUSETTS AVENUE      RESIDENT   09/01/1939                                
+W15        MIT CHAPEL                         48  MASSACHUSETTS AVE            SERVICE    05/01/1955                                
+W16        KRESGE AUDITORIUM                  48  MASSACHUSETTS AVE            SERVICE    12/31/1956                                
+W20        STRATTON STUDENT CENTER            84  MASSACHUSETTS AVENUE         SERVICE    10/01/1965                                
+W31        DU PONT ATHLETIC GYMNASIUM         120  MASSACHUSETTS AVENUE        SERVICE    09/01/1957                                
+W32        DU PONT ATHLETIC CENTER            100  MASSACHUSETTS AVENUE        SERVICE    10/01/1959                                
+W33        ROCKWELL CAGE                      106 VASSAR STREET                SERVICE    06/01/1948                                
+W34        JOHNSON ATHLETICS CENTER           120  VASSAR STREET               SERVICE    10/01/1980                                
+W35        SPORTS & FITNESS CENTER            120  VASSAR STREET               SERVICE    09/01/2002                                
+W45        WEST GARAGE                        125  VASSAR STREET               SERVICE    06/01/1964                                
+W51        BURTON-CONNER HOUSE                410  MEMORIAL DRIVE              RESIDENT   12/31/1948                                
+W51C       405 MEMORIAL DRIVE                 405  MEMORIAL DRIVE              RESIDENT                                             
+W53        CARR INDOOR TENNIS FACILITY        410  MEMORIAL DRIVE              SERVICE    12/31/1971                                
+W53A       CARR INDOOR TENNIS FACILITY        410  MEMORIAL DRIVE              SERVICE    05/01/1985                                
+W53B       DUPONT TENNIS COURTS (OFFICE)      410  MEMORIAL DRIVE              SERVICE                                              
+W53C       BUILDING W53C                      410  MEMORIAL DRIVE              SERVICE                                              
+W53D       CARR INDOOR TENNIS FACILITY(SVC)   410  MEMORIAL DRIVE              SERVICE                                              
+W56        BUILDING W56                       169 VASSAR ST                    SERVICE                                              
+W57        BUILDING W57                       169 VASSAR ST                    SERVICE                                              
+W57A       BUILDING W57A                      169 VASSAR ST                    SERVICE                                              
+W59        HEINZ BUILDING                     201  VASSAR STREET               SERVICE    12/31/1979                                
+W61        MACGREGOR HOUSE                    450  MEMORIAL DRIVE              RESIDENT   09/01/1970                                
+W70        NEW HOUSE                          471-476  MEMORIAL DRIVE          RESIDENT   12/31/1976                                
+W71        NEXT HOUSE                         500  MEMORIAL DRIVE              RESIDENT   08/24/1981                                
+W79        SIMMONS HALL                       229 VASSAR STREET                RESIDENT   08/20/2002                                
+W84        TANG HALL                          550  MEMORIAL DRIVE              RESIDENT   12/31/1973                                
+W85        WESTGATE                           540  MEMORIAL DRIVE              RESIDENT   08/01/1963                                
+W89        MIT POLICE                         301  VASSAR STREET               SERVICE    03/08/2006                                
+W91        INFORMATION SYSTEMS OPERATIONS     565-570  MEMORIAL DRIVE          SERVICE    12/31/1949                                
+W92        BUILDING W92                       304 VASSAR STREET                ACADEMIC   07/01/1999                                
+W98        BUILDING W98                       600 MEMORIAL DRIVE               ACADEMIC                                             
+W85DE      WESTGATE (DE)                      292-290 VASSAR STREET            RESIDENT   08/01/1963                                
+W85FG      WESTGATE (FG)                      286-284 VASSAR STREET            RESIDENT   08/01/1963                                
+WW15       BUILDING WW15                      350  BROOKLINE STREET            SERVICE                                              
+W85ABC     WESTGATE (ABC)                     11-13-15 AUDREY STREET           RESIDENT   08/01/1963                                
+W85HJK     WESTGATE (HJK)                     282-280-278 VASSAR STREET        RESIDENT   08/01/1963                                
+

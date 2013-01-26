@@ -247,6 +247,12 @@ function classlistCallback( request, response ) {
 
   
   now.ready(function() {
+    $('#location').autocomplete(
+      {
+        autoFocus: true,
+        source: now.location_list
+      }
+    )
     now.getClassesWithPrefix('', function(nclasslist) {
       classlist = nclasslist
       //for (var i = 0; i < classlist.length; ++i) {
