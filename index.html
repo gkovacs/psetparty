@@ -164,6 +164,8 @@
     })
     return map
   }
+  
+  getEvents = function(callback) { callback([]) }
 
   $(document).ready(function() {
 	  $( "#dialog-modal" ).hide();
@@ -187,27 +189,17 @@
       },
 	  
       eventNew : function(calEvent, $event) {
+        console.log(calEvent)
         $( "#dialog-modal" ).dialog({
-      height: 300,
-      modal: true
-    });//alert('here is where the logic for creating a new event goes. the region of the calendar selected was:\n ' + JSON.stringify(calEvent))
-        //alert('You\'ve added a new event. You would capture this event, add the logic for creating a new event with your own fields, data and whatever backend persistence you require.');
+          height: 300,
+          modal: true
+        });
       },
       eventClick: function(calEvent, $event) {
         alert('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
       },
       data: function(start, end, callback) {
-        var dataSource = $('#data_source').val();
-
-        if (dataSource === '1') {
-          callback(eventData1);
-        } else if(dataSource === '2') {
-          callback(eventData2);
-        } else if(dataSource === '3') {
-          callback(eventData3);
-        } else {
-          callback([]);
-        }
+        getEvents(callback)
       }
     });
 
@@ -247,6 +239,25 @@ function classlistCallback( request, response ) {
 
   
   now.ready(function() {
+    getEvents = function(callback) {
+      now.getEventsForUser(email, callback)
+    } /*function(callback) {
+    output = [
+  {
+    "id": "etl7gqbekv12rgrm8vlooa5ato",
+    "title": "6.003 lecture",
+    "start": "2013-01-21T07:30:00.000Z",
+    "end": "2013-01-21T12:30:00.000Z"
+  },
+  {
+    "id": "9qmtgen9p0umcje0p1iru08uqo",
+    "title": "6.005 recitation",
+    "start": "2013-01-23T10:30:00.000Z",
+    "end": "2013-01-23T14:00:00.000Z"
+  }
+]
+callback(output)
+  }*/
     $('#location').autocomplete(
       {
         autoFocus: true,

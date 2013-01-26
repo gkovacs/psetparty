@@ -3,6 +3,9 @@ request = require 'request'
 $ = require 'jQuery'
 restler = require 'restler'
 
+redis = require 'redis'
+rclient = redis.createClient()
+
 express = require 'express'
 app = express()
 http = require 'http'
@@ -25,7 +28,8 @@ app.configure( ->
   app.use(express.static(__dirname + '/'))
 )
 
-classes = {}
+
+{cl: classes} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
 
 classlist = []
 classlist_set = {}
@@ -68,6 +72,65 @@ everyone.now.getCalendarId = getCalendarId = (classname, callback) ->
 
 root.classids = {}
 
+###
+# s: "2013-01-21T07:30:00-05:00"
+splitTimeRange = (s) ->
+  [date,timerange] = s.split('T')
+  [start,end] = timerange.split('-')
+  startTime = new Date(date + 'T' + start)
+  endTime = new Date(date + 'T' + end)
+  return [startTime, endTime]
+###
+
+parseEvent = (event) ->
+  #[startTime, endTime] = splitTimeRange(event.start.dateTime)
+  return {
+    id: event.id,
+    title: event.summary,
+    start: new Date(event.start.dateTime),
+    end: new Date(event.end.dateTime),
+  }
+
+getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
+  await
+    getClasses(username, defer(classlist))
+  events_per_class = []
+  await
+    for title,i in classlist
+      getEvents(title, defer(events_per_class[i]))
+  events = []
+  for events_for_class in events_per_class
+    for event in events_for_class
+      events.push event
+  callback events
+
+getEvents = everyone.now.getEvents = (title, callback) ->
+  restler.get('http://localhost:5000/events?title=' + title).on('complete', (events) ->
+    items = events.items ? []
+    callback (parseEvent(event) for event in items)
+  )
+
+app.get '/events', (req, res) ->
+  title = req.query.title
+  if title?
+    getEvents(title, (x) -> res.json(x))
+    return
+  username = req.query.username
+  if username?
+    getEventsForUser(username, (x) -> res.json(x))
+    return
+  res.send 'no title or username specified'
+
+app.get '/classes', (req, res) ->
+  username = req.query.username
+  if username?
+    getClasses(username, (x) -> res.json(x))
+
+app.get '/save', (req, res) ->
+  ndata = JSON.stringify({cl: classes})
+  fs.writeFileSync('psetparty.json', ndata, 'utf-8')
+  res.send ndata
+
 everyone.now.getCalendarIds = (classnames, callback) ->
   await
     for title,i in classnames
@@ -75,7 +138,7 @@ everyone.now.getCalendarIds = (classnames, callback) ->
         getCalendarId(title, defer(classids[title]))
   callback(root.classids)
 
-everyone.now.getClasses = (username, callback) ->
+everyone.now.getClasses = getClasses = (username, callback) ->
   if not classes[username]?
     classes[username] = []
   if callback?
