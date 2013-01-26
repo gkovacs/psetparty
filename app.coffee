@@ -28,8 +28,10 @@ app.configure( ->
   app.use(express.static(__dirname + '/'))
 )
 
-
-{cl: classes} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
+{cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
+if not allevents?
+  allevents = {}
+#everyone.now.events = allevents
 
 classlist = []
 classlist_set = {}
@@ -54,6 +56,12 @@ for line in buildingdata.split('\n')
 
 everyone.now.location_list = location_list
 everyone.now.location_addresses = location_addresses
+
+getAddress = everyone.now.getAddress = (location) ->
+  addr = location_addresses[location]
+  if addr?
+    return addr + ' , Cambridge, MA'
+  return ''
 
 everyone.now.addClassType = (classname) ->
   if typeof classname != typeof ''
@@ -85,10 +93,10 @@ splitTimeRange = (s) ->
 parseEvent = (event) ->
   #[startTime, endTime] = splitTimeRange(event.start.dateTime)
   return {
-    id: event.id,
-    title: event.summary,
-    start: new Date(event.start.dateTime),
-    end: new Date(event.end.dateTime),
+    'id': event.id,
+    'title': event.summary,
+    'start': new Date(event.start.dateTime),
+    'end': new Date(event.end.dateTime),
   }
 
 getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
@@ -104,11 +112,40 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
       events.push event
   callback events
 
+mkId = () -> Math.floor(Math.random()*9007199254740992)
+
+deleteEvent = everyone.now.deleteEvent = (subjectname, eventid, callback) ->
+  allevents[subjectname] = (x for x in allevents[subjectname] when x.id != eventid)
+  if callback?
+    callback()
+
+addEvent = everyone.now.addEvent = (subjectname, event, callback) ->
+  if not allevents[subjectname]?
+    allevents[subjectname] = []
+  newid = event.id ? mkId()
+  event.id = newid
+  event.address = getAddress(event.location)
+  event.subjectname = subjectname
+  allevents[subjectname].push event
+  if callback?
+    callback newid
+
+toValues = (dict) ->
+  output = []
+  for key,value of dict
+    output.push value
+  return output
+
 getEvents = everyone.now.getEvents = (title, callback) ->
+  ###
   restler.get('http://localhost:5000/events?title=' + title).on('complete', (events) ->
     items = events.items ? []
     callback (parseEvent(event) for event in items)
   )
+  ###
+  if not allevents[title]?
+    allevents[title] = []
+  callback allevents[title]
 
 app.get '/events', (req, res) ->
   title = req.query.title
@@ -126,10 +163,13 @@ app.get '/classes', (req, res) ->
   if username?
     getClasses(username, (x) -> res.json(x))
 
-app.get '/save', (req, res) ->
-  ndata = JSON.stringify({cl: classes})
+dumpToDisk = () ->
+  ndata = JSON.stringify({cl: classes, ev: allevents})
   fs.writeFileSync('psetparty.json', ndata, 'utf-8')
-  res.send ndata
+  return ndata
+
+app.get '/save', (req, res) ->
+  res.send dumpToDisk()
 
 everyone.now.getCalendarIds = (classnames, callback) ->
   await
@@ -157,5 +197,16 @@ everyone.now.removeClass = (username, classname, callback) ->
     classes[username] = []
   classes[username] = (x for x in classes[username] when x != classname)
   if callback?
-    callback(classes[username])
+    callback()
 
+process.on 'SIGINT', () ->
+  console.log dumpToDisk()
+  process.exit()
+
+process.on 'SIGTERM', () ->
+  console.log dumpToDisk()
+  process.exit()
+
+process.on 'SIGQUIT', () ->
+  console.log dumpToDisk()
+  process.exit()

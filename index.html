@@ -108,6 +108,9 @@
 
   email = 'gkovacs@MIT.EDU'
   fullname = 'Geza Kovacs'
+  
+  newstart = ''
+  newend = ''
 
   function getUrlParameters() {
     var map = {}
@@ -145,43 +148,37 @@
       },
 	  
       eventNew : function(calEvent, $event) {
-        console.log(calEvent)
-        console.log($event)
+        //console.log(calEvent)
+        newstart = calEvent.start
+        newend = calEvent.end
+        //console.log(calEvent.start.toString())
+        //console.log(calEvent.end.toString())
+        //console.log($event)
         $( "#dialog-modal" ).dialog({
           height: 300,
           modal: true
         });
+        $('#subjectname').html('')
+        var classes = activeClasses()
+        for (var i = 0; i < classes.length; ++i) {
+          var classname = classes[i]
+          $('#subjectname').append($('<option>').attr('value', classname).text(classname))
+        }
+      },
+      eventDelete: function(calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
+        console.log(calEvent.id)
+        console.log(calEvent.subjectname)
+        now.deleteEvent(calEvent.subjectname, calEvent.id, function() {
+          refresh()
+        })
       },
       eventClick: function(calEvent, $event) {
-        alert('<strong>Clicked Event</strong><br/>Start: ' + calEvent.start + '<br/>End: ' + calEvent.end);
+        alert('<strong>Clicked Event</strong><br/>start: ' + calEvent.start + '<br/>end: ' + calEvent.end + '<br/>title:' + calEvent.title + '<br/>location:' + calEvent.location + '<br/>id:' + calEvent.id);
       },
       data: function(start, end, callback) {
         getEvents(callback)
       }
     });
-
-    $('#data_source').change(function() {
-      $calendar.weekCalendar('refresh');
-      updateMessage();
-    });
-
-    function updateMessage() {
-      var dataSource = $('#data_source').val();
-      $('#message').fadeOut(function(){
-        if(dataSource === '1') {
-          $('#message').text('Displaying event data set 1 with timeslots per hour of 4 and timeslot height of 20px');
-        } else if(dataSource === '2') {
-          $('#message').text('Displaying event data set 2 with timeslots per hour of 3 and timeslot height of 30px');
-        } else if(dataSource === '3') {
-          $('#message').text('Displaying event data set 3 with allowEventDelete enabled. Events before today will not be deletable. A confirmation dialog is opened when you delete an event.');
-        } else {
-          $('#message').text('Displaying no events.');
-        }
-        $(this).fadeIn();
-      });
-    }
-
-    updateMessage();
   });
 
 classlist = []
@@ -198,23 +195,9 @@ function classlistCallback( request, response ) {
   now.ready(function() {
     getEvents = function(callback) {
       now.getEventsForUser(email, callback)
-    } /*function(callback) {
-    output = [
-  {
-    "id": "etl7gqbekv12rgrm8vlooa5ato",
-    "title": "6.003 lecture",
-    "start": "2013-01-21T07:30:00.000Z",
-    "end": "2013-01-21T12:30:00.000Z"
-  },
-  {
-    "id": "9qmtgen9p0umcje0p1iru08uqo",
-    "title": "6.005 recitation",
-    "start": "2013-01-23T10:30:00.000Z",
-    "end": "2013-01-23T14:00:00.000Z"
-  }
-]
-callback(output)
-  }*/
+    }
+    //$('.ui-button-text').filter(function() { return $(this).text() == 'today'}).click()
+    $("#calendar").weekCalendar("refresh")
     $('#location').autocomplete(
       {
         autoFocus: true,
@@ -260,7 +243,12 @@ callback(output)
     return $.map($('.classitem'), function(x) { return $(x).attr('classname') })
   }
   
+  function refresh() {
+    $('#calendar').weekCalendar('refresh')
+  }
+  
   function addClassWidget(classname) {
+    if (activeClasses().indexOf(classname) != -1) return
     $('#classlist')
       .prepend(
         $('<div>')
@@ -285,7 +273,9 @@ callback(output)
 			  .css('border', 'none')
               .click(function() {
                 $('.C' + sanitizeClassName(classname)).remove()
-                now.removeClass(email, classname)
+                now.removeClass(email, classname, function() {
+                  refresh()
+                })
                 return false
               })
           )
@@ -304,8 +294,36 @@ callback(output)
       now.addClassType(classname)
     }
     addClassWidget(classname)
-    now.addClass(email, classname)
+    now.addClass(email, classname, function() {
+      refresh()
+    })
     return false
+  }
+  
+  function eventCreated() {
+    //$("#calendar").weekCalendar("removeUnsavedEvents")
+    console.log('created')
+    console.log(newstart)
+    console.log(newend)
+    var subjectname = $('#subjectname').val()
+    var partyname = $('#partyname').val()
+    var location = $('#location').val()
+    var eventTitle = [subjectname, partyname, location].join(' - ')
+    var newevent = {
+      'start': newstart,
+      'end': newend,
+      'title': eventTitle,
+      'partyname': partyname,
+      'location': location,
+    }
+    $('#partyname').val('')
+    $('#location').val('')
+    $(".ui-dialog-titlebar-close").trigger('click');
+    console.log(newevent)
+    console.log(subjectname)
+    now.addEvent(subjectname, newevent, function(newid) {
+      refresh()
+    })
   }
   </script>
 </head>
@@ -367,21 +385,16 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
 </div>
 
 <div id="dialog-modal" title="Create a party">
-  <form>
+  <form action="javascript:void(0)" onsubmit="eventCreated()">
   <fieldset>
+    <label for="subjectname" style="color: #544937">Subject</label>
+    <select name="subjectname" id="subjectname" class="text ui-widget-content ui-corner-all"></select><br/>
     <label for="location" style="color: #544937">Location</label>
     <input type="text" name="location" id="location" class="text ui-widget-content ui-corner-all" />
-    <label for="limit" style="color: #544937">Limit</label>
-    <input type="number" name="limit" id="limit" value="" class="text ui-widget-content ui-corner-all" />
-    <table width="259" height="66">
-      <tr>
-        <td width="135"><label><input type="radio" name="personal-public" value="public" id="personal-public_1" style="color: #544937">
-Public</label></td>
-        <td width="135"><label>
-          <input type="radio" name="personal-public" value="personal" id="personal-public_0" style="color: #544937">
-          Personal</label></td>
-      </tr>
-    </table>
+    <label for="partyname" style="color: #544937">Party Name</label>
+    <input type="text" name="partyname" id="partyname" class="text ui-widget-content ui-corner-all" />
+    <input type="hidden" value="submit"/>
+    <input type="submit" value="Create Party"/>
   </form>
 </div>
 
