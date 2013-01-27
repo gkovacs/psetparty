@@ -173,6 +173,10 @@ joinOrLeaveClicked = function() {
     now.joinEvent(displayedEvent, getUser())
   } else {
     now.leaveEvent(displayedEvent, getUser())
+    if (activeClasses().indexOf(displayedEvent.subjectname) == -1) {
+      $('.ui-dialog-titlebar-close').trigger('click')
+      refresh()
+    }
   }
 }
 

@@ -50,6 +50,17 @@ do ->
     allevents[k] = (fixEventParticipantFormat(event) for event in allevents[k])
 #everyone.now.events = allevents
 
+participantToEvent = {}
+
+do ->
+  for subjectname,v of allevents
+    for event in allevents[subjectname]
+      for participant in event.participants
+        email = participant.email
+        if not participantToEvent[email]?
+          participantToEvent[email] = {}
+        participantToEvent[email][event.id] = subjectname
+
 classlist = []
 classlist_set = {}
 
@@ -116,6 +127,18 @@ parseEvent = (event) ->
     'end': new Date(event.end.dateTime),
   }
 
+getEventsUserIsParticipating = everyone.now.getEventsUserIsParticipating = (username, callback) ->
+  events = []
+  customEventDict = participantToEvent[username] ? {}
+  #console.log participantToEvent
+  for eventid,subjectname of customEventDict
+    eventid = parseInt(eventid)
+    subjectevents = allevents[subjectname] ? []
+    for event in subjectevents # slow, eventually optimize!
+      if event.id == eventid
+        events.push event
+  callback events
+
 getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
   await
     getClasses(username, defer(classlist))
@@ -124,9 +147,21 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
     for title,i in classlist
       getEvents(title, defer(events_per_class[i]))
   events = []
+  eventid_set = {}
   for events_for_class in events_per_class
     for event in events_for_class
       events.push event
+      eventid_set[event.id] = true
+  # now we add subjects for which the user is participating but isn't in the class
+  customEventDict = participantToEvent[username] ? {}
+  for eventid,subjectname of customEventDict
+    eventid = parseInt(eventid)
+    if eventid_set[eventid]?
+      continue
+    subjectevents = allevents[subjectname] ? []
+    for event in subjectevents # slow, eventually optimize!
+      if event.id == eventid
+        events.push event
   callback events
 
 mkId = () -> Math.floor(Math.random()*9007199254740992)
@@ -234,6 +269,9 @@ everyone.now.joinEvent = (event, user) ->
   title = event.subjectname
   if not allevents[title]?
     return
+  if not participantToEvent[user.email]?
+    participantToEvent[user.email] = {}
+  participantToEvent[user.email][eventid] = title
   for i in [0...allevents[title].length]
     if eventid == allevents[title][i].id
       addUserIfNotPresent(allevents[title][i], user)
@@ -244,6 +282,8 @@ everyone.now.leaveEvent = (event, user) ->
   title = event.subjectname
   if not allevents[title]?
     return
+  if participantToEvent[user.email]? and participantToEvent[user.email][eventid]?
+    delete participantToEvent[user.email][eventid]
   for i in [0...allevents[title].length]
     if eventid == allevents[title][i].id
       removeUserIfPresent(allevents[title][i], user)

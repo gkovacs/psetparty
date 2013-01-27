@@ -92,6 +92,10 @@ function togglejoin(eventid) {
     now.joinEvent(event, getUser())
   } else {
     now.leaveEvent(event, getUser())
+    if (activeClasses().indexOf(subjectname) == -1) {
+      refresh()
+      refreshMap()
+    }
   }
 }
 
