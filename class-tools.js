@@ -159,6 +159,6 @@ function classlistCallback( request, response ) {
     console.log(subjectname)
     now.addEvent(subjectname, newevent, function(newid) {
       //refresh()
-      now.joinEvent(newevent, getUser())
+      now.joinEvent({'id': newid, 'subjectname': subjectname}, getUser())
     })
   }
