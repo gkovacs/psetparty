@@ -142,6 +142,7 @@ function classlistCallback( request, response ) {
     var subjectname = $('#subjectname').val()
     var partyname = $('#partyname').val()
     var location = $('#location').val()
+    if (!isdefined(location) || location == '') return
     var eventTitle = [subjectname, partyname, location].join('<br/>')
     var newevent = {
       'start': newstart,

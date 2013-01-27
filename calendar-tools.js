@@ -27,6 +27,22 @@
     }
     return false
   }
+  
+  function canDelete(event) {
+    if (!isdefined(event) || !isdefined(event.participants) || event.participants.length == 0) return true
+    if (isAttending(event) && event.participants.length <= 1) return true
+    return false
+  }
+
+  function joinByNewlines(lines) {
+    var output = $('<span>')
+    for (var i = 0; i < lines.length; ++i) output.append($('<div>').text(lines[i]))
+    return output.html()
+  }
+  
+  function pushIfDefined(list, elem) {
+    if (isdefined(elem)) list.push(elem)
+  }
 
   $(document).ready(function() {
 	  $( "#dialog-modal" ).hide();
@@ -61,7 +77,21 @@
           $event.css('opacity', '0.5')
         }
       },
-	  
+	    eventAfterRender: function(calEvent, $event) {
+	      if (isdefined(calEvent)) {
+	        var infoBits = []
+	        pushIfDefined(infoBits, calEvent.subjectname)
+	        pushIfDefined(infoBits, calEvent.partyname)
+	        pushIfDefined(infoBits, calEvent.location)
+	        if (isdefined(calEvent.participants) && isdefined(calEvent.participants.length)) {
+	          pushIfDefined(infoBits, calEvent.participants.length + ' attending')
+	        }
+	        $event.find('.wc-title').html(joinByNewlines(infoBits))
+	      }
+	      if (!canDelete(calEvent)) {
+	        $event.find('.wc-cal-event-delete').remove()
+	      }
+	    },
       eventNew : function(calEvent, $event) {
         //console.log(calEvent)
         newstart = calEvent.start
@@ -74,7 +104,10 @@
           modal: true,
 			position: "left",
 		  show:"clip",
-		  hide:"clip",
+		  //hide:"clip",
+		  beforeClose: function() {
+		    $('#calendar').weekCalendar('removeUnsavedEvents')
+		  }
         });
         $('#subjectname').html('')
         var classes = activeClasses()
@@ -82,6 +115,9 @@
           var classname = classes[i]
           $('#subjectname').append($('<option>').attr('value', classname).text(classname))
         }
+      },
+      draggable: function(calEvent,element) {
+        return false
       },
       eventDelete: function(calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
         console.log(calEvent.id)
@@ -96,7 +132,7 @@
           modal: true,
 			position: "right",
 		  show:"clip",
-		  hide:"clip",
+		  //hide:"clip",
         });
         displayedEvent = calEvent
         populateEventInfoDisplay(calEvent)
