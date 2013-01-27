@@ -9,7 +9,6 @@ function classlistCallback( request, response ) {
             }
 
   function loggedIn() {
-    $('#userName').text(fullname)
     getEvents = function(callback) {
       now.getEventsForUser(email, function(events) {
         for (var i = 0; i < events.length; ++i) {
@@ -77,7 +76,7 @@ function classlistCallback( request, response ) {
   
   now.ready(function() {
     loggedIn()
-    loginMIT()
+    //loginMIT()
     //now.getAuthenticated(authkeynum, function(userinfo) {
     //  email = userinfo.email
     //  fullname = userinfo.fullname
