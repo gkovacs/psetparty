@@ -230,7 +230,7 @@ removeUserIfPresent = (event, user) ->
     event.participants = newparticipants
 
 everyone.now.joinEvent = (event, user) ->
-  eventid = event.id
+  eventid = event.id 
   title = event.subjectname
   if not allevents[title]?
     return

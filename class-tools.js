@@ -72,6 +72,7 @@ function classlistCallback( request, response ) {
   
   function refresh() {
     $('#calendar').weekCalendar('refresh')
+    refreshEventsMap()
   }
   
   function addClassWidget(classname) {
