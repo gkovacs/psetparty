@@ -41,20 +41,30 @@ fixEventParticipantFormat = (event) ->
   event.participants = participants
   return event
 
+eventListToDictionary = (eventlist) ->
+  output = {}
+  for event in eventlist
+    output[event.id] = event
+  return output
+
 {cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
 if not allevents?
   allevents = {}
 do ->
   for k,v of allevents
     #console.log allevents[k]
-    allevents[k] = (fixEventParticipantFormat(event) for event in allevents[k])
+    if allevents[k] instanceof Array
+      allevents[k] = eventListToDictionary(allevents[k])
+    for eventid,event of allevents[k]
+      eventid = parseInt(eventid)
+      allevents[k][eventid] = fixEventParticipantFormat(event)
 #everyone.now.events = allevents
 
 participantToEvent = {}
 
 do ->
   for subjectname,v of allevents
-    for event in allevents[subjectname]
+    for eventid,event of allevents[subjectname]
       for participant in event.participants
         email = participant.email
         if not participantToEvent[email]?
@@ -133,10 +143,9 @@ getEventsUserIsParticipating = everyone.now.getEventsUserIsParticipating = (user
   #console.log participantToEvent
   for eventid,subjectname of customEventDict
     eventid = parseInt(eventid)
-    subjectevents = allevents[subjectname] ? []
-    for event in subjectevents # slow, eventually optimize!
-      if event.id == eventid
-        events.push event
+    subjectevents = allevents[subjectname] ? {}
+    if subjectevents[event.id]?
+      events.push subjectevents[event.id]
   callback events
 
 getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
@@ -158,28 +167,32 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
     eventid = parseInt(eventid)
     if eventid_set[eventid]?
       continue
-    subjectevents = allevents[subjectname] ? []
-    for event in subjectevents # slow, eventually optimize!
-      if event.id == eventid
-        events.push event
+    subjectevents = allevents[subjectname] ? {}
+    if subjectevents[event.id]?
+      events.push subjectevents[event.id]
   callback events
 
 mkId = () -> Math.floor(Math.random()*9007199254740992)
 
 deleteEvent = everyone.now.deleteEvent = (subjectname, eventid, callback) ->
-  allevents[subjectname] = (x for x in allevents[subjectname] when x.id != eventid)
+  if not allevents[subjectname]?
+    allevents[subjectname] = {}
+  if allevents[subjectname][eventid]?
+    delete allevents[subjectname][eventid]
   if callback?
     callback()
   everyone.now.refreshUser()
 
 addEvent = everyone.now.addEvent = (subjectname, event, callback) ->
   if not allevents[subjectname]?
-    allevents[subjectname] = []
-  newid = event.id ? mkId()
+    allevents[subjectname] = {}
+  newid = mkId()
+  while allevents[subjectname][newid]?
+    newid = mkId()
   event.id = newid
   event.address = getAddress(event.location)
   event.subjectname = subjectname
-  allevents[subjectname].push event
+  allevents[subjectname][event.id] = event
   if callback?
     callback newid
   everyone.now.refreshUser()
@@ -199,7 +212,7 @@ getEvents = everyone.now.getEvents = (title, callback) ->
   ###
   if not allevents[title]?
     allevents[title] = []
-  callback allevents[title]
+  callback toValues(allevents[title])
 
 app.get '/events', (req, res) ->
   title = req.query.title
@@ -272,9 +285,8 @@ everyone.now.joinEvent = (event, user) ->
   if not participantToEvent[user.email]?
     participantToEvent[user.email] = {}
   participantToEvent[user.email][eventid] = title
-  for i in [0...allevents[title].length]
-    if eventid == allevents[title][i].id
-      addUserIfNotPresent(allevents[title][i], user)
+  if allevents[title][eventid]?
+    addUserIfNotPresent(allevents[title][eventid], user)
   everyone.now.refreshUser()
 
 everyone.now.leaveEvent = (event, user) ->
@@ -284,9 +296,8 @@ everyone.now.leaveEvent = (event, user) ->
     return
   if participantToEvent[user.email]? and participantToEvent[user.email][eventid]?
     delete participantToEvent[user.email][eventid]
-  for i in [0...allevents[title].length]
-    if eventid == allevents[title][i].id
-      removeUserIfPresent(allevents[title][i], user)
+  if allevents[title][eventid]?
+    removeUserIfPresent(allevents[title][eventid], user)
   everyone.now.refreshUser()
 
 process.on 'SIGINT', () ->
