@@ -90,6 +90,10 @@ function classlistCallback( request, response ) {
               .css('color', 'white')
 			  .css('border-radius', '10px')
 			  .css('padding', '10px')
+			  .css('text-shadow', '0px -1px 1px #704811')
+			  .css('filter', 'dropshadow(color=#704811, offx=0, offy=-1)')
+			  .css('-webkit-box-shadow', '1px 1px 6px 0px #424242')
+              .css('box-shadow', '1px 1px 6px 0px #424242')
           )
           .append(
             $('<button>')
