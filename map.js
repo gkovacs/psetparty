@@ -22,7 +22,7 @@ function placeEvents() {
       var eventStartTime = moment(event.start)
       if (eventStartTime < firstAcceptableTime) continue
       if (eventStartTime > lastAcceptableTime) continue
-      addMarkerForEvent(event, getEventHtmlBox(event))
+      addMarkerForEvent(event)
     }
   })
 }
@@ -38,7 +38,11 @@ function clearMarkers() {
 }
 
 function emailNamePair(x) {
-  return $('<a>').attr('href', 'mailto:' + x[0]).attr('title', x[0]).attr('alt', x[0]).text(x[1])
+  return $('<a>')
+    .attr('href', 'mailto:' + x.email)
+    .attr('title', x.email)
+    .attr('alt', x.email)
+    .text(x.fullname)
 }
 
 function printParticipants(participants) {
@@ -48,22 +52,30 @@ function printParticipants(participants) {
     var output = $('<span>')
     for (var i = 0; i < participants.length; ++i) {
       var currentParticipant = emailNamePair(participants[i])
-      output.append(currentParticipant)
+      output.append(currentParticipant).append(' ')
     }
     return output
   }
 }
 
 function getEventHtmlBox(event) {
-  return $('<div>').append(
-    $('<div>').append($('<b>').text('What: ')).append($('<span>').text(event.partyname.toString()))
+  var ndiv = $('<div>').attr('id', 'mapinfo-' + event.id).append(
+    $('<div>').append($('<b>').text('Class: ')).append($('<span>').text(event.subjectname.toString()))
   ).append(
-    $('<div>').append($('<b>').text('Where: ')).append($('<span>').text(event.location.toString()))
+    $('<div>').append($('<b>').text('Name: ')).append($('<span>').text(event.partyname.toString()))
   ).append(
-    $('<div>').append($('<b>').text('When: ')).append(moment(event.start).fromNow())
+    $('<div>').append($('<b>').text('Location: ')).append($('<span>').text(event.location.toString()))
   ).append(
-    $('<span>').append($('<b>').text('Who: ')).append(printParticipants(event.participants))
-  ).html()
+    $('<div>').append($('<b>').text('Time: ')).append(moment(event.start).fromNow())
+  ).append(
+    $('<span>').append($('<b>').text('Attendees: ')).append(printParticipants(event.participants))
+  )
+  var buttonText = 'Join'
+  if (isAttending(event)) {
+    buttonText = 'Leave'
+  }
+  ndiv.append($('<button>').text(buttonText))
+  return ndiv.html()
 }
 
 function isClassroom(str) {
@@ -96,15 +108,21 @@ function getLatLngForEvent(event, callback) {
   })
 }
 
+function refreshEvent(event) {
+  var eventList = listEvents()
+  for (var i = 0; i < eventList.size(); ++i) {
+    
+  }
+}
 
-function addMarkerForEvent(event, infotext) {
+function addMarkerForEvent(event) {
         getLatLngForEvent(event, function(latlng) {
           var marker = new google.maps.Marker({
             'position': latlng,
           })
           markers.push(marker)
           var infoWindow = new google.maps.InfoWindow({
-            'content': infotext,
+            'content': getEventHtmlBox(event),
           })
           google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(map, this)

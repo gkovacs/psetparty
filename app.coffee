@@ -28,9 +28,26 @@ app.configure( ->
   app.use(express.static(__dirname + '/'))
 )
 
+fixParticipantFormat = (x) ->
+  if x.email?
+    return x
+  else
+    return {'email': x[0], 'fullname': x[1]}
+
+fixEventParticipantFormat = (event) ->
+  if not event.participants?
+    event.participants = []
+  participants = (fixParticipantFormat(participant) for participant in event.participants)
+  event.participants = participants
+  return event
+
 {cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
 if not allevents?
   allevents = {}
+do ->
+  for k,v of allevents
+    #console.log allevents[k]
+    allevents[k] = (fixEventParticipantFormat(event) for event in allevents[k])
 #everyone.now.events = allevents
 
 classlist = []
@@ -118,6 +135,7 @@ deleteEvent = everyone.now.deleteEvent = (subjectname, eventid, callback) ->
   allevents[subjectname] = (x for x in allevents[subjectname] when x.id != eventid)
   if callback?
     callback()
+  everyone.now.refreshUser()
 
 addEvent = everyone.now.addEvent = (subjectname, event, callback) ->
   if not allevents[subjectname]?
@@ -129,6 +147,7 @@ addEvent = everyone.now.addEvent = (subjectname, event, callback) ->
   allevents[subjectname].push event
   if callback?
     callback newid
+  everyone.now.refreshUser()
 
 toValues = (dict) ->
   output = []
@@ -198,6 +217,37 @@ everyone.now.removeClass = (username, classname, callback) ->
   classes[username] = (x for x in classes[username] when x != classname)
   if callback?
     callback()
+
+addUserIfNotPresent = (event, user) ->
+  emails = (x.email for x in event.participants)
+  if emails.indexOf(user.email) == -1
+    event.participants.push user
+
+removeUserIfPresent = (event, user) ->
+  emails = (x.email for x in event.participants)
+  if emails.indexOf(user.email) != -1
+    newparticipants = (x for x in event.participants when x.email != user.email)
+    event.participants = newparticipants
+
+everyone.now.joinEvent = (event, user) ->
+  eventid = event.id
+  title = event.subjectname
+  if not allevents[title]?
+    return
+  for i in [0...allevents[title].length]
+    if eventid == allevents[title][i].id
+      addUserIfNotPresent(allevents[title][i], user)
+  everyone.now.refreshUser()
+
+everyone.now.leaveEvent = (event, user) ->
+  eventid = event.id
+  title = event.subjectname
+  if not allevents[title]?
+    return
+  for i in [0...allevents[title].length]
+    if eventid == allevents[title][i].id
+      removeUserIfPresent(allevents[title][i], user)
+  everyone.now.refreshUser()
 
 process.on 'SIGINT', () ->
   console.log dumpToDisk()

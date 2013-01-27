@@ -15,6 +15,19 @@
   
   getEvents = function(callback) { callback([]) }
 
+  function listEvents() {
+    return $('#calendar').weekCalendar('serializeEvents')
+  }
+  
+  function isAttending(event) {
+    if (!isdefined(event) || !isdefined(event.participants)) return false
+    for (var i = 0; i < event.participants.length; ++i) {
+      if (event.participants[i].email == email)
+        return true
+    }
+    return false
+  }
+
   $(document).ready(function() {
 	  $( "#dialog-modal" ).hide();
 	  $( "#dialog" ).hide();
@@ -35,9 +48,17 @@
         return $(window).height() - $('h1').outerHeight(true);
       },
       eventRender : function(calEvent, $event) {
+        if (isdefined(calEvent.subjectname)) {
+          $event.css('backgroundColor', stringToColor(calEvent.subjectname))
+        }
+        if (isAttending(calEvent)) {
+          $event.css('font-weight', 'bold')
+          $event.find('.wc-time').css('backgroundColor', 'green').css('border', '1px solid #888').css('color', 'white').css('font-weight', 'bold')
+        }
         if(calEvent.end.getTime() < new Date().getTime()) {
-          $event.css('backgroundColor', '#aaa');
-          $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
+          //$event.css('background-color', '#aaa');
+          //$event.find('.time').css({'backgroundColor': 'black', 'border':'1px solid #888'});
+          $event.css('opacity', '0.5')
         }
       },
 	  
@@ -75,10 +96,48 @@
 		  show:"clip",
 		  hide:"clip",
         });
+        displayedEvent = calEvent
+        populateEventInfoDisplay(calEvent)
       },
       data: function(start, end, callback) {
         getEvents(callback)
       }
     });
   });
+
+
+function getUser() {
+  return {'email': email, 'fullname': fullname}
+}
+
+displayedEvent = {}
+
+joinOrLeaveClicked = function() {
+  if ($('#joinOrLeave').text() == 'Join') {
+    now.joinEvent(displayedEvent, getUser())
+  } else {
+    now.leaveEvent(displayedEvent, getUser())
+  }
+}
+
+function populateEventInfoDisplay(event) {
+  $('#ui-dialog-title-dialog').text(event.partyname)
+  $('#classInfo').text(event.subjectname)
+  $('#eventTimeInfo').text(moment(event.start).calendar())
+  $('#locationInfo').text(event.location)
+  $('#numberOfPeopleInfo').text(event.participants.length)
+  $('#attendeeListInfo').html(printParticipants(event.participants))
+  console.log(isAttending(event))
+  if (isAttending(event)) {
+    $('.ui-dialog-titlebar').css('backgroundColor', 'green')
+    $('.ui-dialog-titlebar').css('color', 'white')
+    //$('.ui-icon-closethick').css('backgroundColor','white')
+    $('#joinOrLeave').text('Leave')
+  } else {
+    $('.ui-dialog-titlebar').css('backgroundColor', 'rgb(251, 165, 44)')
+    $('.ui-dialog-titlebar').css('color', 'white')
+    //$('.ui-icon-closethick').css('backgroundColor','')
+    $('#joinOrLeave').text('Join')
+  }
+}
 

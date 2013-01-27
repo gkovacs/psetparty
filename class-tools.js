@@ -11,7 +11,16 @@ function classlistCallback( request, response ) {
   
   now.ready(function() {
     getEvents = function(callback) {
-      now.getEventsForUser(email, callback)
+      now.getEventsForUser(email, function(events) {
+        for (var i = 0; i < events.length; ++i) {
+          if (events[i].id == displayedEvent.id)
+            populateEventInfoDisplay(events[i])
+        }
+        callback(events)
+      })
+    }
+    now.refreshUser = function() {
+      refresh()
     }
     //$('.ui-button-text').filter(function() { return $(this).text() == 'today'}).click()
     $("#calendar").weekCalendar("refresh")
@@ -77,7 +86,7 @@ function classlistCallback( request, response ) {
           .append(
             $('<span>')
               .text(classname)
-              .css('background-color', '#fba52c')
+              .css('background-color', stringToColor(classname))//'#fba52c')
               .css('color', 'white')
 			  .css('border-radius', '10px')
 			  .css('padding', '10px')
@@ -92,7 +101,7 @@ function classlistCallback( request, response ) {
               .click(function() {
                 $('.C' + sanitizeClassName(classname)).remove()
                 now.removeClass(email, classname, function() {
-                  refresh()
+                  //refresh()
                   refreshMap()
                 })
                 return false
@@ -114,7 +123,7 @@ function classlistCallback( request, response ) {
     }
     addClassWidget(classname)
     now.addClass(email, classname, function() {
-      refresh()
+      //refresh()
       refreshMap()
     })
     return false
@@ -128,14 +137,14 @@ function classlistCallback( request, response ) {
     var subjectname = $('#subjectname').val()
     var partyname = $('#partyname').val()
     var location = $('#location').val()
-    var eventTitle = [subjectname, partyname, location].join(' - ')
+    var eventTitle = [subjectname, partyname, location].join('<br/>')
     var newevent = {
       'start': newstart,
       'end': newend,
       'title': eventTitle,
       'partyname': partyname,
       'location': location,
-      'participants': [[email, fullname]],
+      'participants': [getUser()],
     }
     $('#partyname').val('')
     $('#location').val('')
@@ -143,6 +152,6 @@ function classlistCallback( request, response ) {
     console.log(newevent)
     console.log(subjectname)
     now.addEvent(subjectname, newevent, function(newid) {
-      refresh()
+      //refresh()
     })
   }
