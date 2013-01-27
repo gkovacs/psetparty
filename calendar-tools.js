@@ -43,10 +43,22 @@
   function pushIfDefined(list, elem) {
     if (isdefined(elem)) list.push(elem)
   }
+  
+  function locationChanged() {
+    console.log('typed something!')
+    if ($('#location').val && $('#location').val().length >= 1) {
+      $('#createPartyButton').removeAttr('disabled').css('opacity', 1.0)
+    } else {
+      $('#createPartyButton').attr('disabled', true).css('opacity', 0.5)
+    }
+  }
 
   $(document).ready(function() {
 	  $( "#dialog-modal" ).hide();
 	  $( "#dialog" ).hide();
+	  
+	  $('submit')
+	  
     if (isdefined(getUrlParameters()['email'])) {
       email = getUrlParameters()['email']
     }
@@ -99,6 +111,12 @@
         //console.log(calEvent.start.toString())
         //console.log(calEvent.end.toString())
         //console.log($event)
+        if (activeClasses().length == 0) {
+          alert('need to add some classes before you can start adding events! see the search box in the top-right corner!')
+          $('#calendar').weekCalendar('removeUnsavedEvents')
+          return
+        }
+        $('#createPartyButton').attr('disabled', true).css('opacity', 0.5)
         $( "#dialog-modal" ).dialog({
           height: 300,
           modal: true,
