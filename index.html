@@ -108,11 +108,12 @@ var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
 </div>
 
 <div id="dialog" title="Party Name">
-<p style="color: #544937;">Location:</p>
-<p style="color: #544937;"> 6 people are currently in this party:</p>
-<p style="color: #544937;"> Name 1, Name 2, Name 3</p>
+<p style="color: #544937;"><b>Class:</b> <span id="classInfo"></span></p>
+<p style="color: #544937;"><b>Time:</b> <span id="eventTimeInfo"></span></p>
+<p style="color: #544937;"><b>Location:</b> <span id="locationInfo"></span></p>
+<p style="color: #544937;"><b><span id="numberOfPeopleInfo"></span></b> attending: <span id="attendeeListInfo"></span></p>
 <input type="hidden" value="submit"/>
-    <input type="submit" value="Join"/>
+    <button id="joinOrLeave" onclick="joinOrLeaveClicked()">Join</button>
 </div>
 </body>
 </html>
