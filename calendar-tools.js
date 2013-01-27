@@ -17,6 +17,7 @@
 
   $(document).ready(function() {
 	  $( "#dialog-modal" ).hide();
+	  $( "#dialog" ).hide();
     if (isdefined(getUrlParameters()['email'])) {
       email = getUrlParameters()['email']
     }
@@ -49,7 +50,9 @@
         //console.log($event)
         $( "#dialog-modal" ).dialog({
           height: 300,
-          modal: true
+          modal: true,
+		  show:"clip",
+		  hide:"clip",
         });
         $('#subjectname').html('')
         var classes = activeClasses()
@@ -66,7 +69,12 @@
         })
       },
       eventClick: function(calEvent, $event) {
-        alert('<strong>Clicked Event</strong><br/>start: ' + calEvent.start + '<br/>end: ' + calEvent.end + '<br/>title:' + calEvent.title + '<br/>location:' + calEvent.location + '<br/>id:' + calEvent.id);
+         $( "#dialog" ).dialog({
+          height: 300,
+          modal: true,
+		  show:"clip",
+		  hide:"clip",
+        });
       },
       data: function(start, end, callback) {
         getEvents(callback)

@@ -28,13 +28,14 @@
  */
 .TabbedPanels {
 	overflow: hidden;
-	left: 70px;
+	left: 68px;
 	right: 70px;
-	position: absolute;
 	padding: 5px;
 	clear: none;
 	width: 85%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
-	top: 159px;
+	top: 170px;
+	position: absolute;
+	float: right;
 }
 
 /* This is the selector for the TabGroup. The TabGroup container houses
@@ -86,8 +87,8 @@
 	border-right: solid 1px rgba(251, 165, 44, 0.5);
 	-webkit-border-radius: 10px 10px 0px 0px;
 	border-radius: 10px 10px 0px 0px;
-	-webkit-box-shadow:  3px 0px 5px 0px rgba(0, 0, 0, 0.5);    
-    box-shadow:  3px 0px 5px 0px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow:  5px 0px 5px -3px rgba(0, 0, 0, 0.5);    
+    box-shadow:  5px 0px 5px -3px rgba(0, 0, 0, 0.5);
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	cursor: pointer;
@@ -156,7 +157,6 @@
     -webkit-box-shadow:  3px 0px 5px 0px rgba(0, 0, 0, 0.5);    
     box-shadow:  3px 0px 5px 0px rgba(0, 0, 0, 0.5);
 	margin-left:0px;
-	margin-bottom:100px;
 }
 
 /* This is the selector for the Content panel. The Content panel holds the
