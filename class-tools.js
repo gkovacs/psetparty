@@ -106,7 +106,7 @@ function classlistCallback( request, response ) {
               .click(function() {
                 $('.C' + sanitizeClassName(classname)).remove()
                 now.removeClass(email, classname, function() {
-                  //refresh()
+                  refresh()
                   refreshMap()
                 })
                 return false
@@ -128,7 +128,7 @@ function classlistCallback( request, response ) {
     }
     addClassWidget(classname)
     now.addClass(email, classname, function() {
-      //refresh()
+      refresh()
       refreshMap()
     })
     return false

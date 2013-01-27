@@ -180,6 +180,7 @@ function addMarkerForEvent(event) {
       }
 
 function getLatLng(str, callback) {
+        if (!isdefined(geocoder)) return
         geocoder.geocode({
           'address': str,
           'region': 'US',
@@ -197,6 +198,7 @@ function getLatLng(str, callback) {
       }
 
 mapInitialized = false
+geocoder = null
 
 function initializeMap() {
 if (mapInitialized) return
