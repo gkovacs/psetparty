@@ -51,6 +51,7 @@
         $( "#dialog-modal" ).dialog({
           height: 300,
           modal: true,
+			position: "left",
 		  show:"clip",
 		  hide:"clip",
         });
@@ -72,6 +73,7 @@
          $( "#dialog" ).dialog({
           height: 300,
           modal: true,
+			position: "right",
 		  show:"clip",
 		  hide:"clip",
         });
