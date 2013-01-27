@@ -22,5 +22,12 @@ for classroom in classrooms:
   address = buildingnum_to_address[buildingnum]
   output[classroom] =  address
 
+def fixCase(x):
+  if ' ' in x:
+    return ' '.join(fixCase(w) for w in x.split(' '))
+  if len(x) == 0:
+    return x
+  return x[0] + x[1:].lower()
+
 for k,v in sorted(output.items()):
-  print k + '\t' + v
+  print fixCase(k) + '\t' + fixCase(v)

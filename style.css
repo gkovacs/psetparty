@@ -1,0 +1,83 @@
+  :focus {
+	  outline: none;
+  }
+
+  body {
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	margin: 0;
+	background-color: #544937;
+	background-image: url('tea-cup1.png');
+	background-repeat: repeat-x repeat-y;
+	background-position: left top;
+
+	margin-left: 33px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+  }
+
+  h1 {
+    margin:0 0 2em;
+    padding: 0.5em;
+    font-size: 1.3em;
+  }
+
+  p.description {
+    font-size: 0.8em;
+    padding: 1em;
+    position: absolute;
+    top: 3.2em;
+    margin-right: 400px;
+  }
+
+  .clearer {
+    clear: both;
+  }
+  
+  .search {
+	  -webkit-border-radius: 30px;
+    border-radius: 30px;
+	float: right;
+	margin-right: 50px;
+  }
+  
+  .search-icon{
+	  color:white;
+	  float:right;
+	  margin-right:10px;
+  }
+
+  #calendar_selection {
+	font-size: 0.7em;
+	position: absolute;
+	top: 87px;
+	right: 1370px;
+	padding: 1em;
+	background: #ffc;
+	border: 1px solid #dda;
+	width: 190px;
+	height: 27px;
+  }
+
+  #message {
+    font-size: 0.7em;
+    padding: 1em;
+    margin-right: 1em;
+    margin-bottom: 10px;
+    background: #ddf;
+    border: 1px solid #aad;
+    width: 270px;
+    float: right;
+  }
+    label, input { display: inline-block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:10px; }
+    .ui-dialog .ui-state-error { padding: .1em; }
+	#personal-public_1, #personal-public_0 {cursor: pointer;}
+
+
+.ui-autocomplete {
+    max-height: 400px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }

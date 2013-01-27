@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBteJTTaKlmbnDq4OpxXOVesyalgxoWLJE&sensor=false">
+    </script>
+    <script type="text/javascript">
+      
+
+      function addMarker(address, infotext) {
+        getLatLng(address, function(latlng) {
+          var marker = new google.maps.Marker({
+            'position': latlng,
+          })
+          var infoWindow = new google.maps.InfoWindow({
+            'content': infotext,
+          })
+          google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.open(map, this)
+          })
+          marker.setMap(map)
+        })
+      }
+
+      function getLatLng(str, callback) {
+        geocoder.geocode({
+          'address': str,
+          'region': 'US',
+          'bounds': getMITLatLngBounds(),
+        }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results[0].geometry.location)
+            if (callback != null) callback(results[0].geometry.location)
+          }
+        })
+      }
+
+      function getMITLatLngBounds() {
+        return new google.maps.LatLngBounds(new google.maps.LatLng(42.3543643, -71.10349120000001), new google.maps.LatLng(42.3630281, 71.08594310000001))
+      }
+
+      function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var mapOptions = {
+          center: new google.maps.LatLng(42.3590995, -71.0934608),
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+  </body>
+</html>

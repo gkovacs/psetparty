@@ -7,90 +7,9 @@
   <link rel='stylesheet' type='text/css' href='libs/css/smoothness/jquery-ui-1.8.11.custom.css' />
   <link rel='stylesheet' type='text/css' href='jquery.weekcalendar.css' />
   <link rel="stylesheet" type="text/css" href="skins/default.css" />
+  <link rel='stylesheet' type='text/css' href='style.css' />
   <style type='text/css'>
-  :focus {
-	  outline: none;
-  }
 
-  body {
-	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-	margin: 0;
-	background-color: #544937;
-	background-image: url('tea-cup1.png');
-	background-repeat: repeat-x repeat-y;
-	background-position: left top;
-
-	margin-left: 33px;
-	margin-top: 10px;
-	margin-bottom: 0px;
-  }
-
-  h1 {
-    margin:0 0 2em;
-    padding: 0.5em;
-    font-size: 1.3em;
-  }
-
-  p.description {
-    font-size: 0.8em;
-    padding: 1em;
-    position: absolute;
-    top: 3.2em;
-    margin-right: 400px;
-  }
-
-  .clearer {
-    clear: both;
-  }
-  
-  .search {
-	  -webkit-border-radius: 30px;
-    border-radius: 30px;
-	float: right;
-	margin-right: 50px;
-  }
-  
-  .search-icon{
-	  color:white;
-	  float:right;
-	  margin-right:10px;
-  }
-
-  #calendar_selection {
-	font-size: 0.7em;
-	position: absolute;
-	top: 87px;
-	right: 1370px;
-	padding: 1em;
-	background: #ffc;
-	border: 1px solid #dda;
-	width: 190px;
-	height: 27px;
-  }
-
-  #message {
-    font-size: 0.7em;
-    padding: 1em;
-    margin-right: 1em;
-    margin-bottom: 10px;
-    background: #ddf;
-    border: 1px solid #aad;
-    width: 270px;
-    float: right;
-  }
-    label, input { display: inline-block; }
-    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:10px; }
-    .ui-dialog .ui-state-error { padding: .1em; }
-	#personal-public_1, #personal-public_0 {cursor: pointer;}
-
-
-.ui-autocomplete {
-    max-height: 400px;
-    overflow-y: auto;
-    /* prevent horizontal scrollbar */
-    overflow-x: hidden;
-  }
 
   </style>
   <link href="SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
@@ -102,229 +21,17 @@
   <script type="text/javascript" src="libs/date.js"></script>
   <script type='text/javascript' src='jquery.weekcalendar.js'></script>
   <script type='text/javascript' src='jquery.fuzzymatch.js'></script>
+  <script type='text/javascript' src='moment.js'></script>
   <script src="SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
  
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBteJTTaKlmbnDq4OpxXOVesyalgxoWLJE&sensor=false">
+  </script>
+  <script src="md5.min.js"></script>
+  <script src="map.js"></script>
+  <script type='text/javascript' src='calendar-tools.js'></script>
+  <script type='text/javascript' src='class-tools.js'></script>
   <script type='text/javascript'>
-
-  email = 'gkovacs@MIT.EDU'
-  fullname = 'Geza Kovacs'
   
-  newstart = ''
-  newend = ''
-
-  function getUrlParameters() {
-    var map = {}
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-      map[key] = decodeURI(value)
-    })
-    return map
-  }
-  
-  getEvents = function(callback) { callback([]) }
-
-  $(document).ready(function() {
-	  $( "#dialog-modal" ).hide();
-    if (isdefined(getUrlParameters()['email'])) {
-      email = getUrlParameters()['email']
-    }
-    if (isdefined(getUrlParameters()['name'])) {
-      fullname = getUrlParameters()['name']
-    }
-    var $calendar = $('#calendar').weekCalendar({
-      timeslotsPerHour: 4,
-      timeslotHeight: 20,
-      scrollToHourMillis : 0,
-      allowCalEventOverlap: true,
-      overlapEventsSeparate: true,
-      totalEventsWidthPercentInOneColumn: 90,
-      height: function($calendar){
-        return $(window).height() - $('h1').outerHeight(true);
-      },
-      eventRender : function(calEvent, $event) {
-        if(calEvent.end.getTime() < new Date().getTime()) {
-          $event.css('backgroundColor', '#aaa');
-          $event.find('.time').css({'backgroundColor': '#999', 'border':'1px solid #888'});
-        }
-      },
-	  
-      eventNew : function(calEvent, $event) {
-        //console.log(calEvent)
-        newstart = calEvent.start
-        newend = calEvent.end
-        //console.log(calEvent.start.toString())
-        //console.log(calEvent.end.toString())
-        //console.log($event)
-        $( "#dialog-modal" ).dialog({
-          height: 300,
-          modal: true
-        });
-        $('#subjectname').html('')
-        var classes = activeClasses()
-        for (var i = 0; i < classes.length; ++i) {
-          var classname = classes[i]
-          $('#subjectname').append($('<option>').attr('value', classname).text(classname))
-        }
-      },
-      eventDelete: function(calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
-        console.log(calEvent.id)
-        console.log(calEvent.subjectname)
-        now.deleteEvent(calEvent.subjectname, calEvent.id, function() {
-          refresh()
-        })
-      },
-      eventClick: function(calEvent, $event) {
-        alert('<strong>Clicked Event</strong><br/>start: ' + calEvent.start + '<br/>end: ' + calEvent.end + '<br/>title:' + calEvent.title + '<br/>location:' + calEvent.location + '<br/>id:' + calEvent.id);
-      },
-      data: function(start, end, callback) {
-        getEvents(callback)
-      }
-    });
-  });
-
-classlist = []
-  
-function classlistCallback( request, response ) {
-                var t = jQuery.grep(classlist, function(a){
-                        var patt = new RegExp("^" + request.term, "i");
-                        return (a.match(patt));
-                    });
-                response(t);
-            }
-
-  
-  now.ready(function() {
-    getEvents = function(callback) {
-      now.getEventsForUser(email, callback)
-    }
-    //$('.ui-button-text').filter(function() { return $(this).text() == 'today'}).click()
-    $("#calendar").weekCalendar("refresh")
-    $('#location').autocomplete(
-      {
-        autoFocus: true,
-        source: now.location_list
-      }
-    )
-    now.getClassesWithPrefix('', function(nclasslist) {
-      classlist = nclasslist
-      //for (var i = 0; i < classlist.length; ++i) {
-      //  $('#classDataList').append($('<option>').attr('value', classlist[i]))
-      //}
-      $('#classSearchBox').autocomplete(
-        {
-          autoFocus: true,
-          source: classlistCallback,
-          delay: 0,
-          sortResults:false,
-          select: function(event, ui) {
-            $('#classSearchBox').val(ui.item.value)
-            $('#classSearchBox').submit()
-            //classAdded(ui.item.value)
-            //$('#classSearchBox').val('')
-            setTimeout(function() {$('#classSearchBox').val('')},10)
-          },
-        })
-    })
-    now.getClasses(email, function(classes) {
-      $.map(classes, function(classname) {
-        addClassWidget(classname)
-      })
-    })
-  })
-  
-  function isdefined(x) {
-    return (typeof x !== 'undefined' && x !== null)
-  }
-  
-  function sanitizeClassName(x) {
-    return x.split('.').join('-')
-  }
-  
-  function activeClasses() {
-    return $.map($('.classitem'), function(x) { return $(x).attr('classname') })
-  }
-  
-  function refresh() {
-    $('#calendar').weekCalendar('refresh')
-  }
-  
-  function addClassWidget(classname) {
-    if (activeClasses().indexOf(classname) != -1) return
-    $('#classlist')
-      .prepend(
-        $('<div>')
-          .css('float', 'left')
-          .addClass('C' + sanitizeClassName(classname))
-          .addClass('classitem')
-          .attr('classname', classname)
-          .append(
-            $('<span>')
-              .text(classname)
-              .css('background-color', '#fba52c')
-              .css('color', 'white')
-			  .css('border-radius', '10px')
-			  .css('padding', '10px')
-          )
-          .append(
-            $('<button>')
-              .text('X')
-              .css('cursor', 'pointer')
-			  .css('background-color', 'transparent')
-			  .css('color', '#fba52c')
-			  .css('border', 'none')
-              .click(function() {
-                $('.C' + sanitizeClassName(classname)).remove()
-                now.removeClass(email, classname, function() {
-                  refresh()
-                })
-                return false
-              })
-          )
-      )
-  }
-  
-  function classAdded(classname) {
-    if (!isdefined(classname))
-      classname = $('#classSearchBox').val()
-    console.log(classname)
-    $('#classSearchBox').val('')
-    var active = activeClasses()
-    if (active.length > 0 && active.indexOf(classname) != -1)
-      return false
-    if (!isdefined(classlist[classname])) {
-      now.addClassType(classname)
-    }
-    addClassWidget(classname)
-    now.addClass(email, classname, function() {
-      refresh()
-    })
-    return false
-  }
-  
-  function eventCreated() {
-    //$("#calendar").weekCalendar("removeUnsavedEvents")
-    console.log('created')
-    console.log(newstart)
-    console.log(newend)
-    var subjectname = $('#subjectname').val()
-    var partyname = $('#partyname').val()
-    var location = $('#location').val()
-    var eventTitle = [subjectname, partyname, location].join(' - ')
-    var newevent = {
-      'start': newstart,
-      'end': newend,
-      'title': eventTitle,
-      'partyname': partyname,
-      'location': location,
-    }
-    $('#partyname').val('')
-    $('#location').val('')
-    $(".ui-dialog-titlebar-close").trigger('click');
-    console.log(newevent)
-    console.log(subjectname)
-    now.addEvent(subjectname, newevent, function(newid) {
-      refresh()
-    })
-  }
   </script>
 </head>
 
@@ -371,12 +78,14 @@ function classlistCallback( request, response ) {
 <div id="TabbedPanels1" class="TabbedPanels">
   <ul class="TabbedPanelsTabGroup">
     <li class="TabbedPanelsTab" tabindex="0">Calendar</li>
-    <li class="TabbedPanelsTab" tabindex="0">Map</li>
+    <li class="TabbedPanelsTab" tabindex="1" onclick="mapEntered()">Map</li>
   </ul>
   <div class="TabbedPanelsContentGroup">
     <div class="TabbedPanelsContent"><div id="calendar"></div></div>
 
-    <div class="TabbedPanelsContent">Map here</div>
+    <div class="TabbedPanelsContent">
+      <div id="map_canvas" style="width:100%; height:500px"></div>
+    </div>
   </div>
 <script type="text/javascript">
 var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");

@@ -3,8 +3,8 @@ request = require 'request'
 $ = require 'jQuery'
 restler = require 'restler'
 
-redis = require 'redis'
-rclient = redis.createClient()
+#redis = require 'redis'
+#rclient = redis.createClient()
 
 express = require 'express'
 app = express()
@@ -60,8 +60,8 @@ everyone.now.location_addresses = location_addresses
 getAddress = everyone.now.getAddress = (location) ->
   addr = location_addresses[location]
   if addr?
-    return addr + ' , Cambridge, MA'
-  return ''
+    return addr + ' , MIT, Cambridge, MA'
+  return location + ' , MIT, Cambridge, MA'
 
 everyone.now.addClassType = (classname) ->
   if typeof classname != typeof ''
