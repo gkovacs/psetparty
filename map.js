@@ -22,8 +22,9 @@ function refreshEventsMap() {
   })
 }
 
+//map = null
+
 function refreshMap() {
-  clearMarkers()
   placeEvents()
 }
 
@@ -33,21 +34,56 @@ function mapEntered() {
   refreshMap()
 }
 
+function getLastAcceptableTime() {
+ // return whatever time you want to display up to
+ var numHoursAhead = parseInt($('#timeRange').val())
+ return moment(new Date()).add('hours', numHoursAhead)
+}
+
+function timeRangeSliderChanged() {
+  console.log($('#timeRange').val())
+  refreshMap()
+}
+
 function isShownOnMap(event) {
   var firstAcceptableTime = moment(new Date())
-  var lastAcceptableTime = moment(new Date()).add('weeks', 1)
+  var lastAcceptableTime = getLastAcceptableTime()
   var eventStartTime = moment(event.start)
   if (eventStartTime < firstAcceptableTime) return false
   if (eventStartTime > lastAcceptableTime) return false
   return true
 }
 
+function removeEventFromMap(eventid) {
+  if (isdefined(markersById[eventid])) {
+    markersById[eventid].setMap(null)
+    //delete markersById[eventid]
+  }
+}
+
 function placeEvents() {
   getEvents(function(events) {
+    var activeEvents = {}
     for (var i = 0; i < events.length; ++i) {
       var event = events[i]
-      if (!isShownOnMap(event)) continue
+      if (!isShownOnMap(event)) {
+        removeEventFromMap(event.id)
+        continue
+      }
+      activeEvents[event.id] = true
+      if (isdefined(markersById[event.id])) {
+        if (markersById[event.id].getMap() != map)
+          markersById[event.id].setMap(map)
+        continue
+        //markersById[event.id].setMap(null)
+      }
       addMarkerForEvent(event)
+    }
+    var allEventIds = Object.keys(markersById)
+    for (var i = 0; i < allEventIds.length; ++i) {
+      var inactiveEventId = parseInt(allEventIds[i])
+      if (isdefined(activeEvents[inactiveEventId])) continue
+      removeEventFromMap(inactiveEventId)
     }
   })
 }
@@ -56,8 +92,10 @@ markersById = {}
 infoWindowsById = {}
 
 function clearMarkers() {
-  for (var id in markersById) {
-    markersById[id].setMap(null)
+  var markerIds = Object.keys(markersById)
+  for (var i = 0; i < markerIds.length; ++i) {
+    var id = parseInt(markerIds[i])
+    removeEventFromMap(id)
   }
 }
 
@@ -163,11 +201,15 @@ function getLatestEvent(event) {
 }
 
 function addMarkerForEvent(event) {
-        getLatLngForEvent(event, function(latlng) {
-          var marker = new google.maps.Marker({
-            'position': latlng,
+        var marker = new google.maps.Marker({
+          //  'position': latlng,
           })
-          markersById[event.id] = marker
+        marker.setMap(map)
+        markersById[event.id] = marker
+        getLatLngForEvent(event, function(latlng) {
+          marker.setPosition(latlng)
+          
+          
           google.maps.event.addListener(marker, 'click', function() {
             if (isdefined(currentlyOpenInfoWindow) && isdefined(currentlyOpenInfoWindow.close)) {
               currentlyOpenInfoWindow.close()
@@ -179,7 +221,7 @@ function addMarkerForEvent(event) {
             })
             currentlyOpenInfoWindow.open(map, this)
           })
-          marker.setMap(map)
+          //marker.setMap(map)
         })
       }
 
