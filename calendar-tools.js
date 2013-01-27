@@ -120,7 +120,7 @@
         $( "#dialog-modal" ).dialog({
           height: 300,
           modal: true,
-			position: "left",
+			position: {my:"bottom", at:"top", of:$event, collision:"fit"},
 		  show:"clip",
 		  //hide:"clip",
 		  beforeClose: function() {
@@ -148,7 +148,7 @@
          $( "#dialog" ).dialog({
           height: 300,
           modal: true,
-			position: "right",
+			position: {my:"top", at:"bottom", of:$event, collision:"fit"},
 		  show:"clip",
 		  //hide:"clip",
         });
