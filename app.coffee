@@ -230,6 +230,35 @@ app.get '/classes', (req, res) ->
   if username?
     getClasses(username, (x) -> res.json(x))
 
+everyone.now.getAuthenticated = (key, callback) ->
+  if authentications[key]?
+    callback(authentications[key])
+
+authentications = {}
+
+app.get '/authenticate', (req, res) ->
+  email = req.query.email
+  if not email?
+    res.send 'e'
+    return
+  name = req.query.name
+  if not name?
+    res.send 'n'
+    return
+  key = req.query.key
+  if not key?
+    res.send 'k'
+    return
+  #secret = req.query.secret
+  #if not secret?
+  #  res.send 's'
+  #  return
+  authentications[key] = {'email': email, 'fullname': name}
+  console.log key #secret
+  console.log email
+  console.log name
+  res.send 'g'
+
 dumpToDisk = () ->
   ndata = JSON.stringify({cl: classes, ev: allevents})
   fs.writeFileSync('psetparty.json', ndata, 'utf-8')

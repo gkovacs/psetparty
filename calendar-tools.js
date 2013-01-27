@@ -1,6 +1,6 @@
 
-  email = 'gkovacs@MIT.EDU'
-  fullname = 'Geza Kovacs'
+  email = 'guest@MIT.EDU'
+  fullname = 'Guest User'
   
   newstart = ''
   newend = ''

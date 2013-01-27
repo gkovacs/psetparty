@@ -8,8 +8,8 @@ function classlistCallback( request, response ) {
                 response(t);
             }
 
-  
-  now.ready(function() {
+  function loggedIn() {
+    $('#userName').text(fullname)
     getEvents = function(callback) {
       now.getEventsForUser(email, function(events) {
         for (var i = 0; i < events.length; ++i) {
@@ -55,7 +55,33 @@ function classlistCallback( request, response ) {
         addClassWidget(classname)
       })
     })
+    refresh()
     //setTimeout(function() {initializeMap()}, 1000)
+  }
+  
+  authkeynum = Math.floor(Math.random()*9007199254740992)
+  authenticationloop = {}
+  
+  function loginMIT() {
+    $('#authenticationIframe').attr('src', 'https://gkovacs.scripts.mit.edu:444/login2.py?key=' + authkeynum)
+    authenticationloop = setInterval(function() {
+      now.getAuthenticated(authkeynum, function(newuserinfo) {
+        email = newuserinfo.email
+        fullname = newuserinfo.fullname
+        clearInterval(authenticationloop)
+        $('#loginButton').hide()
+        loggedIn()
+      })
+    }, 100)
+  }
+  
+  now.ready(function() {
+    loggedIn()
+    loginMIT()
+    //now.getAuthenticated(authkeynum, function(userinfo) {
+    //  email = userinfo.email
+    //  fullname = userinfo.fullname
+    //})
   })
   
   function isdefined(x) {
