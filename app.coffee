@@ -354,6 +354,7 @@ app.get '/authenticate', (req, res) ->
   res.send 'g'
 
 dumpToDisk = (callback) ->
+  console.log 'dumping to disk'
   ndata = JSON.stringify({cl: classes, ev: allevents})
   #fs.writeFileSync('psetparty.json', ndata, 'utf-8')
   rclient.set('psetparty', ndata, callback)
@@ -427,16 +428,21 @@ everyone.now.leaveEvent = (event, user) ->
     removeUserIfPresent(allevents[title][eventid], user)
   everyone.now.refreshUser()
 
-'''
 process.on 'SIGINT', () ->
-  dumpToDisk()
-  process.exit()
+  dumpToDisk(() ->
+    console.log 'exiting'
+    process.exit()
+  )
 
 process.on 'SIGTERM', () ->
-  dumpToDisk()
-  process.exit()
+  dumpToDisk(() ->
+    console.log 'exiting'
+    process.exit()
+  )
 
 process.on 'SIGQUIT', () ->
-  dumpToDisk()
-  process.exit()
-'''
+  dumpToDisk(() ->
+    console.log 'exiting'
+    process.exit()
+  )
+
