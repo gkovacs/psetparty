@@ -223,10 +223,16 @@ function getLatestEvent(event) {
   return event
 }
 
+function getMarkerIconForClass(str) {
+  var colorString = md5(str).substring(0,6)
+  return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + colorString
+}
+
 function addMarkerForEvent(event) {
   if (!getGoogleMap()) return
         var marker = new google.maps.Marker({
           //  'position': latlng,
+          'icon': getMarkerIconForClass(event.subjectname),
           })
         marker.setMap(getGoogleMap())
         markersById[event.id] = marker
@@ -278,6 +284,26 @@ function getGoogleMap() {
   return mapContainer.googmap
 }
 
+function setGeoLocationMarker() {
+  if(navigator.geolocation) {
+    browserSupportFlag = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      var marker = new google.maps.Marker({
+        'position': initialLocation,
+        'icon': 'youarehere.png',
+        'title': 'This is your location',
+      })
+      marker.setMap(getGoogleMap())
+      //map.setCenter(initialLocation);
+    }, function() {
+      //handleNoGeolocation(browserSupportFlag);
+      console.log('geolocation not supported')
+    });
+  }
+  
+}
+
 mapInitialized = false
 geocoder = null
 
@@ -294,4 +320,5 @@ mapInitialized = true
         mapContainer.googmap = googleMap = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
         //$('#map_canvas').height(500)
+        setGeoLocationMarker()
       }
