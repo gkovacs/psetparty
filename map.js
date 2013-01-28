@@ -41,7 +41,12 @@ function getLastAcceptableTime() {
 }
 
 function timeRangeSliderChanged() {
-  console.log($('#timeRange').val())
+  var timeRangeVal = parseInt($('#timeRange').val())
+  var relativeTime =  timeRangeVal + ' hours'
+  if (relativeTime == '1 hours') relativeTime = 'hour'
+  if (timeRangeVal > 48)
+    relativeTime = getLastAcceptableTime().fromNow().toString().split('in ').join('').split('an ').join('').split('a ').join('')
+  $('#timeRangeDisplay').text('Show pset parties in the next ' + relativeTime)
   refreshMap()
 }
 
