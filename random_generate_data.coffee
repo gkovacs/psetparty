@@ -19,13 +19,26 @@ for line in classdata.split('\n')
     classlist.push subjectnum
 classlist.sort()
 
-data = fs.readFileSync('mit-course-6-fb.html', 'utf-8')
+if fs.existsSync 'mit-people.json'
+  people = JSON.parse(fs.readFileSync('mit-people.json', 'utf-8'))
+else
+  data = fs.readFileSync('mit-fb.html', 'utf-8')
+  console.log 'parsing mit fb'
+  people = {}
+  for x in $(data).find('.fsl.fwb.fcb')
+    fburl = $(x).find('a').attr('href')
+    name = $(x).find('a').text()
+    people[fburl] = name
+  console.log 'num people in mit fb: ' + Object.keys(people).length
 
-people = {}
-for x in $(data).find('.fsl.fwb.fcb')
-  fburl = $(x).find('a').attr('href')
-  name = $(x).find('a').text()
-  people[fburl] = name
+  data = fs.readFileSync('mit-course-6-fb.html', 'utf-8')
+
+  people = {}
+  for x in $(data).find('.fsl.fwb.fcb')
+    fburl = $(x).find('a').attr('href')
+    name = $(x).find('a').text()
+    people[fburl] = name
+  fs.writeFileSync('mit-people.json', JSON.stringify(people), 'utf-8')
 
 buildingdata = fs.readFileSync('buildings.txt', 'utf-8')
 location_list = []
@@ -74,9 +87,9 @@ for email,name of people
 
 surroundingDates = () ->
   dates = []
-  for i in [7...0]
+  for i in [5...0]
     dates.push moment(Date()).subtract('days', i)
-  for i in [0..10]
+  for i in [0..8]
     dates.push moment(Date()).add('days', i)
   return dates
 
@@ -110,12 +123,14 @@ fixEventParticipantFormat = (event) ->
 allevents = {}
 
 for classname in classlist
-  console.log classname
+  #console.log classname
   if classname == 'ESD.344'
     continue
   allevents[classname] = {}
   partyCounter = 0
   for date in surroundingDates()
+    if randInt(0,2) != 0
+      continue
     numPartiesToday = randInt(0, 2)
     for i in [0..numPartiesToday]
       partyCounter += 1
