@@ -3,6 +3,8 @@ function stringToColor(str){
 }
 
 function refreshEventsMap(callback) {
+  /*
+  console.log('refreshEventsMap')
   getEvents(function(events) {
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
       var event = events[eventCounter]
@@ -28,6 +30,7 @@ function refreshEventsMap(callback) {
     }
     if (callback) callback()
   })
+  */
 }
 
 //googleMap = null
@@ -88,9 +91,28 @@ function removeEventFromMap(eventid) {
   }
 }
 
-setInterval(function() {
-  placeEvents()
-}, 500)
+//setInterval(function() {
+//  placeEvents()
+//}, 500)
+
+function eventsAtLocation(placename) {
+  var output = []
+  var events = listEvents()
+  for (var i = 0; i < events.length; ++i) {
+    if (placename == events[i].location)
+      output.push(events[i])
+  }
+  return output
+}
+
+function showEventOnMap(event) {
+  if (!isdefined(markersById[event.id])) {
+        addMarkerForEvent(event)
+      }
+  if (markersById[event.id].getMap() != getGoogleMap())
+    markersById[event.id].setMap(getGoogleMap())
+  setMarkerPositionForEvent(event)
+}
 
 function placeEvents() {
   var events = listEvents()
@@ -98,29 +120,16 @@ function placeEvents() {
     var activeEvents = {}
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
       var event = events[eventCounter]
-      if (isdefined(markersById[event.id])) {
-        if (!isdefined(markersById[event.id].getPosition())) {
-          setMarkerPositionForEvent(event)
-        }
-      }
+
       if (!isShownOnMap(event)) {
-        removeEventFromMap(event.id)
         continue
       }
+      
+      showEventOnMap(event)
+      
       activeEvents[event.id] = true
-      
-      if (isdefined(markersById[event.id])) {
-        if (markersById[event.id].getMap() != getGoogleMap())
-          markersById[event.id].setMap(getGoogleMap())
-        if (!isdefined(markersById[event.id].getPosition())) {
-          setMarkerPositionForEvent(event)
-        }
-        continue
-        //markersById[event.id].setMap(null)
-      }
-      
-      addMarkerForEvent(event)
     }
+
     var allEventIds = Object.keys(markersById)
     for (var i = 0; i < allEventIds.length; ++i) {
       var inactiveEventId = parseInt(allEventIds[i])
@@ -223,17 +232,19 @@ function getLatLngForEvent(event, callback) {
   //  places[0] = getClassroomAddress(event.location)
   //}
   getLatLng(places[0], function(result1) {
-    if (result1) {
+    if (isdefined(result1)) {
        callback(result1)
     } else {
       getLatLng(places[1], function(result2) {
-        if (result2) {
+        if (isdefined(result2)) {
           callback(result2)
         }
         
         getLatLng(places[2], function(result3) {
-		      if (result3) {
+		      if (isdefined(result3)) {
 		        callback(result3)
+		      } else {
+		        callback(null)
 		      }
 		    })
         
@@ -263,14 +274,23 @@ function addMarkerForPlace(place) {
   addMarkerForEvent({'id': 134095, 'location': place})
 }
 
+function clickMarkerById(eventid) {
+google.maps.event.trigger(markersById[eventid], 'click')
+}
+
 function addMarkerForEvent(event) {
   if (!getGoogleMap()) return
-
+  console.log('addMarkerForEvent: ' + event.location)
+  //if (isdefined(markersById[event.id])) {
+    //markersById[event.id].setMap(getGoogleMap())
+    //setMarkerPositionForEvent(event)
+    //return
+	//}
 		      var marker = new google.maps.Marker({
 		        //  'position': latlng,
 		        'icon': getMarkerIconForClass(event.subjectname),
 		        })
-		      marker.setMap(getGoogleMap())
+		      //marker.setMap(getGoogleMap())
 		      markersById[event.id] = marker
 
           google.maps.event.addListener(marker, 'click', function() {
@@ -285,14 +305,28 @@ function addMarkerForEvent(event) {
             currentlyOpenInfoWindow.open(getGoogleMap(), this)
           })
         
+        setMarkerPositionForEvent(event)
+        /*
         getLatLngForEvent(event, function(latlng) {
           marker.setPosition(latlng)
+          marker.setMap(getGoogleMap())
+          markersById[event.id] = marker
         })
+        */
       }
 
 function getLatLng(str, callback) {
+  now.geocode(str, function(result) {
+    if (result == null) callback(null)
+    else {
+      callback(new google.maps.LatLng(result.lat, result.lng))
+    }
+  })
+}
+
+function getLatLngReal(str, callback) {
         if (!isdefined(geocoder)) {
-          if (callback) callback(null)
+          //if (callback) callback(null)
           return
         }
         geocoder.geocode({
@@ -320,10 +354,15 @@ function getGoogleMap() {
 }
 
 function setMarkerPositionForEvent(event) {
+  if (!isdefined(markersById[event.id])) return
+  if (markersById[event.id].getPosition() != null) return
   getLatLngForEvent(event, function(latlng) {
     var marker = markersById[event.id]
-    if (isdefined(marker) && marker.getPosition() == null)
+    if (latlng == null) {
+      console.log('couldnt find geoloc for ' + evevnt.id)
+    } else if (isdefined(marker)) {
       marker.setPosition(latlng) 
+    }
   })
 }
 

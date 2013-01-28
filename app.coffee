@@ -10,10 +10,17 @@ console.log 'loading redis data'
 #{cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
 await
   rclient.get('psetparty', defer(rediserr, redisdata))
-{cl: classes, ev: allevents} = JSON.parse redisdata
+  rclient.get('geocodecache', defer(rediserr2, geocodecachedata))
+{'cl': classes, 'ev': allevents} = JSON.parse redisdata
+geocodecache = JSON.parse geocodecachedata
+if not geocodecache?
+  geocodecache = {}
+
 console.log 'finished loading redis data'
 
 restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').trim()
+
+googlemaps = require 'googlemaps'
 
 express = require 'express'
 app = express()
@@ -357,7 +364,8 @@ app.get '/authenticate', (req, res) ->
 
 dumpToDisk = (callback) ->
   console.log 'dumping to disk'
-  ndata = JSON.stringify({cl: classes, ev: allevents})
+  rclient.set('geocodecache', JSON.stringify(geocodecache))
+  ndata = JSON.stringify({'cl': classes, 'ev': allevents})
   #fs.writeFileSync('psetparty.json', ndata, 'utf-8')
   rclient.set('psetparty', ndata, callback)
   return ndata
@@ -453,6 +461,22 @@ everyone.now.leaveEvent = (event, user) ->
   if allevents[title][eventid]?
     removeUserIfPresent(allevents[title][eventid], user)
   everyone.now.refreshUser()
+
+everyone.now.geocode = (str, callback) ->
+  if geocodecache[str]?
+    callback geocodecache[str]
+    return
+  googlemaps.geocode(str, (geoerr, georesults) ->
+    if not georesults? or not georesults.status? or georesults.status != 'OK'
+      callback(null)
+      return
+    else
+      resultLocation = georesults.results[0].geometry.location
+      geocodecache[str] = resultLocation
+      console.log 'cached: ' + str
+      callback(resultLocation)
+      return
+  )
 
 process.on 'SIGINT', () ->
   dumpToDisk(() ->

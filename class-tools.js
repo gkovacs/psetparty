@@ -15,6 +15,7 @@ function classlistCallback( request, response ) {
           if (events[i].id == displayedEvent.id)
             populateEventInfoDisplay(events[i])
         }
+        console.log('called getevents')
         callback(events)
       })
     }
