@@ -428,13 +428,13 @@ everyone.now.leaveEvent = (event, user) ->
   everyone.now.refreshUser()
 
 process.on 'SIGINT', () ->
-  #console.log dumpToDisk()
+  dumpToDisk()
   process.exit()
 
 process.on 'SIGTERM', () ->
-  #console.log dumpToDisk()
+  dumpToDisk()
   process.exit()
 
 process.on 'SIGQUIT', () ->
-  #console.log dumpToDisk()
+  dumpToDisk()
   process.exit()
