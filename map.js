@@ -3,7 +3,6 @@ function stringToColor(str){
 }
 
 function refreshEventsMap(callback) {
-  /*
   console.log('refreshEventsMap')
   getEvents(function(events) {
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
@@ -30,13 +29,12 @@ function refreshEventsMap(callback) {
     }
     if (callback) callback()
   })
-  */
 }
 
 //googleMap = null
 
 function refreshMap() {
-  //refreshEventsMap(function() {
+  refreshEventsMap()//function() {
     //placeEvents()
   //})
   placeEvents()
