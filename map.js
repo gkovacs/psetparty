@@ -195,12 +195,14 @@ function getEventHtmlBox(event) {
   if (!partyname) partyname = ''
   var ndiv = $('<div>')
   ndiv.append($('<b>').text('Class: ')).append($('<span>').text(event.subjectname.toString())
-  ).append(
+  )
+  if (partyname != '') ndiv.append(
     $('<div>').append($('<b>').text('Name: ')).append($('<span>').text(partyname.toString()))
-  ).append(
+  )
+  ndiv.append(
     $('<div>').append($('<b>').text('Location: ')).append($('<span>').text(event.location.toString()))
   ).append(
-    $('<div>').append($('<b>').text('Time: ')).append(moment(event.start).fromNow())
+    $('<div>').append($('<b>').text('Time: ')).append(moment(event.start).calendar())
   ).append(
     $('<span>').append($('<b>').text('Attendees: ')).append(printParticipants(event.participants))
   )
