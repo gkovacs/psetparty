@@ -13,6 +13,8 @@ await
 {cl: classes, ev: allevents} = JSON.parse redisdata
 console.log 'finished loading redis data'
 
+restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').strip()
+
 express = require 'express'
 app = express()
 http = require 'http'
@@ -371,8 +373,6 @@ app.get '/restore_backup_passphrase.txt', (req, res) ->
 
 app.get '/save', (req, res) ->
   dumpToDisk(() -> res.send 'saved')
-
-restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').strip()
 
 app.get '/restorebackup', (req, res) ->
   if not req.query? or not req.query.key? or req.query.key != restore_backup_passphrase
