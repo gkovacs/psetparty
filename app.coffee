@@ -17,6 +17,8 @@ everyone = nowjs.initialize(httpserver)
 passport = require('passport')
 FacebookStrategy = require('passport-facebook').Strategy
 
+indexContents = fs.readFileSync('index.html')
+
 FACEBOOK_APP_ID = '123681104472943'
 FACEBOOK_APP_SECRET = '9115798d61b57d41b5e10b66f49e86a0'
 hostname = require('os').hostname()
@@ -84,6 +86,12 @@ app.configure( ->
   app.use(express.static(__dirname + '/'))
 )
 
+app.get '/', (req, res) ->
+  if req.query? and req.query.email? and req.query.name?
+    res.redirect('/index.html?email=' + encodeURI(req.query.email) + '&name=' + encodeURI(req.query.name))
+  else
+    res.redirect('/login.html')
+
 # GET /auth/facebook
 #   Use passport.authenticate() as route middleware to authenticate the
 #   request.  The first step in Facebook authentication will involve
@@ -99,14 +107,14 @@ app.get('/auth/facebook', passport.authenticate('facebook'), (req, res) ->
 #   request.  If authentication fails, the user will be redirected back to the
 #   login page.  Otherwise, the primary route function function will be called,
 #   which, in this example, will redirect the user to the home page.
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) ->
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login.html' }), (req, res) ->
   res.redirect('/?email=' + encodeURI(req.user.profileUrl) + '&name=' + encodeURI(req.user.displayName))
 )
 
 ensureAuthenticated = (req, res, next) ->
   if req.isAuthenticated()
     return next()
-  res.redirect('/')
+  res.redirect('/login.html')
 
 fixParticipantFormat = (x) ->
   if x.email?
