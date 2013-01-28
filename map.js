@@ -38,6 +38,12 @@ function mapEntered() {
   //console.log('map entered')
   initializeMap()
   refreshMap()
+  setTimeout(function() {
+    //getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+    google.maps.event.trigger(getGoogleMap(), 'resize')
+    getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+  }, 100)
+  
 }
 
 function getLastAcceptableTime() {

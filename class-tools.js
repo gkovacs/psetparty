@@ -76,6 +76,7 @@ function classlistCallback( request, response ) {
   
   now.ready(function() {
     loggedIn()
+    initializeMap()
     //loginMIT()
     //now.getAuthenticated(authkeynum, function(userinfo) {
     //  email = userinfo.email
