@@ -115,8 +115,7 @@ function showEventOnMap(event) {
 }
 
 function placeEvents() {
-  var events = listEvents()
-  //getEvents(function(events) {
+  getEvents(function(events) {
     var activeEvents = {}
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
       var event = events[eventCounter]
@@ -136,7 +135,7 @@ function placeEvents() {
       if (isdefined(activeEvents[inactiveEventId])) continue
       removeEventFromMap(inactiveEventId)
     }
-  //})
+  })
 }
 
 markersById = {}
