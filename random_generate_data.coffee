@@ -66,7 +66,7 @@ for classname in classlist
 email_to_classlist = {}
 
 for email,name of people
-  numClasses = randInt(4, 8)
+  numClasses = randInt(1, 4)
   classes = randSample(classlist, numClasses)
   email_to_classlist[email] = classes
   for classname in classes
@@ -122,7 +122,7 @@ for classname in classlist
       partyStartTime = moment(date).add('hours', randInt(48)/2.0)
       partyEndTime = moment(partyStartTime).add('hours', randInt(2,5)/2.0)
       partyLocation = randElem(location_list)
-      numParticipants = randInt(2,7)
+      numParticipants = randInt(1,4)
       partyParticipants = randSample(class_participants[classname], numParticipants)
       event = {
         'id': mkId(),
