@@ -45,7 +45,7 @@
   }
   
   function locationChanged() {
-    console.log('typed something!')
+    //console.log('typed something!')
     if ($('#location').val && $('#location').val().length >= 1) {
       $('#createPartyButton').removeAttr('disabled').css('opacity', 1.0)
     } else {
@@ -150,6 +150,7 @@
         console.log(calEvent.subjectname)
         now.deleteEvent(calEvent.subjectname, calEvent.id, function() {
           refresh()
+          refreshMap()
         })
       },
       eventClick: function(calEvent, $event) {
@@ -188,7 +189,14 @@ joinOrLeaveClicked = function() {
   }
 }
 
+function deleteEventClicked() {
+  now.deleteEvent(displayedEvent.subjectname, displayedEvent.id)
+  $('.ui-dialog-titlebar-close').trigger('click')
+  //refresh()
+}
+
 function populateEventInfoDisplay(event) {
+  console.log(event)
   $('#ui-dialog-title-dialog').text(event.partyname)
   $('#classInfo').text(event.subjectname)
   $('#eventTimeInfo').text(moment(event.start).calendar())
@@ -196,6 +204,11 @@ function populateEventInfoDisplay(event) {
   $('#numberOfPeopleInfo').text(event.participants.length)
   $('#attendeeListInfo').html(printParticipants(event.participants))
   console.log(isAttending(event))
+  if (canDelete(event)) {
+    $('#deleteEvent').show()
+  } else {
+    $('#deleteEvent').hide()
+  }
   if (isAttending(event)) {
     $('.ui-dialog-titlebar').css('backgroundColor', 'green')
     $('.ui-dialog-titlebar').css('color', 'white')
