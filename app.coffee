@@ -366,11 +366,16 @@ app.get '/app.js', (req, res) ->
 app.get '/app.coffee', (req, res) ->
   res.redirect '/'
 
+app.get '/restore_backup_passphrase.txt', (req, res) ->
+  res.redirect '/'
+
 app.get '/save', (req, res) ->
   dumpToDisk(() -> res.send 'saved')
 
+restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').strip()
+
 app.get '/restorebackup', (req, res) ->
-  if not req.query? or not req.query.key? or req.query.key != 'gezakovacs'
+  if not req.query? or not req.query.key? or req.query.key != restore_backup_passphrase
     res.redirect '/'
     return
   console.log 'getting backup'
