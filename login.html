@@ -1,6 +1,95 @@
-<html>
-<h1>PsetParty</h1>
-<a href="/auth/facebook">Click here login with your Facebook</a><br/>
-<a href="https://gkovacs.scripts.mit.edu:444/login.py">Click here login with your MIT certificates</a>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	<!--
+		Supersized - Fullscreen Slideshow jQuery Plugin
+		Version : 3.2.7
+		Site	: www.buildinternet.com/project/supersized
+		
+		Author	: Sam Dunn
+		Company : One Mighty Roar (www.onemightyroar.com)
+		License : MIT License / GPL License
+	-->
+
+	<head>
+
+		<title>PsetParty</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		
+		<link rel="stylesheet" href="css/supersized.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="theme/supersized.shutter.css" type="text/css" media="screen" />
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+		
+		<script type="text/javascript" src="js/supersized.3.2.7.min.js"></script>
+		<script type="text/javascript" src="theme/supersized.shutter.min.js"></script>
+		
+		<script type="text/javascript">
+			
+			jQuery(function($){
+				
+				$.supersized({
+				
+					// Functionality
+					slide_interval          :   5000,		// Length between transitions
+					transition              :   1, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
+					transition_speed		:	700,		// Speed of transition
+															   
+					// Components							
+					slide_links				:	'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
+					slides 					:  	[			// Slideshow Images
+														{image : 'slide 1.jpg',},
+														{image : 'slide 2.jpg',}, 
+														{image : 'slide 3.jpg',},
+														{image : 'slide 4.jpg',},
+														
+												]
+					
+				});
+		    });
+		    
+		</script>
+		
+	</head>
+	
+	<style type="text/css">
+        #demo-block {margin-left: 30px; margin-top:23.8px;}
+		ul#demo-block2 li{ margin:280px 0px -270px 90px; padding:20px; -webkit-border-radius: 10px; border-radius: 10px; display:inline; float:left; clear:both; color: rgba(255, 255, 255, 0.8); background-color: rgba(51, 51, 51, 0.5); font:18px Helvetica, Arial, sans-serif; cursor: pointer;-webkit-box-shadow:  1px 1px 5px 2px rgba(51, 51, 51, 0.8); box-shadow:  1px 1px 5px 2px rgba(51, 51, 51, 0.8);}	
+		ul#demo-block2 li:hover{background-color: rgba(51, 51, 51, 0.8);}
+			
+	</style>
+
+<body>
+
+	<!--Demo styles (you can delete this block)-->
+	
+	<div id="demo-block">
+		<img src="pset party logo.png"/>
+    </div>
+    <ul id="demo-block2">    
+        <li><a href="/auth/facebook" style="text-decoration: none; color: rgba(255, 255, 255, 0.8);">Login with Facebook</a></li>
+        <li><a href="https://gkovacs.scripts.mit.edu:444/login.py" style="text-decoration: none; color: rgba(255, 255, 255, 0.8);">Login with MIT Certificate</a></li>	
+	</ul>
+	
+	<!--End of styles-->
+
+	<!--Thumbnail Navigation-->
+	<div id="prevthumb"></div>
+	<div id="nextthumb"></div>
+	
+	<!--Arrow Navigation-->
+	<a id="prevslide" class="load-item"></a>
+	<a id="nextslide" class="load-item"></a>
+	
+	<div id="thumb-tray" class="load-item">
+		<div id="thumb-back"></div>
+		<div id="thumb-forward"></div>
+	</div>
+	
+
+	</div>
+
+</body>
+</html>
