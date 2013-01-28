@@ -1,7 +1,5 @@
 Albany Garage	32  Albany Street
 Albany St Generator Shelter	180  Albany Street
-Alum House: Munroe Hayden Wood	3  Ames Street
-Alum House: Walcott Bemis Goodale	3  Ames Street
 Annex 3	244  Wood Street
 Annex 6	244  Wood Street
 Annex 6 Trailer	244  Wood Street
@@ -70,7 +68,6 @@ Katahdin Hill 1a	244  Wood Street
 Koch Biology Building	31  Ames Street
 Kresge Auditorium	48  Massachusetts Ave
 Landau Building	25  Ames Street
-Lexington Field House	244  Wood Street
 Macgregor House	450  Memorial Drive
 Maclaurin Buildings (10)	222  Memorial Drive
 Maclaurin Buildings (3)	33  Massachusetts Ave

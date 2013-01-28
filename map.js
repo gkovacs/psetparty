@@ -281,12 +281,12 @@ google.maps.event.trigger(markersById[eventid], 'click')
 
 function addMarkerForEvent(event) {
   if (!getGoogleMap()) return
-  console.log('addMarkerForEvent: ' + event.location)
-  //if (isdefined(markersById[event.id])) {
-    //markersById[event.id].setMap(getGoogleMap())
-    //setMarkerPositionForEvent(event)
-    //return
-	//}
+  //console.log('addMarkerForEvent: ' + event.location)
+  if (isdefined(markersById[event.id])) {
+    markersById[event.id].setMap(getGoogleMap())
+    setMarkerPositionForEvent(event)
+    return
+	}
 		      var marker = new google.maps.Marker({
 		        //  'position': latlng,
 		        'icon': getMarkerIconForClass(event.subjectname),
