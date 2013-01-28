@@ -134,6 +134,8 @@ for classname in classlist
         'subjectname': classname,
         'participants': fixEventParticipantFormat(mkParticipantList(partyParticipants)),
       }
+      if not event.location or not event.address or not event.id or not event.start or not event.end or not event.partyname or not event.subjectname or event.participants.length == 0 or event.participants.length != numParticipants
+        continue
       allevents[classname][event.id] = event
       #console.log event
 
