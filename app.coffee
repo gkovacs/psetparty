@@ -93,11 +93,11 @@ app.configure( ->
   app.use(express.static(__dirname + '/'))
 )
 
-app.get '/', (req, res) ->
-  if req.query? and req.query.email? and req.query.name?
-    res.redirect('/index.html?email=' + encodeURI(req.query.email) + '&name=' + encodeURI(req.query.name))
-  else
-    res.redirect('/login.html')
+#app.get '/', (req, res) ->
+#  if req.query? and req.query.email? and req.query.name?
+#    res.redirect('/setcookie.html?email=' + encodeURI(req.query.email) + '&name=' + encodeURI(req.query.name))
+#  else
+#    res.redirect('/login.html')
 
 # GET /auth/facebook
 #   Use passport.authenticate() as route middleware to authenticate the
@@ -115,7 +115,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'), (req, res) ->
 #   login page.  Otherwise, the primary route function function will be called,
 #   which, in this example, will redirect the user to the home page.
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login.html' }), (req, res) ->
-  res.redirect('/?email=' + encodeURI(req.user.profileUrl) + '&name=' + encodeURI(req.user.displayName))
+  res.redirect('/setcookie.html?email=' + encodeURI(req.user.profileUrl) + '&name=' + encodeURI(req.user.displayName))
 )
 
 ensureAuthenticated = (req, res, next) ->

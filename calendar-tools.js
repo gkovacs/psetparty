@@ -57,21 +57,18 @@
 	  $( "#dialog-modal" ).hide();
 	  $( "#dialog" ).hide();
 	  
-    if (isdefined(getUrlParameters()['email'])) {
-      email = getUrlParameters()['email']
-    } else {
+	  if (isdefined($.cookie('email'))) {
+	    email = $.cookie('email')
+	  } else {
       // redirect to login page
       window.location = '/login.html'
-    }
-    if (isdefined(getUrlParameters()['name'])) {
-      fullname = getUrlParameters()['name']
-    } else {
+	  }
+	  if (isdefined($.cookie('fullname'))) {
+	    fullname = $.cookie('fullname')
+	  } else {
       // redirect to login page
       window.location = '/login.html'
-    }
-    if (fullname.indexOf('#') != -1) {
-      fullname = fullname.split('#')[0]
-    }
+	  }
     
     var $calendar = $('#calendar').weekCalendar({
       timeslotsPerHour: 4,
