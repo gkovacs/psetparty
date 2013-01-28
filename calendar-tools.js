@@ -65,6 +65,9 @@
     if (isdefined(getUrlParameters()['name'])) {
       fullname = getUrlParameters()['name']
     }
+    if (fullname.indexOf('#') != -1) {
+      fullname = fullname.split('#')[0]
+    }
     var $calendar = $('#calendar').weekCalendar({
       timeslotsPerHour: 4,
       timeslotHeight: 20,

@@ -110,8 +110,10 @@ function clearMarkers() {
 }
 
 function emailNamePair(x) {
+  var emailAsURL = x.email
+  if (emailAsURL.indexOf('@') != -1 && emailAsURL.indexOf('/') == -1) emailAsURL = 'mailto:' + emailAsURL
   return $('<a>')
-    .attr('href', 'mailto:' + x.email)
+    .attr('href', emailAsURL)
     .attr('title', x.email)
     .attr('alt', x.email)
     .text(x.fullname)
