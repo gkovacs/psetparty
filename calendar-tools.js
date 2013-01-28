@@ -57,17 +57,22 @@
 	  $( "#dialog-modal" ).hide();
 	  $( "#dialog" ).hide();
 	  
-	  $('submit')
-	  
     if (isdefined(getUrlParameters()['email'])) {
       email = getUrlParameters()['email']
+    } else {
+      // redirect to login page
+      window.location = '/login.html'
     }
     if (isdefined(getUrlParameters()['name'])) {
       fullname = getUrlParameters()['name']
+    } else {
+      // redirect to login page
+      window.location = '/login.html'
     }
     if (fullname.indexOf('#') != -1) {
       fullname = fullname.split('#')[0]
     }
+    
     var $calendar = $('#calendar').weekCalendar({
       timeslotsPerHour: 4,
       timeslotHeight: 20,
