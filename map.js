@@ -117,6 +117,7 @@ function emailNamePair(x) {
     .attr('href', emailAsURL)
     .attr('title', x.email)
     .attr('alt', x.email)
+    .attr('target', '_blank')
     .text(x.fullname)
 }
 
