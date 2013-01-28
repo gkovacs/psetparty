@@ -283,7 +283,8 @@ function addMarkerForEvent(event) {
   if (!getGoogleMap()) return
   //console.log('addMarkerForEvent: ' + event.location)
   if (isdefined(markersById[event.id])) {
-    markersById[event.id].setMap(getGoogleMap())
+    if (markersById[event.id].getMap() != getGoogleMap())
+      markersById[event.id].setMap(getGoogleMap())
     setMarkerPositionForEvent(event)
     return
 	}
