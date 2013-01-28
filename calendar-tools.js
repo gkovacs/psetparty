@@ -125,12 +125,13 @@
         $( "#dialog-modal" ).dialog({
           height: 300,
           modal: true,
-			position: {my:"bottom", at:"top", of:$event, collision:"fit"},
-		  show:"clip",
-		  //hide:"clip",
-		  beforeClose: function() {
-		    $('#calendar').weekCalendar('removeUnsavedEvents')
-		  }
+          open: function(event, ui) { $('.ui-widget-overlay').bind('click', function(){ $("#dialog-modal").dialog('close'); }); },
+          position: {my:"bottom", at:"top", of:$event, collision:"fit"},
+          show:"clip",
+          //hide:"clip",
+          beforeClose: function() {
+            $('#calendar').weekCalendar('removeUnsavedEvents')
+          }
         });
         $('#subjectname').html('')
         var classes = activeClasses()
@@ -154,9 +155,10 @@
          $( "#dialog" ).dialog({
           height: 300,
           modal: true,
-			position: {my:"top", at:"bottom", of:$event, collision:"fit"},
-		  show:"clip",
-		  //hide:"clip",
+          open: function(event, ui) { $('.ui-widget-overlay').bind('click', function(){ $("#dialog").dialog('close'); }); },
+          position: {my:"top", at:"bottom", of:$event, collision:"fit"},
+		      show:"clip",
+		      //hide:"clip",
         });
         displayedEvent = calEvent
         populateEventInfoDisplay(calEvent)
