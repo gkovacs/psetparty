@@ -111,6 +111,8 @@ allevents = {}
 
 for classname in classlist
   console.log classname
+  if classname == 'ESD.344'
+    continue
   allevents[classname] = {}
   partyCounter = 0
   for date in surroundingDates()

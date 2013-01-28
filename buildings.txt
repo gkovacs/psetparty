@@ -36,6 +36,7 @@ Dreyfus Building	21  Ames St
 Du Pont Athletic Center	100  Massachusetts Avenue
 Du Pont Athletic Gymnasium	120  Massachusetts Avenue
 Dupont Tennis Courts (office)	410  Memorial Drive
+East Campus	East Campus, 3 Ames Street
 Eastgate	60  Wadsworth Street
 Eastman Laboratories	182  Memorial Drive
 Edgerton House	143  Albany Street
@@ -124,5 +125,4 @@ Whitaker College	45  Carleton Street
 Wiesner Building	20  Ames Street
 Wood Sailing Pavilion	134  Memorial Drive
 Wright Brothers Wind Tunnel	76  Vassar Street
-East Campus	3 Ames Street
 

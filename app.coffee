@@ -262,8 +262,8 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
     if eventid_set[eventid]?
       continue
     subjectevents = allevents[subjectname] ? {}
-    if subjectevents[event.id]?
-      events.push subjectevents[event.id]
+    if subjectevents[eventid]?
+      events.push subjectevents[eventid]
   callback events
 
 mkId = () -> Math.floor(Math.random()*9007199254740992)

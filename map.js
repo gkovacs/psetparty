@@ -12,19 +12,20 @@ function refreshEventsMap() {
         if (newcontent == currentlyOpenInfoWindow.content) continue
         currentlyOpenInfoWindow.close()
         currentlyOpenInfoWindow.content = getEventHtmlBox(event)
-        currentlyOpenInfoWindow.open(map, currentlyOpenMarker)
+        currentlyOpenInfoWindow.open(getGoogleMap(), currentlyOpenMarker)
       }
       if (!isdefined(markersById[event.id])) {
         addMarkerForEvent(event)
       }
-      console.log(event.id)
+      //console.log(event.id)
     }
   })
 }
 
-//map = null
+//googleMap = null
 
 function refreshMap() {
+  refreshEventsMap()
   placeEvents()
 }
 
@@ -34,7 +35,7 @@ function calendarEntered() {
 
 function mapEntered() {
   $('#timeRangeDisplayDiv').show()
-  console.log('map entered')
+  //console.log('map entered')
   initializeMap()
   refreshMap()
 }
@@ -82,8 +83,8 @@ function placeEvents() {
       }
       activeEvents[event.id] = true
       if (isdefined(markersById[event.id])) {
-        if (markersById[event.id].getMap() != map)
-          markersById[event.id].setMap(map)
+        if (markersById[event.id].getMap() != getGoogleMap())
+          markersById[event.id].setMap(getGoogleMap())
         continue
         //markersById[event.id].setMap(null)
       }
@@ -133,8 +134,8 @@ function printParticipants(participants) {
 }
 
 function togglejoin(eventid) {
-  console.log('clicked!')
-  console.log(eventid)
+  //console.log('clicked!')
+  //console.log(eventid)
   var subjectname = $('#jlb' + eventid).attr('subjectname')
   var toggledbutton = $('#jlb' + eventid)
   var event = {'id': eventid, 'subjectname': subjectname}
@@ -185,18 +186,25 @@ function getClassroomAddress(str) {
 }
 
 function getLatLngForEvent(event, callback) {
-  var places = [event.location + ' , MIT, Cambridge, MA', event.address]
+  var places = [event.location + ' , MIT, Cambridge, MA', event.location + ' ,' + event.address, event.address]
   //if (isClassroom(event.location)) {
   //  places[0] = getClassroomAddress(event.location)
   //}
   getLatLng(places[0], function(result1) {
-    if (result1 != null) {
+    if (result1) {
        callback(result1)
     } else {
       getLatLng(places[1], function(result2) {
-        if (result2 != null) {
+        if (result2) {
           callback(result2)
         }
+        
+        getLatLng(places[2], function(result3) {
+		      if (result3) {
+		        callback(result3)
+		      }
+		    })
+        
       })
     }
   })
@@ -215,10 +223,11 @@ function getLatestEvent(event) {
 }
 
 function addMarkerForEvent(event) {
+  if (!getGoogleMap()) return
         var marker = new google.maps.Marker({
           //  'position': latlng,
           })
-        marker.setMap(map)
+        marker.setMap(getGoogleMap())
         markersById[event.id] = marker
         getLatLngForEvent(event, function(latlng) {
           marker.setPosition(latlng)
@@ -233,22 +242,27 @@ function addMarkerForEvent(event) {
             currentlyOpenInfoWindow = new google.maps.InfoWindow({
               'content': getEventHtmlBox(getLatestEvent(event)),
             })
-            currentlyOpenInfoWindow.open(map, this)
+            currentlyOpenInfoWindow.open(getGoogleMap(), this)
           })
           //marker.setMap(map)
         })
       }
 
 function getLatLng(str, callback) {
-        if (!isdefined(geocoder)) return
+        if (!isdefined(geocoder)) {
+          if (callback) callback(null)
+          return
+        }
         geocoder.geocode({
           'address': str,
           'region': 'US',
           'bounds': getMITLatLngBounds(),
         }, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-            console.log(results[0].geometry.location)
-            if (callback != null) callback(results[0].geometry.location)
+            //console.log(results[0].geometry.location)
+            if (callback) callback(results[0].geometry.location)
+          } else {
+            if (callback) callback(null)
           }
         })
       }
@@ -256,6 +270,12 @@ function getLatLng(str, callback) {
       function getMITLatLngBounds() {
         return new google.maps.LatLngBounds(new google.maps.LatLng(42.3543643, -71.10349120000001), new google.maps.LatLng(42.3630281, 71.08594310000001))
       }
+
+mapContainer = {}
+
+function getGoogleMap() {
+  return mapContainer.googmap
+}
 
 mapInitialized = false
 geocoder = null
@@ -270,7 +290,7 @@ mapInitialized = true
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapContainer.googmap = googleMap = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
         //$('#map_canvas').height(500)
       }
