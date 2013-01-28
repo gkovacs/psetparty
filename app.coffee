@@ -13,7 +13,7 @@ await
 {cl: classes, ev: allevents} = JSON.parse redisdata
 console.log 'finished loading redis data'
 
-restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').strip()
+restore_backup_passphrase = fs.readFileSync('restore_backup_passphrase.txt', 'utf-8').trim()
 
 express = require 'express'
 app = express()
