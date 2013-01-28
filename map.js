@@ -2,10 +2,10 @@ function stringToColor(str){
   return '#' + md5(str).substring(0,6)
 }
 
-function refreshEventsMap() {
+function refreshEventsMap(callback) {
   getEvents(function(events) {
-    for (var i = 0; i < events.length; ++i) {
-      var event = events[i]
+    for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
+      var event = events[eventCounter]
       if (!isShownOnMap(event)) continue
       if (event.id == currentlyOpenInfoWindowEventId && currentlyOpenInfoWindow && currentlyOpenInfoWindow.open && currentlyOpenInfoWindow.close && currentlyOpenInfoWindow.getAnchor && currentlyOpenInfoWindow.getAnchor()) {
         var newcontent = getEventHtmlBox(event)
@@ -16,16 +16,26 @@ function refreshEventsMap() {
       }
       if (!isdefined(markersById[event.id])) {
         addMarkerForEvent(event)
+      } else {
+        if (markersById[event.id].getMap() != getGoogleMap()) {
+          markersById[event.id].setMap(getGoogleMap())
+        }
+        if (!isdefined(markersById[event.id].getPosition())) {
+          setMarkerPositionForEvent(event)
+        }
       }
       //console.log(event.id)
     }
+    if (callback) callback()
   })
 }
 
 //googleMap = null
 
 function refreshMap() {
-  refreshEventsMap()
+  //refreshEventsMap(function() {
+    //placeEvents()
+  //})
   placeEvents()
 }
 
@@ -81,19 +91,29 @@ function removeEventFromMap(eventid) {
 function placeEvents() {
   getEvents(function(events) {
     var activeEvents = {}
-    for (var i = 0; i < events.length; ++i) {
-      var event = events[i]
+    for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
+      var event = events[eventCounter]
+      if (isdefined(markersById[event.id])) {
+        if (!isdefined(markersById[event.id].getPosition())) {
+          setMarkerPositionForEvent(event)
+        }
+      }
       if (!isShownOnMap(event)) {
         removeEventFromMap(event.id)
         continue
       }
       activeEvents[event.id] = true
+      
       if (isdefined(markersById[event.id])) {
         if (markersById[event.id].getMap() != getGoogleMap())
           markersById[event.id].setMap(getGoogleMap())
+        if (!isdefined(markersById[event.id].getPosition())) {
+          setMarkerPositionForEvent(event)
+        }
         continue
         //markersById[event.id].setMap(null)
       }
+      
       addMarkerForEvent(event)
     }
     var allEventIds = Object.keys(markersById)
@@ -234,18 +254,20 @@ function getMarkerIconForClass(str) {
   return 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|' + colorString
 }
 
+function addMarkerForPlace(place) {
+  addMarkerForEvent({'id': 134095, 'location': place})
+}
+
 function addMarkerForEvent(event) {
   if (!getGoogleMap()) return
-        var marker = new google.maps.Marker({
-          //  'position': latlng,
-          'icon': getMarkerIconForClass(event.subjectname),
-          })
-        marker.setMap(getGoogleMap())
-        markersById[event.id] = marker
-        getLatLngForEvent(event, function(latlng) {
-          marker.setPosition(latlng)
-          
-          
+
+		      var marker = new google.maps.Marker({
+		        //  'position': latlng,
+		        'icon': getMarkerIconForClass(event.subjectname),
+		        })
+		      marker.setMap(getGoogleMap())
+		      markersById[event.id] = marker
+
           google.maps.event.addListener(marker, 'click', function() {
             if (isdefined(currentlyOpenInfoWindow) && isdefined(currentlyOpenInfoWindow.close)) {
               currentlyOpenInfoWindow.close()
@@ -257,7 +279,9 @@ function addMarkerForEvent(event) {
             })
             currentlyOpenInfoWindow.open(getGoogleMap(), this)
           })
-          //marker.setMap(map)
+        
+        getLatLngForEvent(event, function(latlng) {
+          marker.setPosition(latlng)
         })
       }
 
@@ -288,6 +312,14 @@ mapContainer = {}
 
 function getGoogleMap() {
   return mapContainer.googmap
+}
+
+function setMarkerPositionForEvent(event) {
+  getLatLngForEvent(event, function(latlng) {
+    var marker = markersById[event.id]
+    if (isdefined(marker) && marker.getPosition() == null)
+      marker.setPosition(latlng) 
+  })
 }
 
 function setGeoLocationMarker() {
