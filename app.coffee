@@ -3,8 +3,15 @@ request = require 'request'
 $ = require 'jQuery'
 restler = require 'restler'
 
-#redis = require 'redis'
-#rclient = redis.createClient()
+redis = require 'redis'
+rclient = redis.createClient()
+
+console.log 'loading redis data'
+#{cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
+await
+  rclient.get('psetparty', defer(rediserr, redisdata))
+{cl: classes, ev: allevents} = JSON.parse redisdata
+console.log 'finished loading redis data'
 
 express = require 'express'
 app = express()
@@ -135,7 +142,6 @@ eventListToDictionary = (eventlist) ->
     output[event.id] = event
   return output
 
-{cl: classes, ev: allevents} = JSON.parse fs.readFileSync('psetparty.json', 'utf-8')
 if not allevents?
   allevents = {}
 do ->
@@ -349,11 +355,15 @@ app.get '/authenticate', (req, res) ->
 
 dumpToDisk = () ->
   ndata = JSON.stringify({cl: classes, ev: allevents})
-  fs.writeFileSync('psetparty.json', ndata, 'utf-8')
+  #fs.writeFileSync('psetparty.json', ndata, 'utf-8')
+  rclient.set('psetparty', ndata)
   return ndata
 
 app.get '/save', (req, res) ->
   res.send dumpToDisk()
+
+#app.get '/restart', (req, res) ->
+#  process.exit()
 
 everyone.now.getCalendarIds = (classnames, callback) ->
   await
@@ -418,13 +428,13 @@ everyone.now.leaveEvent = (event, user) ->
   everyone.now.refreshUser()
 
 process.on 'SIGINT', () ->
-  console.log dumpToDisk()
+  #console.log dumpToDisk()
   process.exit()
 
 process.on 'SIGTERM', () ->
-  console.log dumpToDisk()
+  #console.log dumpToDisk()
   process.exit()
 
 process.on 'SIGQUIT', () ->
-  console.log dumpToDisk()
+  #console.log dumpToDisk()
   process.exit()

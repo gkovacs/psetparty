@@ -150,10 +150,12 @@ function togglejoin(eventid) {
 }
 
 function getEventHtmlBox(event) {
+  var partyname = event.partyname
+  if (!partyname) partyname = ''
   var ndiv = $('<div>')
   ndiv.append($('<b>').text('Class: ')).append($('<span>').text(event.subjectname.toString())
   ).append(
-    $('<div>').append($('<b>').text('Name: ')).append($('<span>').text(event.partyname.toString()))
+    $('<div>').append($('<b>').text('Name: ')).append($('<span>').text(partyname.toString()))
   ).append(
     $('<div>').append($('<b>').text('Location: ')).append($('<span>').text(event.location.toString()))
   ).append(
@@ -183,10 +185,10 @@ function getClassroomAddress(str) {
 }
 
 function getLatLngForEvent(event, callback) {
-  var places = [event.location + ' , MIT, Cambridge, MA', event.location]
-  if (isClassroom(event.location)) {
-    places[0] = getClassroomAddress(event.location)
-  }
+  var places = [event.location + ' , MIT, Cambridge, MA', event.address]
+  //if (isClassroom(event.location)) {
+  //  places[0] = getClassroomAddress(event.location)
+  //}
   getLatLng(places[0], function(result1) {
     if (result1 != null) {
        callback(result1)
