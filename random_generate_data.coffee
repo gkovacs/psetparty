@@ -141,6 +141,8 @@ ndata = JSON.stringify({cl: email_to_classlist, ev: allevents})
 
 #fs.writeFileSync('psetparty-generated.json', ndata, 'utf-8')
 rclient.set('psetparty', ndata, () ->
-  process.exit()
+  rclient.set('psetparty-backup', ndata, () ->
+    process.exit()
+  )
 )
 

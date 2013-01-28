@@ -360,8 +360,29 @@ dumpToDisk = (callback) ->
   rclient.set('psetparty', ndata, callback)
   return ndata
 
+app.get '/app.js', (req, res) ->
+  res.redirect '/'
+
+app.get '/app.coffee', (req, res) ->
+  res.redirect '/'
+
 app.get '/save', (req, res) ->
   dumpToDisk(() -> res.send 'saved')
+
+app.get '/restorebackup', (req, res) ->
+  if not req.query? or not req.query.key? or res.query.key != 'gezakovacs'
+    res.redirect '/'
+    return
+  console.log 'getting backup'
+  rclient.get('psetparty-backup', (rediserr2, redisdata2) ->
+    console.log 'setting psetparty to backup'
+    rclient.set('psetparty', redisdata2, () ->
+      console.log 'restarting process'
+      res.send 'backup restored'
+      process.exit()
+    )
+  )
+  #dumpToDisk(() -> res.send 'saved')
 
 #app.get '/restart', (req, res) ->
 #  process.exit()
