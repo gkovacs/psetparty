@@ -1,0 +1,43 @@
+<html>
+<script type='text/javascript' src='libs/jquery-1.4.4.min.js'></script>
+<script type='text/javascript' src='jquery.cookie.js'></script>
+<script>
+
+function getUrlParameters() {
+    var map = {}
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      map[key] = decodeURI(value)
+    })
+    return map
+  }
+
+  function isdefined(x) {
+    return (typeof x !== 'undefined' && x !== null)
+  }
+
+$(document).ready(function() {
+    email = 'guest@MIT.EDU'
+    fullname = 'Guest User'
+
+    if (isdefined(getUrlParameters()['email'])) {
+      email = getUrlParameters()['email']
+    } else {
+      // redirect to login page
+      window.location = '/login.html'
+    }
+    if (isdefined(getUrlParameters()['name'])) {
+      fullname = getUrlParameters()['name']
+    } else {
+      // redirect to login page
+      window.location = '/login.html'
+    }
+    if (fullname.indexOf('#') != -1) {
+      fullname = fullname.split('#')[0]
+    }
+    $.cookie('email', email)
+    $.cookie('fullname', fullname)
+    window.location = '/'
+})
+</script>
+</html>
+
