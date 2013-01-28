@@ -198,6 +198,14 @@ function populateEventInfoDisplay(event) {
   $('#classInfo').text(event.subjectname)
   $('#eventTimeInfo').text(moment(event.start).calendar())
   $('#locationInfo').text(event.location)
+  if (isdefined(markersById) && isdefined(markersById[displayedEvent.id]) && isdefined(markersById[displayedEvent.id].getMap()) && isdefined(markersById[displayedEvent.id].getPosition())) {
+    $('#locationInfo').html($('<a>').attr('href', '#').text(event.location).click(function() {
+        $('.ui-dialog-titlebar-close').trigger('click')
+        $("#mapSwitchTab").click()
+        google.maps.event.trigger(markersById[displayedEvent.id], 'click')
+      })
+    )
+  }
   $('#numberOfPeopleInfo').text(event.participants.length)
   $('#attendeeListInfo').html(printParticipants(event.participants))
   //console.log(isAttending(event))
