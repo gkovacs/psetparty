@@ -126,7 +126,7 @@ input[type="range"]::-webkit-slider-thumb {
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
 }
 
-#timeRangeDisplayDiv {
+#scrollwrap {
 	float: left;
 	left: 250px;
 	overflow: hidden;
@@ -138,12 +138,12 @@ input[type="range"]::-webkit-slider-thumb {
 	/*width: 50%;*/
 }
 
-#timeRange {
+#scroll {
 	width: 50%;
 }
 
 
-#timeRangeDisplay {
+#scrolldisplay {
 	font: bold 1em sans-serif; 
 	color: #fff;
 	text-shadow: 0px -1px 1px #704811;

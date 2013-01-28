@@ -43,11 +43,11 @@ function refreshMap() {
 }
 
 function calendarEntered() {
-  $('#timeRangeDisplayDiv').hide()
+  $('#scrollwrap').hide()
 }
 
 function mapEntered() {
-  $('#timeRangeDisplayDiv').show()
+  $('#scrollwrap').show()
   //console.log('map entered')
   initializeMap()
   refreshMap()
@@ -71,7 +71,7 @@ function timeRangeSliderChanged() {
   if (relativeTime == '1 hours') relativeTime = 'hour'
   if (timeRangeVal > 48)
     relativeTime = getLastAcceptableTime().fromNow().toString().split('in ').join('').split('an ').join('').split('a ').join('')
-  $('#timeRangeDisplay').text('Show pset parties in the next ' + relativeTime)
+  $('#scrolldisplay').text('Show pset parties in the next ' + relativeTime)
   refreshMap()
 }
 
