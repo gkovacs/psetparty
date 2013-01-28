@@ -42,12 +42,14 @@
 <img src="pset party logo.png" width="234" height="104" alt="PsetParty">
   
   <div style="float: right; margin-right: 100px">
-    
-    <form style="float: right; margin-right: 0px;" action="javascript:void(0)" onsubmit="classAdded()" class="search" id="search from" dir="ltr" lang="en">
+
+    <form style="float: right; margin-right: 10px;" action="javascript:void(0)" onsubmit="classAdded()" class="search" id="search from" dir="ltr" lang="en">
     <input type="text" id="classSearchBox" value="search for classes" onblur="if(this.value=='')this.value='search for classes'" onfocus="if(this.value=='search for classes')this.value=''" style="background-color: #FFF; color: #544937; -webkit-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: inset 1px 1px 6px 0px #ccc; box-shadow: inset 1px 1px 6px 0px #ccc; text-align:left; padding-left: 5px;"/>
 	  <input type="hidden" value="submit"/>
-    </form>
-    
+   	</form>
+		<img id="search-icon" src="search-icon.png" width="20" height="20" style="float:right; margin-right: 10px;" alt="Search" />
+
+
     <br/>
 
     <div id="classlist" style="float: right; margin-right: 0px; margin-top:0px; text-align: center; padding-top:20px;"></div>
@@ -75,6 +77,12 @@
   </div>
 -->
 
+<div id="timeRangeDisplayDiv" style="display: none">
+	<input id="timeRange" min="1" max="168" value="168" onchange="timeRangeSliderChanged()" type="range"/>
+	<span id="timeRangeDisplay">Show pset parties in the next 7 days</span>
+</div>
+
+
 <div id="TabbedPanels1" class="TabbedPanels">
   <ul class="TabbedPanelsTabGroup">
     <li class="TabbedPanelsTab" tabindex="0" onclick="calendarEntered()">Calendar</li>
@@ -88,10 +96,7 @@
     </div>
   </div>
   
-  <div id="timeRangeDisplayDiv" style="display: none">
-  <input id="timeRange" min="1" max="168" value="168" onchange="timeRangeSliderChanged()" type="range"/>
-  <span id="timeRangeDisplay">Show pset parties in the next 7 days</span>
-  </div>
+
 <script type="text/javascript">
 var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
 
