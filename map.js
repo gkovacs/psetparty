@@ -28,7 +28,12 @@ function refreshMap() {
   placeEvents()
 }
 
+function calendarEntered() {
+  $('#timeRangeDisplayDiv').hide()
+}
+
 function mapEntered() {
+  $('#timeRangeDisplayDiv').show()
   console.log('map entered')
   initializeMap()
   refreshMap()
