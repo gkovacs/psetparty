@@ -19,7 +19,8 @@ FacebookStrategy = require('passport-facebook').Strategy
 
 FACEBOOK_APP_ID = '123681104472943'
 FACEBOOK_APP_SECRET = '9115798d61b57d41b5e10b66f49e86a0'
-if require('os').hostname() == 'psetparty.xvm.mit.edu'
+hostname = require('os').hostname()
+if hostname == 'psetparty'
   FACEBOOK_APP_ID = '122852207888099'
   FACEBOOK_APP_SECRET = 'aeb972a64f7d04e23a8fd509a61e8f90'
 
