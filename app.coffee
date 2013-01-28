@@ -106,7 +106,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
 ensureAuthenticated = (req, res, next) ->
   if req.isAuthenticated()
     return next()
-  res.redirect('/login')
+  res.redirect('/')
 
 fixParticipantFormat = (x) ->
   if x.email?
