@@ -59,12 +59,12 @@ function mapEntered() {
 
 function getLastAcceptableTime() {
  // return whatever time you want to display up to
- var numHoursAhead = parseInt($('#timeRange').val())
+ var numHoursAhead = parseInt($('#scroll').val())
  return moment(new Date()).add('hours', numHoursAhead)
 }
 
 function timeRangeSliderChanged() {
-  var timeRangeVal = parseInt($('#timeRange').val())
+  var timeRangeVal = parseInt($('#scroll').val())
   var relativeTime =  timeRangeVal + ' hours'
   if (relativeTime == '1 hours') relativeTime = 'hour'
   if (timeRangeVal > 48)
