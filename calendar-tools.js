@@ -193,14 +193,14 @@ function deleteEventClicked() {
 }
 
 function populateEventInfoDisplay(event) {
-  console.log(event)
+  //console.log(event)
   $('#ui-dialog-title-dialog').text(event.partyname)
   $('#classInfo').text(event.subjectname)
   $('#eventTimeInfo').text(moment(event.start).calendar())
   $('#locationInfo').text(event.location)
   $('#numberOfPeopleInfo').text(event.participants.length)
   $('#attendeeListInfo').html(printParticipants(event.participants))
-  console.log(isAttending(event))
+  //console.log(isAttending(event))
   if (canDelete(event)) {
     $('#deleteEvent').show()
   } else {

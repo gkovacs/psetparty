@@ -145,6 +145,7 @@ function classlistCallback( request, response ) {
     if (!isdefined(classname))
       classname = $('#classSearchBox').val()
     console.log(classname)
+    if (!isdefined(classname) || classname == '') return false
     $('#classSearchBox').val('')
     var active = activeClasses()
     if (active.length > 0 && active.indexOf(classname) != -1)
