@@ -88,8 +88,13 @@ function removeEventFromMap(eventid) {
   }
 }
 
+setInterval(function() {
+  placeEvents()
+}, 500)
+
 function placeEvents() {
-  getEvents(function(events) {
+  var events = listEvents()
+  //getEvents(function(events) {
     var activeEvents = {}
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
       var event = events[eventCounter]
@@ -122,7 +127,7 @@ function placeEvents() {
       if (isdefined(activeEvents[inactiveEventId])) continue
       removeEventFromMap(inactiveEventId)
     }
-  })
+  //})
 }
 
 markersById = {}
