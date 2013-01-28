@@ -79,3 +79,9 @@
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
   }
+
+input[type="range"] {
+	-webkit-appearance: none;
+	background-color: black;
+	height: 2px;
+}
