@@ -370,7 +370,7 @@ app.get '/save', (req, res) ->
   dumpToDisk(() -> res.send 'saved')
 
 app.get '/restorebackup', (req, res) ->
-  if not req.query? or not req.query.key? or res.query.key != 'gezakovacs'
+  if not req.query? or not req.query.key? or req.query.key != 'gezakovacs'
     res.redirect '/'
     return
   console.log 'getting backup'
