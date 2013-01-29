@@ -268,6 +268,7 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
       events.push event
       eventid_set[event.id] = true
   # now we add subjects for which the user is participating but isn't in the class
+  '''
   customEventDict = participantToEvent[username] ? {}
   for eventid,subjectname of customEventDict
     eventid = parseInt(eventid)
@@ -276,6 +277,7 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
     subjectevents = allevents[subjectname] ? {}
     if subjectevents[eventid]?
       events.push subjectevents[eventid]
+  '''
   callback events
 
 mkId = () -> Math.floor(Math.random()*9007199254740992)
