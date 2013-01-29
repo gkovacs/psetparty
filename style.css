@@ -10,28 +10,30 @@
 
   body {
 	height: 100%;
+	min-width: 700px;
 	font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
-	margin: 0 auto;
+	margin-top:10px;
+	margin-bottom:0px;
+	margin-right:0px;
+	margin-left:33px;
+
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 
-
-background: rgb(153,50,50); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%, rgba(153,29,29,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(153,50,50,1)), color-stop(100%,rgba(153,29,29,1))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#993232', endColorstr='#991d1d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: rgb(153,50,50); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%, rgba(153,29,29,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(153,50,50,1)), color-stop(100%,rgba(153,29,29,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#993232', endColorstr='#991d1d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 
 	/*background-color: #380000;	#544937*/
 	
 
-	margin-left: 33px;
-	margin-top: 10px;
-	margin-bottom: 0px;
+
   }
 
   h1 {
@@ -57,6 +59,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#993232', end
     border-radius: 30px;
 	float: right;
   }
+
+	#header {
+		margin: 5px 0px 0px;
+		min-width:1000px;
+	}
   
   #search-icon{
 	  color:white;
@@ -151,7 +158,7 @@ background-image: linear-gradient(to bottom, #8F3000 0%, #A60048 100%);
 	right: 100px;
 	/*margin-right: 100px;*/
 	top: 140px;
-	/*width: 50%;*/
+	min-width: 700px;
 }
 
 #scroll {
