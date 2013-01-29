@@ -209,6 +209,9 @@ function populateEventInfoDisplay(event) {
   addMarkerForEvent(event)
   if (isdefined(markersById) && isdefined(markersById[displayedEvent.id]) && isdefined(markersById[displayedEvent.id].getMap()) /*&& isdefined(markersById[displayedEvent.id].getPosition())*/) {
     $('#locationInfo').html($('<a>').attr('href', '#').text(event.location).click(function() {
+        $('#scroll').val($('#scroll').attr('max'))
+        timeRangeSliderChanged()
+        
         setMarkerPositionForEvent(event)
         $('.ui-dialog-titlebar-close').trigger('click')
         mapSettingCenterThisRun = false

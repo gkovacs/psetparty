@@ -3,7 +3,7 @@ function stringToColor(str){
 }
 
 function refreshEventsMap(callback) {
-  console.log('refreshEventsMap')
+  //console.log('refreshEventsMap')
   getEvents(function(events) {
     for (var eventCounter = 0; eventCounter < events.length; ++eventCounter) {
       var event = events[eventCounter]
