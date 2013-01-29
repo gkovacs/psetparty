@@ -53,6 +53,7 @@ function mapEntered() {
     //getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
     google.maps.event.trigger(getGoogleMap(), 'resize')
     getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+    $('#map_canvas').height($(window).height() - $('#map_canvas').offset().top - 50)
   }, 100)
   
 }

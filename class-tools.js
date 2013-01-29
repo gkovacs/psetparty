@@ -54,14 +54,7 @@ function classlistCallback( request, response ) {
       $.map(classes, function(classname) {
         addClassWidget(classname)
       })
-      if (classes.length == 0) {
-        getEvents(function(allEvents) {
-          if (allEvents.length == 0) {
-            $.gritter.removeAll()
-            $.gritter.add({'title': 'Add Classes →', 'text': 'Add your classes to find pset parties →', 'sticky': true})
-          }
-        })
-      }
+      mayHaveNoClassesLeft()
     })
     refresh()
     //setTimeout(function() {initializeMap()}, 1000)
@@ -111,6 +104,17 @@ function classlistCallback( request, response ) {
     refreshMap()
   }
   
+  function mayHaveNoClassesLeft() {
+    if (activeClasses().length > 0) return
+    getEvents(function(events) {
+      if (events.length > 0) return
+      if (activeClasses().length > 0) return
+      $.gritter.removeAll()
+      $.gritter.add({'title': '<div style="text-align: center">Add Classes →</div>', 'text': '<div style="text-align: center">Add your classes to find pset parties</div>', 'sticky': true})
+      $('#gritter-notice-wrapper').click(scrollToTop)
+    })
+  }
+  
   function addClassWidget(classname) {
     $.gritter.removeAll()
     if (activeClasses().indexOf(classname) != -1) return
@@ -145,6 +149,7 @@ function classlistCallback( request, response ) {
                 now.removeClass(email, classname, function() {
                   refresh()
                   refreshMap()
+                  mayHaveNoClassesLeft()
                 })
                 return false
               })
@@ -199,4 +204,8 @@ function classlistCallback( request, response ) {
       //refresh()
       now.joinEvent({'id': newid, 'subjectname': subjectname}, getUser())
     })
+  }
+  
+  function scrollToTop() {
+    $("html, body").animate({ scrollTop: 0 }, 600);
   }

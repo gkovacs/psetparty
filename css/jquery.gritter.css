@@ -1,9 +1,10 @@
 /* the norm */
 #gritter-notice-wrapper {
 	position:fixed;
-	top:20px;
-	left:50%;
-	margin-left: -150px;
+	top:10px;
+	/*left:50%;
+	margin-left: -150px;*/
+	right: 330px;
 	width:301px;
 	z-index:9999;
 }
