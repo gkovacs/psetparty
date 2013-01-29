@@ -145,6 +145,9 @@
       draggable: function(calEvent,element) {
         return false
       },
+      resizable: function(calEvent, element) {
+        return false
+      },
       eventDelete: function(calEvent, element, dayFreeBusyManager, calendar, clickEvent) {
         console.log(calEvent.id)
         console.log(calEvent.subjectname)
