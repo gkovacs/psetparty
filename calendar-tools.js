@@ -117,7 +117,9 @@
         //console.log(calEvent.end.toString())
         //console.log($event)
         if (activeClasses().length == 0) {
-          alert('need to add some classes before you can start adding events! see the search box in the top-right corner!')
+          //alert('need to add some classes before you can start adding events! see the search box in the top-right corner!')
+          //$.gritter.removeAll()
+          $.gritter.add({'title': 'Add Class to Create Events', 'text': 'You need to add a class before you can create an event'})
           $('#calendar').weekCalendar('removeUnsavedEvents')
           return
         }

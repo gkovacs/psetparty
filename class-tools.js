@@ -15,7 +15,7 @@ function classlistCallback( request, response ) {
           if (events[i].id == displayedEvent.id)
             populateEventInfoDisplay(events[i])
         }
-        console.log('called getevents')
+        //console.log('called getevents')
         callback(events)
       })
     }
@@ -54,6 +54,14 @@ function classlistCallback( request, response ) {
       $.map(classes, function(classname) {
         addClassWidget(classname)
       })
+      if (classes.length == 0) {
+        getEvents(function(allEvents) {
+          if (allEvents.length == 0) {
+            $.gritter.removeAll()
+            $.gritter.add({'title': 'Add Classes →', 'text': 'Add your classes to find pset parties →', 'sticky': true})
+          }
+        })
+      }
     })
     refresh()
     //setTimeout(function() {initializeMap()}, 1000)
@@ -104,6 +112,7 @@ function classlistCallback( request, response ) {
   }
   
   function addClassWidget(classname) {
+    $.gritter.removeAll()
     if (activeClasses().indexOf(classname) != -1) return
     $('#classlist')
       .prepend(
