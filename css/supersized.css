@@ -10,7 +10,10 @@
 	
 */
 
-* { margin:0; padding:0; }
+* {
+	padding: 0;
+	margin: 0;
+}
 body { background:#111; height:100%; }
 	img { border:none; }
 	
