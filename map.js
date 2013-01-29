@@ -42,6 +42,7 @@ function refreshMap() {
 
 function calendarEntered() {
   $('#scrollwrap').hide()
+  $('#calendar').weekCalendar('resize')
 }
 
 function mapEntered() {
