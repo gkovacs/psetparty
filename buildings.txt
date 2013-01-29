@@ -1,87 +1,87 @@
-Albany Garage	32  Albany Street
-Albany St Generator Shelter	180  Albany Street, Boston, MA
+Albany Garage	32 Albany Street
+Albany St Generator Shelter	180 Albany Street, Boston, MA
 Alpha Chi Omega	478 Commonwealth Ave, Boston, MA
 Alpha Delta Phi	351 Massachusetts Avenue, Cambridge, MA
 Alpha Epsilon Pi	155 Bay State Rd, Boston, MA
 Alpha Phi	479 Commonwealth Avenue, Boston, MA
-Arthur D Little Building	30  Memorial Drive
-Ashdown House	235  Albany Street
-Baker House	362  Memorial Drive
+Arthur D Little Building	30 Memorial Drive
+Ashdown House	235 Albany Street
+Baker House	362 Memorial Drive
 Bates Linear Accelerator	21 Manning Ave
 Beta Theta Pi	119 Bay State Road, Boston, MA
-Bexley Hall	46-52  Massachusetts Avenue
-Brown Building	60  Vassar Street
-Burton-conner House	410  Memorial Drive
-Bush Building	105  Massachusetts Ave
-Carr Indoor Tennis Facility	410  Memorial Drive
+Bexley Hall	46-52 Massachusetts Avenue
+Brown Building	60 Vassar Street
+Burton-conner House	410 Memorial Drive
+Bush Building	105 Massachusetts Ave
+Carr Indoor Tennis Facility	410 Memorial Drive
 Chi Phi	32 Hereford Street, Boston, MA
-Cogeneration Plant	59  Vassar Street
-Compton Laboratories	60  Vassar Street
-Cooling Tower & Oil Reserve	60  Albany Street
-Cyclotron	51  Vassar Street
+Cogeneration Plant	59 Vassar Street
+Compton Laboratories	60 Vassar Street
+Cooling Tower & Oil Reserve	60 Albany Street
+Cyclotron	51 Vassar Street
 Delta Kappa Epsilon	403 Memorial Drive, Cambridge, MA
 Delta Psi	428 Memorial Drive, Cambridge, MA
 Delta Tau Delta	416 Beacon Street, Boston, MA
 Delta Upsilon	526 Beacon Street, Boston, MA
 Epsilon Theta	259 St. Paul Street, Brookline, MA
-Dorrance Building	21  Ames St
-Dreyfus Building	21  Ames St
-Du Pont Athletic Center	100  Massachusetts Avenue
-Du Pont Athletic Gymnasium	120  Massachusetts Avenue
-Dupont Tennis Courts (office)	410  Memorial Drive
+Dorrance Building	21 Ames St
+Dreyfus Building	21 Ames St
+Du Pont Athletic Center	100 Massachusetts Avenue
+Du Pont Athletic Gymnasium	120 Massachusetts Avenue
+Dupont Tennis Courts (office)	410 Memorial Drive
 East Campus	East Campus, 3 Ames Street
-Eastgate	60  Wadsworth Street
-Eastman Laboratories	182  Memorial Drive
-Edgerton House	143  Albany Street
-Edward Pennell Brooks Center	80  Haven St
-Endicott House	80  Haven St
-Fairchild Building (36)	50  Vassar Street
-Fairchild Building (38)	50  Vassar Street
-Fariborz Maseeh Hall	305  Memorial Drive
+Eastgate	60 Wadsworth Street
+Eastman Laboratories	182 Memorial Drive
+Edgerton House	143 Albany Street
+Edward Pennell Brooks Center	80 Haven St
+Endicott House	80 Haven St
+Fairchild Building (36)	50 Vassar Street
+Fairchild Building (38)	50 Vassar Street
+Fariborz Maseeh Hall	305 Memorial Drive
 Fenway House	34 The Fenway, Boston, MA
-Fire Pump Room	60  Albany Street
-Ford Building (e18)	50  Ames Street
-Ford Building (e19)	400  Main Street
-Francis Bitter Magnet Lab (nw14)	150  Albany Street
-Francis Bitter Magnet Lab (nw15)	166-170  Albany Street
-Gray House	111  Memorial Drive
-Green Building	21  Ames St
-Green Hall	350  Memorial Drive
-Guggenheim Laboratory	125  Massachusetts Avenue
-Hayden Memorial Library	160  Memorial Drive
-Haystack Atmospheric Sciences	50  Groton Rd
-Haystack Observatory	50  Groton Rd
-Health Services	25  Carleton Street
-Heinz Building	201  Vassar Street
-Hermann Building	30  Wadsworth Street
-High Voltage Research Lab	155  Massachusetts Avenue
-Homberg Building	77  Massachusetts Ave
-Information Systems Operations	565-570  Memorial Drive
-Johnson Athletics Center	120  Vassar Street
+Fire Pump Room	60 Albany Street
+Ford Building (e18)	50 Ames Street
+Ford Building (e19)	400 Main Street
+Francis Bitter Magnet Lab (nw14)	150 Albany Street
+Francis Bitter Magnet Lab (nw15)	166-170 Albany Street
+Gray House	111 Memorial Drive
+Green Building	21 Ames St
+Green Hall	350 Memorial Drive
+Guggenheim Laboratory	125 Massachusetts Avenue
+Hayden Library	160 Memorial Drive
+Haystack Atmospheric Sciences	50 Groton Rd
+Haystack Observatory	50 Groton Rd
+Health Services	25 Carleton Street
+Heinz Building	201 Vassar Street
+Hermann Building	30 Wadsworth Street
+High Voltage Research Lab	155 Massachusetts Avenue
+Homberg Building	77 Massachusetts Ave
+Information Systems Operations	565-570 Memorial Drive
+Johnson Athletics Center	120 Vassar Street
 Kappa Alpha Theta	350 Memorial Drive, Cambridge, MA
 Kappa Sigma	407 Memorial Drive, Cambridge, MA
-Koch Biology Building	31  Ames Street
-Kresge Auditorium	48  Massachusetts Ave
+Koch Biology Building	31 Ames Street
+Kresge Auditorium	48 Massachusetts Ave
 Lambda Chi Alpha	99 Bay State Road, Boston, MA
-Landau Building	25  Ames Street
-MacGregor House	450  Memorial Drive
-Maclaurin Buildings (10)	222  Memorial Drive
-Maclaurin Buildings (3)	33  Massachusetts Ave
-Maclaurin Buildings (4)	182  Memorial Drive
-McCormick Hall	320  Memorial Drive
-McNair Building	70  Vassar Street
+Landau Building	25 Ames Street
+MacGregor House	450 Memorial Drive
+Maclaurin Buildings (10)	222 Memorial Drive
+Maclaurin Buildings (3)	33 Massachusetts Ave
+Maclaurin Buildings (4)	182 Memorial Drive
+McCormick Hall	320 Memorial Drive
+McNair Building	70 Vassar Street
 Media Lab	75 Amherst Street
-MIT Alumni Pool	6  Vassar St
-MIT Chapel	48  Massachusetts Ave
-MIT Museum	265  Massachusetts Avenue
-MIT Police	301  Vassar Street
-Muckley Building	1  Amherst Street
-Mudd Building	40  Ames Street
-New House	471-476  Memorial Drive
-Next House	500  Memorial Drive
+MIT Alumni Pool	6 Vassar St
+MIT Chapel	48 Massachusetts Ave
+MIT Museum	265 Massachusetts Avenue
+MIT Police	301 Vassar Street
+Muckley Building	1 Amherst Street
+Mudd Building	40 Ames Street
+New House	471-476 Memorial Drive
+Next House	500 Memorial Drive
 Nu Delta	460 Beacon Street, Boston, MA
-Nuclear Reactor Lab	138  Albany Street
-Parsons Laboratory	15  Vassar Street
+Nuclear Reactor Lab	138 Albany Street
+Parsons Laboratory	15 Vassar Street
 Pi Beta Phi	405 Memorial Drive, Cambridge, MA
 Pi Lambda Phi	450 Beacon Street, Boston, MA
 Pika	69 Chestnut Street, Cambridge, MA
@@ -90,18 +90,18 @@ Phi Delta Theta	97 Bay State Road, Boston, MA
 Phi Kappa Sigma	530 Beacon Street, Boston, MA
 Phi Kappa Theta	229 Commonwealth Avenue, Boston, MA
 Phi Sigma Kappa	487 Commonwealth Avenue, Boston, MA
-Pierce Boathouse	405  Memorial Drive
-Pierce Laboratory	33  Massachusetts Avenue
-Plasma Science & Fusion Center	185  Albany Street
-Power Plant Annex	57  Vassar Street
-Pratt School	55  Massachusetts Avenue
-Random Hall	290  Massachusetts Ave
-Religious Activities Center	40  Massachusetts Avenue
-Rinaldi Tile	34  Carleton Street
+Pierce Boathouse	405 Memorial Drive
+Pierce Laboratory	33 Massachusetts Avenue
+Plasma Science & Fusion Center	185 Albany Street
+Power Plant Annex	57 Vassar Street
+Pratt School	55 Massachusetts Avenue
+Random Hall	290 Massachusetts Ave
+Religious Activities Center	40 Massachusetts Avenue
+Rinaldi Tile	34 Carleton Street
 Rockwell Cage	106 Vassar Street
-Rogers Building	77  Massachusetts Avenue
-Rotch Library Extension	77  Massachusetts Avenue
-Senior House	4  Ames Street
+Rogers Building	77 Massachusetts Avenue
+Rotch Library Extension	77 Massachusetts Avenue
+Senior House	4 Ames Street
 Sidney-Pacific	70 Pacific Street
 Sigma Alpha Epsilon	165 Bay State Road, Boston, MA
 Sigma Chi	532 Beacon Street, Boston, MA
@@ -109,35 +109,35 @@ Sigma Kappa	480 Commonwealth Avenue, Boston, MA
 Sigma Nu	28 Fenway, Boston, MA
 Sigma Phi Epsilon	515 Beacon Street, Boston, MA
 Simmons Hall	229 Vassar Street
-Sloan Building	50  Memorial Drive
-Sloan Laboratories	70  Vassar Street
-Sloan Laboratory	127  Massachusetts Avenue
-Solvent Storage	182  Memorial Drive
-Sports & Fitness Center	120  Vassar Street
+Sloan Building	50 Memorial Drive
+Sloan Laboratories	70 Vassar Street
+Sloan Laboratory	127 Massachusetts Avenue
+Solvent Storage	182 Memorial Drive
+Sports & Fitness Center	120 Vassar Street
 Stata Center	32 Vassar Street
-Stratton Student Center	84  Massachusetts Avenue
+Stratton Student Center	84 Massachusetts Avenue
 Student House	111 Bay State Road, Boston, MA
-Suffolk Building	292  Main Street
-Superconducting Test Facility	68  Albany Street
-Tang Center	70  Memorial Drive
-Tang Hall	550  Memorial Drive
+Suffolk Building	292 Main Street
+Superconducting Test Facility	68 Albany Street
+Tang Center	70 Memorial Drive
+Tang Hall	550 Memorial Drive
 Tau Epsilon Phi	253 Commonwealth Avenue, Boston, MA
 Theta Chi	528 Beacon Street, Boston, MA
 Theta Delta Chi	372 Memorial Drive, Boston, MA
 Theta Xi	64 Bay State Road, Boston, MA
 The Warehouse	224 Albany Street
-Volvo Garage	310-314  Massachusetts Ave
-Walker Memorial	142  Memorial Drive
-Wallace Astrophysical Observatory	50  Groton Rd
-Wallace Geophysical Observatory	50  Groton Rd
-Waste Chemical Storage	60  Vassar Street
-West Garage	125  Vassar Street
-Westford Optics Facility	50  Groton Rd
-Whitaker Building	21  Ames St
-Whitaker College	45  Carleton Street
-Wiesner Building	20  Ames Street
+Volvo Garage	310-314 Massachusetts Ave
+Walker Memorial	142 Memorial Drive
+Wallace Astrophysical Observatory	50 Groton Rd
+Wallace Geophysical Observatory	50 Groton Rd
+Waste Chemical Storage	60 Vassar Street
+West Garage	125 Vassar Street
+Westford Optics Facility	50 Groton Rd
+Whitaker Building	21 Ames St
+Whitaker College	45 Carleton Street
+Wiesner Building	20 Ames Street
 WILG	355 Massachusetts Avenue, Cambridge, MA
-Wood Sailing Pavilion	134  Memorial Drive
-Wright Brothers Wind Tunnel	76  Vassar Street
+Wood Sailing Pavilion	134 Memorial Drive
+Wright Brothers Wind Tunnel	76 Vassar Street
 Zeta Beta Tau	58 Manchester Rd, Brookline, MA
 Zeta Psi	233 Massachusetts Ave
