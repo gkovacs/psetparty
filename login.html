@@ -55,7 +55,9 @@
 	</head>
 	
 	<style type="text/css">
-        #demo-block {margin-left: 30px; margin-top:23.8px;}
+        #demo-block {margin-left: 0px; margin-top:-10px; width:100%; padding:10px; color: rgba(255, 255, 255, 0.9);background-color: rgba(51, 51, 51, 0.7);-webkit-box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6); box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
+		#calendar {height: 175px; width:18%; margin-left: 50%; margin-top:-220px; padding:20px; color: rgba(255, 255, 255, 0.9);background-color: rgba(51, 51, 51, 0.7);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
+		#map{height: 175px; width:18%; margin-left: 73%; margin-top:-215px; padding:20px; color: rgba(255, 255, 255, 0.9);background-color: rgba(51, 51, 51, 0.7);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
 		ul#demo-block2 li{
 	margin: 280px 0px -270px 90px;
 	padding: 20px;
@@ -82,9 +84,20 @@
 
 	<!--Demo styles (you can delete this block)-->
 	
-	<div id="demo-block">
-		<img src="pset party logo.png"/>
+	
+		
+    <div id="demo-block"><img src="pset party logo.png"/>
+        <p style="margin-left:160px; font-size:24px; text-shadow: 0px 1px 1px #242424;
+        filter: dropshadow(color=#242424, offx=0, offy=1);"> Find and Create Pset Parties <p> 
     </div>
+        <div id="calendar">
+        <p><a style="font-size:18px"> Find the time of parties on our </a></p>
+        <p><a style="font-size:24px"> Calendar </a></p>
+        </div>
+        <div id="map">
+        <p> <a style="font-size:18px">Find recent nearby parties on our </a></p>
+        <p><a style="font-size:24px"> Map </a></p>
+        </div>
     <ul id="demo-block2">    
         <li><a href="/auth/facebook" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);">Login with Facebook</a></li>
         <li><a href="https://gkovacs.scripts.mit.edu:444/login.py" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);">Login with MIT Certificate</a></li>	
