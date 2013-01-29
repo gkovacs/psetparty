@@ -78,7 +78,7 @@
       overlapEventsSeparate: true,
       totalEventsWidthPercentInOneColumn: 90,
       height: function($calendar){
-        return $(window).height() - $('h1').outerHeight(true);
+        return $(window).height() - $('#calendar').offset().top - 50 //- $('h1').outerHeight(true);
       },
       eventRender : function(calEvent, $event) {
         if (isdefined(calEvent.subjectname)) {
@@ -119,7 +119,8 @@
         if (activeClasses().length == 0) {
           //alert('need to add some classes before you can start adding events! see the search box in the top-right corner!')
           //$.gritter.removeAll()
-          $.gritter.add({'title': 'Add Class to Create Events', 'text': 'You need to add a class before you can create an event'})
+          $.gritter.add({'title': '<div style="text-align: center">Add Class to Create Events</div>', 'text': '<div style="text-align: center">You need to add a class before you can create an event</div>'})
+          $('#gritter-notice-wrapper').click(scrollToTop)
           $('#calendar').weekCalendar('removeUnsavedEvents')
           return
         }
