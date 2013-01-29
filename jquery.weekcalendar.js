@@ -59,7 +59,7 @@
         showHeader: true,
         buttons: true,
         buttonText: {
-          today: 'today',
+          today: 'this week',
           lastWeek: 'previous',
           nextWeek: 'next'
         },

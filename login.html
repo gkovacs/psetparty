@@ -16,6 +16,7 @@
 
 		<title>PsetParty</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="favicon.png" type="image/png" size="16*16">
 		
 		<link rel="stylesheet" href="css/supersized.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="theme/supersized.shutter.css" type="text/css" media="screen" />
@@ -40,10 +41,11 @@
 					// Components							
 					slide_links				:	'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
 					slides 					:  	[			// Slideshow Images
-														//{image : 'slide 1.jpg',},
-														{image : 'slide 3.jpg',}, 
-														{image : 'slide 2.jpg',},
+														{image : 'slide 1.jpg',},
+														{image : 'slide 2.jpg',}, 
+														{image : 'slide 3.jpg',},
 														{image : 'slide 4.jpg',},
+														
 														
 												]
 					
@@ -55,9 +57,8 @@
 	</head>
 	
 	<style type="text/css">
-        #demo-block {margin-left: 0px; margin-top:-10px; width:100%; padding:20px; color: rgba(255, 255, 255, 0.9);background-color: rgba(51, 51, 51, 0.7);-webkit-box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6); box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
-		#calendar { float: left; height: 175px; width:18.5%; margin-left: 45%; margin-top:-269px; padding:0px; color: rgba(255, 255, 255, 1);background-color: rgba(51, 51, 51, 0);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
-		#map{ float: left; height: 175px; width:18.5%; margin-left: 73%; margin-top:-270px; padding:0px; color: rgba(255, 255, 255, 1);background-color: rgba(51, 51, 51, 0);font-weight: bold; font-family:Helvetica, Arial, sans-serif;}
+        #demo-block {margin-left: 0px; margin-top:0px; width:100%; padding:10px; color: rgba(255, 255, 255, 0.9);background-color: rgba(51, 51, 51, 0.7);-webkit-box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6); box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);font-weight: bold; font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;}
+		
 		ul#demo-block2 li{
 	margin: 17% 0px -15% 90px;
 	padding: 20px;
@@ -70,9 +71,9 @@
 	background-color: rgba(51, 51, 51, 0.7);
 	font-style: normal;
 	cursor: pointer;
-	-webkit-box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);
-	box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);
-	font-family: Helvetica, Arial, sans-serif;
+	-webkit-box-shadow: 1px 1px 5px 1px rgba(229, 229, 229, 0.6);
+	box-shadow: 1px 1px 5px 1px rgba(229, 229, 229, 0.6);
+	font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
 	font-size: 1.6em;
 	font-weight: bold;
 }	
@@ -80,32 +81,21 @@
 			
 	</style>
 
-<body style="overflow-x: hidden;">
+<body>
 
 	<!--Demo styles (you can delete this block)-->
 	
 	
 		
-    <div id="demo-block"><img src="pset party logo.png"/>
-        <p style="margin-left:10%; font-size:1.2em; text-shadow: 0px 1px 2px #242424;
-        filter: dropshadow(color=#242424, offx=0, offy=1);"> Find and Create Pset Parties <p> 
+    <div id="demo-block"><img src="pset party logo.png" height="150px" style="margin-left: 40px;"/>
+        <p style="margin-left:15%; font-size:1.3em; text-shadow: 1px 1px 2px #242424;
+        filter: dropshadow(color=#242424, offx=,1 offy=1);"> Make New Pset Buddies <p> 
     </div>
-        <div id="calendar">
-        <img src="calendar-screenshot.png"></img>
-        <p><a style="font-size: 1.15em; text-shadow: 2px 2px 4px #242424; filter: dropshadow(color=#242424, offx=2, offy=2); z-index: absolute; position: absolute; margin-top: -225px; margin-left: 15px;"> Find party times on</a></p>
-        <p><a style="font-size: 1.6em; text-shadow: 2px 2px 4px #242424; filter: dropshadow(color=#242424, offx=2, offy=2); position: absolute; margin-top: -200px; margin-left: 15px;"> Calendar </a></p>
-        </div>
-     
-        <div id="map">
-        <img src="map-screenshot.png"></img>
-        <p> <a style="font-size: 1.15em; text-shadow: 2px 2px 4px #242424; filter: dropshadow(color=#242424, offx=2, offy=2); position: absolute; margin-top: -225px;margin-left: 15px;">Find nearby parties on</a></p>
-        <p><a style="font-size: 1.6em; text-shadow: 2px 2px 4px #242424; filter: dropshadow(color=#242424, offx=2, offy=2); position: absolute; margin-top: -200px;margin-left: 15px;"> Map </a></p>
-        </div>
-    <ul id="demo-block2">    
-        <li><a href="https://gkovacs.scripts.mit.edu:444/login.py" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);text-shadow: 0px 1px 2px #242424;
-        filter: dropshadow(color=#242424, offx=0, offy=1);">Login with MIT Certificates</a></li>
-        <li><a href="/auth/facebook" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);text-shadow: 0px 1px 2px #242424;
-        filter: dropshadow(color=#242424, offx=0, offy=1);">Login with Facebook</a></li>	
+            <ul id="demo-block2">    
+        <a href="/auth/facebook" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);text-shadow: 1px 1px 2px #242424;
+        filter: dropshadow(color=#242424, offx=1, offy=1);"><li>Login with Facebook</li></a>
+        <a href="https://gkovacs.scripts.mit.edu:444/login.py" style="text-decoration: none; color: rgba(255, 255, 255, 0.9);text-shadow: 1px 1px 2px #242424;
+        filter: dropshadow(color=#242424, offx=1, offy=1);"><li>Login with MIT Certificate</li></a>
 	</ul>
 	
 	<!--End of styles-->

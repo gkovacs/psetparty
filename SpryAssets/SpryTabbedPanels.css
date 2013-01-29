@@ -28,6 +28,7 @@
  */
 .TabbedPanels {
 	overflow: hidden;
+	min-width: 867px;
 	left: 68px;
 	right: 70px;
 	padding: 5px;

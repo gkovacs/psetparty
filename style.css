@@ -3,34 +3,28 @@
   }
 
 	html {
-		height: 100%;
+		/*height: 100%;*/
+		min-height: 800px;
+		overflow: auto;
 	}
 
   body {
-	height: 100%;
+	/*height: 100%;*/
 	font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
-	margin: 0;
+	margin: 0 auto;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 
 
-	/* IE10 Consumer Preview */ 
-	background-image: -ms-radial-gradient(center bottom, circle farthest-corner, #730505 0%, #2B0000 100%);
+background: rgb(153,50,50); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%, rgba(153,29,29,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(153,50,50,1)), color-stop(100%,rgba(153,29,29,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#993232', endColorstr='#991d1d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-	/* Mozilla Firefox */ 
-	background-image: -moz-radial-gradient(center bottom, circle farthest-corner, #730505 0%, #2B0000 100%);
-
-	/* Opera */ 
-	background-image: -o-radial-gradient(center bottom, circle farthest-corner, #730505 0%, #2B0000 100%);
-
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(radial, center bottom, 0, center bottom, 553, color-stop(0, #730505), color-stop(1, #2B0000));
-
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-radial-gradient(center bottom, circle farthest-corner, #730505 0%, #2B0000 100%);
-
-	/* W3C Markup, IE10 Release Preview */ 
-	background-image: radial-gradient(circle farthest-corner at center bottom, #730505 0%, #2B0000 100%);
 
 	/*background-color: #380000;	#544937*/
 	

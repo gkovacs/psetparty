@@ -78,7 +78,7 @@ function timeRangeSliderChanged() {
   if (relativeTime == '1 hours') relativeTime = 'hour'
   if (timeRangeVal > 48)
     relativeTime = getLastAcceptableTime().fromNow().toString().split('in ').join('').split('an ').join('').split('a ').join('')
-  $('#scrolldisplay').text('Show pset parties in the next ' + relativeTime)
+  $('#scrolldisplay').text('Pset parties in the next ' + relativeTime)
   refreshMap()
 }
 
