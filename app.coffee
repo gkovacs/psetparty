@@ -204,8 +204,8 @@ getAddress = everyone.now.getAddress = (location) ->
     if addr.indexOf('Boston') != -1 or addr.indexOf('Brookline') != -1 or addr.indexOf('Cambridge') != -1
       return addr
     else
-      return addr + ' , Cambridge, MA'
-  return location + ' , Cambridge, MA'
+      return addr + ' , MIT, Cambridge, MA'
+  return location + ' , MIT, Cambridge, MA'
 
 everyone.now.addClassType = (classname) ->
   if typeof classname != typeof ''
