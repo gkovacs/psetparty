@@ -45,15 +45,22 @@ function calendarEntered() {
   $('#calendar').weekCalendar('resize')
 }
 
+var mapSettingCenterThisRun = true
+
 function mapEntered() {
   $('#scrollwrap').show()
   //console.log('map entered')
   initializeMap()
   refreshMap()
   setTimeout(function() {
-    //getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
     google.maps.event.trigger(getGoogleMap(), 'resize')
-    getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+    if (mapSettingCenterThisRun) {
+      getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+      //mapSettingCenterThisRun = true
+    } else {
+      mapSettingCenterThisRun = true
+    }
+    //getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
     $('#map_canvas').height($(window).height() - $('#map_canvas').offset().top - 50)
   }, 100)
   
@@ -228,7 +235,13 @@ function getClassroomAddress(str) {
 }
 
 function getLatLngForEvent(event, callback) {
-  var places = [event.location + ' , MIT, Cambridge, MA', event.location + ' ,' + event.address, event.address]
+  var places = [event.location + ' , ' + event.address, event.address, event.location + ' , MIT, Cambridge, MA']
+  if (event.address.indexOf('Boston') != -1) {
+    places = [event.address, event.location + ' , ' + event.address, event.location + ' , Boston, MA']
+  }
+  if (event.address.indexOf('Brookline') != -1) {
+    places = [event.address, event.location + ' , ' + event.address, event.location + ' , Brookline, MA']
+  }
   //if (isClassroom(event.location)) {
   //  places[0] = getClassroomAddress(event.location)
   //}
@@ -239,16 +252,17 @@ function getLatLngForEvent(event, callback) {
       getLatLng(places[1], function(result2) {
         if (isdefined(result2)) {
           callback(result2)
+        } else {
+
+		      getLatLng(places[2], function(result3) {
+				    if (isdefined(result3)) {
+				      callback(result3)
+				    } else {
+				      callback(null)
+				    }
+				  })
+        
         }
-        
-        getLatLng(places[2], function(result3) {
-		      if (isdefined(result3)) {
-		        callback(result3)
-		      } else {
-		        callback(null)
-		      }
-		    })
-        
       })
     }
   })
@@ -405,4 +419,21 @@ mapInitialized = true
             mapOptions);
         //$('#map_canvas').height(500)
         setGeoLocationMarker()
+      
+      /*
+      setTimeout(function() {
+    $('#map_canvas').height($(window).height() - $('#map_canvas').offset().top - 50)
+    setTimeout(function() {
+
+    getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+    google.maps.event.trigger(getGoogleMap(), 'resize')
+    getGoogleMap().setCenter(new google.maps.LatLng(42.3590995, -71.0934608))
+    //$('#map_canvas').height($(window).height() - $('#map_canvas').offset().top - 50)
+    
+    }, 500)
+    
+
+  }, 500)
+  */
+      
       }

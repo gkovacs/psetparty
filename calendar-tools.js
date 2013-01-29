@@ -211,6 +211,7 @@ function populateEventInfoDisplay(event) {
     $('#locationInfo').html($('<a>').attr('href', '#').text(event.location).click(function() {
         setMarkerPositionForEvent(event)
         $('.ui-dialog-titlebar-close').trigger('click')
+        mapSettingCenterThisRun = false
         $("#mapSwitchTab").click()
         google.maps.event.trigger(markersById[displayedEvent.id], 'click')
       })
