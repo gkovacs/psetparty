@@ -71,8 +71,8 @@
 	  }
     
     var $calendar = $('#calendar').weekCalendar({
-      timeslotsPerHour: 4,
-      timeslotHeight: 20,
+      timeslotsPerHour: 2,
+      timeslotHeight: 25,
       scrollToHourMillis : 0,
       allowCalEventOverlap: true,
       overlapEventsSeparate: true,
