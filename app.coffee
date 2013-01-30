@@ -350,7 +350,8 @@ eventToIcal = (event) ->
     eventSummary.push event.partyname
   if event.location? and event.location != ''
     eventSummary.push event.location
-  output.push 'SUMMARY:' + event.subjectname + eventSummary.join(' - ')
+  output.push 'SUMMARY:' + eventSummary.join(' - ')
+  output.push 'DESCRIPTION:' + eventSummary.join(' - ')
   for participant in event.participants
     output.push 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=' + participant.fullname + ';X-NUM-GUESTS=0:' + participant.email
   output.push 'LOCATION:' + event.location
