@@ -309,8 +309,10 @@ VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:''' + calendar_description + '''
+
 X-WR-TIMEZONE:America/New_York
-X-WR-CALDESC:
+X-WR-CALDESC:''' + calendar_description + '''
+
 BEGIN:VTIMEZONE
 TZID:America/New_York
 X-LIC-LOCATION:America/New_York
