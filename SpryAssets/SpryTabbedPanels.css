@@ -33,7 +33,7 @@
 	right: 70px;
 	padding: 5px;
 	clear: none;
-	width: 85%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
+	width: 90%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
 	top: 123px;
 	position: absolute;
 	float: right;
