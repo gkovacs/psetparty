@@ -34,7 +34,7 @@
 	padding: 5px;
 	clear: none;
 	width: 90%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
-	top: 123px;
+	top: 140px;
 	position: absolute;
 	float: right;
 }
