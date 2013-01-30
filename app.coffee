@@ -328,13 +328,14 @@ END:VTIMEZONE'''.split('\n').join('\r\n'))
     callback(output.join('\r\n'))
   )
 
-app.get '/ical', (req, res) ->
+app.get '/exportcal', (req, res) ->
   username = req.query.username
   if not username?
     res.send 'need username'
     return
   getIcalForUser(username, (icaldata) ->
-    res.header('Content-Type', 'text/plain')
+    res.setHeader('Content-Type', 'text/plain')
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
     res.send icaldata
   )
 
