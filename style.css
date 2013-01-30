@@ -63,9 +63,14 @@
 	#header {
 		margin: 5px 0px 0px;
 		min-width:1000px;
+		padding: 5px;
 		background-color: rgba(51, 51, 51, 0.7);
 		-webkit-box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);
 		box-shadow: 1px 1px 5px 2px rgba(229, 229, 229, 0.6);
+	}
+
+	#logo {
+		margin-left: 50px;
 	}
   
   #search-icon{
@@ -156,12 +161,12 @@ background-image: radial-gradient(circle farthest-corner at center, #FFA200 0%, 
 
 #scrollwrap {
 	float: left;
-	left: 250px;
+	left: 305px;
 	overflow: hidden;
 	padding: 5px;
 	position: absolute;
 	right: 100px;
-	top: 140px;
+	top: 155px;
 	min-width: 700px;
 }
 
