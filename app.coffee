@@ -303,7 +303,7 @@ abbreviatedUserName = (email) ->
 getIcalForUser = (username, callback) ->
   getEventsUserIsParticipating(username, (events) ->
     output = []
-    calendar_description = 'Pset Parties for ' + abbreviatedUserName(username)
+    calendar_description = 'Pset Parties attended by ' + abbreviatedUserName(username)
     output.push('''BEGIN:VCALENDAR
 VERSION:2.0
 CALSCALE:GREGORIAN
