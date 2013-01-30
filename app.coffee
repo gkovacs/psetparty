@@ -293,14 +293,22 @@ getEventsUserIsParticipating = everyone.now.getEventsUserIsParticipating = (user
       events.push subjectevents[eventid]
   callback events
 
+abbreviatedUserName = (email) ->
+  if email.indexOf('@MIT.EDU') != -1
+    return email.split('@MIT.EDU').join('')
+  if email.indexOf('http://www.facebook.com/') != -1
+    return email.split('http://www.facebook.com/').join('')
+  return email
+
 getIcalForUser = (username, callback) ->
   getEventsUserIsParticipating(username, (events) ->
     output = []
+    calendar_description = 'Pset Parties for ' + abbreviatedUserName(username)
     output.push('''BEGIN:VCALENDAR
 VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Pset Parties
+X-WR-CALNAME:''' + calendar_description + '''
 X-WR-TIMEZONE:America/New_York
 X-WR-CALDESC:
 BEGIN:VTIMEZONE
@@ -321,7 +329,7 @@ DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE'''.split('\n').join('\r\n'))
-    output.push 'DESCRIPTION:Pset Parties'
+    output.push 'DESCRIPTION:''' + calendar_description
     for event in events
       output.push eventToIcal(event)
     output.push 'END:VCALENDAR'
