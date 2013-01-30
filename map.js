@@ -44,7 +44,7 @@ function calendarEntered() {
   $('#scrollwrap').hide()
   $('#calendar').weekCalendar('resize')
   $('#addToGoogleCalendar').show()
-  $('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu/exportcal?username=' + email))
+  $('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu:3333/exportcal?username=' + email))
 }
 
 var mapSettingCenterThisRun = true
