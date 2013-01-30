@@ -173,6 +173,8 @@
         getEvents(callback)
       }
     });
+    
+    calendarEntered()
   });
 
 
