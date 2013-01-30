@@ -43,11 +43,14 @@ function refreshMap() {
 function calendarEntered() {
   $('#scrollwrap').hide()
   $('#calendar').weekCalendar('resize')
+  $('#addToGoogleCalendar').show()
+  $('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu/exportcal?username=' + email))
 }
 
 var mapSettingCenterThisRun = true
 
 function mapEntered() {
+  $('#addToGoogleCalendar').hide()
   $('#scrollwrap').show()
   //console.log('map entered')
   initializeMap()
