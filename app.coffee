@@ -301,19 +301,7 @@ VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Pset Parties
-X-WR-TIMEZONE:America/New_York
-X-WR-CALDESC:
-BEGIN:VTIMEZONE
-TZID:America/New_York
-X-LIC-LOCATION:America/New_York
-BEGIN:DAYLIGHT
-TZOFFSETFROM:-0500
-TZOFFSETTO:-0400
-TZNAME:EDT
-DTSTART:19700308T020000
-RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
-END:DAYLIGHT
-END:VTIMEZONE'''.split('\n').join('\r\n'))
+X-WR-CALDESC:Pset Parties'''.split('\n').join('\r\n'))
     output.push 'DESCRIPTION:Pset Parties'
     for event in events
       output.push eventToIcal(event)
