@@ -341,8 +341,8 @@ app.get '/ical', (req, res) ->
 eventToIcal = (event) ->
   output = []
   output.push 'BEGIN:VEVENT'
-  output.push 'DTSTART;TZID=US-Eastern:' + moment(event.start).format('YYYYMMDDTHHmmss') + 'Z'
-  output.push 'DTEND;TZID=US-Eastern:' + moment(event.end).format('YYYYMMDDTHHmmss') + 'Z'
+  output.push 'DTSTART;TZID=America/New_York:' + moment(event.start).format('YYYYMMDDTHHmmss') + 'Z'
+  output.push 'DTEND;TZID=America/New_York:' + moment(event.end).format('YYYYMMDDTHHmmss') + 'Z'
   eventSummary = []
   if event.subjectname? and event.subjectname != ''
     eventSummary.push event.subjectname
