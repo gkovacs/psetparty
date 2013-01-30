@@ -320,12 +320,12 @@ TZNAME:EST
 DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
-END:VTIMEZONE''')
+END:VTIMEZONE'''.split('\n').join('\r\n'))
     output.push 'DESCRIPTION:Pset Parties'
     for event in events
       output.push eventToIcal(event)
     output.push 'END:VCALENDAR'
-    callback(output.join('\n'))
+    callback(output.join('\r\n'))
   )
 
 app.get '/ical', (req, res) ->
@@ -341,8 +341,8 @@ app.get '/ical', (req, res) ->
 eventToIcal = (event) ->
   output = []
   output.push 'BEGIN:VEVENT'
-  output.push 'DTSTART:' + moment(event.start).format()
-  output.push 'DTEND:' + moment(event.end).format()
+  output.push 'DTSTART:' + moment(event.start).format('YYYYMMDDTHHmm') + '00Z'
+  output.push 'DTEND:' + moment(event.end).format('YYYYMMDDTHHmm') + '00Z'
   eventSummary = []
   if event.subjectname? and event.subjectname != ''
     eventSummary.push event.subjectname
@@ -355,7 +355,7 @@ eventToIcal = (event) ->
     output.push 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=' + participant.fullname + ';X-NUM-GUESTS=0:' + participant.email
   output.push 'LOCATION:' + event.location
   output.push 'END:VEVENT'
-  return output.join('\n')
+  return output.join('\r\n')
 
 mkId = () -> Math.floor(Math.random()*9007199254740992)
 
