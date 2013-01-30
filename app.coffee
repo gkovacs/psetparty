@@ -333,6 +333,8 @@ app.get '/exportcal', (req, res) ->
   if not username?
     res.send 'need username'
     return
+  if username.lastIndexOf('_') != -1
+    username = username[0...username.lastIndexOf('_')]
   getIcalForUser(username, (icaldata) ->
     res.setHeader('Content-Type', 'text/plain')
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
