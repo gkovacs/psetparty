@@ -181,7 +181,7 @@ background-image: radial-gradient(circle farthest-corner at center, #FFA200 0%, 
 	top: 158px;
 	border-radius: 10px;
 	background-color: black;
-	z-index: 99999;
+	z-index: 3;
 }
 
 
