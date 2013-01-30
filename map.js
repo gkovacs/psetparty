@@ -52,7 +52,7 @@ function calendarEntered() {
   $('#scrollwrap').hide()
   $('#calendar').weekCalendar('resize')
   if (haveJoinedEvents()) { showAddToCalendarButton() }
-  $('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu:3333/exportcal?username=' + email + '_' + Math.floor(Math.random()*100000) + '.ical'))
+  else { $('#addToGoogleCalendar').hide() }
 }
 
 var mapSettingCenterThisRun = true

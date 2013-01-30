@@ -16,6 +16,7 @@ function classlistCallback( request, response ) {
             populateEventInfoDisplay(events[i])
         }
         if (haveJoinedEvents() && isShowingCalendar) { showAddToCalendarButton() }
+        else { $('#addToGoogleCalendar').hide() }
         //console.log('called getevents')
         callback(events)
       })
