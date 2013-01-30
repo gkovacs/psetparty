@@ -40,16 +40,25 @@ function refreshMap() {
   placeEvents()
 }
 
+var isShowingCalendar = true
+
+function showAddToCalendarButton() {
+$('#addToGoogleCalendar').show()
+$('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu:3333/exportcal?username=' + email + '_' + Math.floor(Math.random()*100000) + '.ical'))
+}
+
 function calendarEntered() {
+  isShowingCalendar = true
   $('#scrollwrap').hide()
   $('#calendar').weekCalendar('resize')
-  $('#addToGoogleCalendar').show()
+  if (haveJoinedEvents()) { showAddToCalendarButton() }
   $('#addToGoogleCalendarLink').attr('href', encodeURI('http://www.google.com/calendar/render?cid=http://psetparty.xvm.mit.edu:3333/exportcal?username=' + email + '_' + Math.floor(Math.random()*100000) + '.ical'))
 }
 
 var mapSettingCenterThisRun = true
 
 function mapEntered() {
+  isShowingCalendar = false
   $('#addToGoogleCalendar').hide()
   $('#scrollwrap').show()
   //console.log('map entered')

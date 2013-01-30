@@ -182,6 +182,17 @@ function getUser() {
   return {'email': email, 'fullname': fullname}
 }
 
+function haveJoinedEvents() {
+  var events = listEvents()
+  for (var i = 0; i < events.length; ++i) {
+    var participants = events[i].participants
+    for (var j = 0; j < participants.length; ++j) {
+      if (participants[j].email == email) return true
+    }
+  }
+  return false
+}
+
 displayedEvent = {}
 
 joinOrLeaveClicked = function() {
