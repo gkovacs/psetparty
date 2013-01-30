@@ -329,7 +329,7 @@ DTSTART:19701101T020000
 RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
 END:STANDARD
 END:VTIMEZONE'''.split('\n').join('\r\n'))
-    output.push 'DESCRIPTION:''' + calendar_description
+    output.push 'DESCRIPTION:' + calendar_description
     for event in events
       output.push eventToIcal(event)
     output.push 'END:VCALENDAR'
