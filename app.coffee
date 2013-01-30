@@ -3,6 +3,8 @@ request = require 'request'
 $ = require 'jQuery'
 restler = require 'restler'
 
+moment = require 'moment'
+
 redis = require 'redis'
 rclient = redis.createClient()
 
@@ -290,6 +292,51 @@ getEventsUserIsParticipating = everyone.now.getEventsUserIsParticipating = (user
     if subjectevents[eventid]?
       events.push subjectevents[eventid]
   callback events
+
+getIcalForUser = (username, callback) ->
+  getEventsUserIsParticipating(username, (events) ->
+    output = []
+    output.push('''BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:UID Tearoom
+X-WR-TIMEZONE:America/New_York
+X-WR-CALDESC:
+BEGIN:VTIMEZONE
+TZID:America/New_York
+X-LIC-LOCATION:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE''')
+    output.push 'DESCRIPTION:Pset Parties'
+    for event in events
+      output.push eventToIcal(event)
+    output.push 'END:VCALENDAR'
+    callback(output.join('\n'))
+  )
+
+app.get '/ical', (req, res) ->
+  username = req.query.username
+  if not username?
+    res.send 'need username'
+    return
+  getIcalForUser(username, (icaldata) ->
+    res.header('Content-Type', 'text/plain')
+    res.send icaldata
+  )
 
 eventToIcal = (event) ->
   output = []
