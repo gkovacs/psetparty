@@ -313,13 +313,6 @@ TZNAME:EDT
 DTSTART:19700308T020000
 RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
 END:DAYLIGHT
-BEGIN:STANDARD
-TZOFFSETFROM:-0400
-TZOFFSETTO:-0500
-TZNAME:EST
-DTSTART:19701101T020000
-RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
-END:STANDARD
 END:VTIMEZONE'''.split('\n').join('\r\n'))
     output.push 'DESCRIPTION:Pset Parties'
     for event in events
@@ -341,8 +334,8 @@ app.get '/ical', (req, res) ->
 eventToIcal = (event) ->
   output = []
   output.push 'BEGIN:VEVENT'
-  output.push 'DTSTART:' + moment(event.start).format('YYYYMMDDTHHmm') + '00Z'
-  output.push 'DTEND:' + moment(event.end).format('YYYYMMDDTHHmm') + '00Z'
+  output.push 'DTSTART:' + moment(event.start).format('YYYYMMDDTHHmmss') + 'Z'
+  output.push 'DTEND:' + moment(event.end).format('YYYYMMDDTHHmmss') + 'Z'
   eventSummary = []
   if event.subjectname? and event.subjectname != ''
     eventSummary.push event.subjectname
