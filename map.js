@@ -229,9 +229,9 @@ function isClassroom(str) {
   return false
 }
 
-function getClassroomAddress(str) {
+function getBuildingNumber(str) {
   var splitByDash = str.split('-')
-  return 'Building ' + splitByDash[0] + ' , MIT, Cambridge, MA'
+  return 'Building ' + splitByDash[0]
 }
 
 function getLatLngForEvent(event, callback) {
@@ -242,9 +242,17 @@ function getLatLngForEvent(event, callback) {
   if (event.address.indexOf('Brookline') != -1) {
     places = [event.address, event.location + ' , ' + event.address, event.location + ' , Brookline, MA']
   }
-  //if (isClassroom(event.location)) {
-  //  places[0] = getClassroomAddress(event.location)
-  //}
+  if (event.location == 'Green Building') {
+    places = [event.location + ' , MIT, Cambridge, MA', event.location + ' , MIT, Cambridge, MA', event.location + ' , ' + event.address]
+  }
+  if (isClassroom(event.location)) {
+    places = [getBuildingNumber(event.location) + ' , ' + event.address, event.address, getBuildingNumber(event.location) + ' , MIT, Cambridge, MA']
+    if (getBuildingNumber(event.location) == 'Building 10')
+      places[0] = 'Building 10, MIT, Cambridge, MA'
+    if (getBuildingNumber(event.location) == 'Building 32')
+      places[0] = 'Stata Center, MIT, Cambridge, MA'
+    
+  }
   getLatLng(places[0], function(result1) {
     if (isdefined(result1)) {
        callback(result1)

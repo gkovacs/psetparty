@@ -280,6 +280,36 @@ getEventsForUser = everyone.now.getEventsForUser = (username, callback) ->
   '''
   callback events
 
+getEventsUserIsParticipating = everyone.now.getEventsUserIsParticipating = (username, callback) ->
+  events = []
+  # now we add subjects for which the user is participating but isn't in the class
+  customEventDict = participantToEvent[username] ? {}
+  for eventid,subjectname of customEventDict
+    eventid = parseInt(eventid)
+    subjectevents = allevents[subjectname] ? {}
+    if subjectevents[eventid]?
+      events.push subjectevents[eventid]
+  callback events
+
+eventToIcal = (event) ->
+  output = []
+  output.push 'BEGIN:VEVENT'
+  output.push 'DTSTART:' + moment(event.start).format()
+  output.push 'DTEND:' + moment(event.end).format()
+  eventSummary = []
+  if event.subjectname? and event.subjectname != ''
+    eventSummary.push event.subjectname
+  if event.partyname? and event.partyname != ''
+    eventSummary.push event.partyname
+  if event.location? and event.location != ''
+    eventSummary.push event.location
+  output.push 'SUMMARY:' + event.subjectname + eventSummary.join(' - ')
+  for participant in event.participants
+    output.push 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=' + participant.fullname + ';X-NUM-GUESTS=0:' + participant.email
+  output.push 'LOCATION:' + event.location
+  output.push 'END:VEVENT'
+  return output.join('\n')
+
 mkId = () -> Math.floor(Math.random()*9007199254740992)
 
 deleteEvent = everyone.now.deleteEvent = (subjectname, eventid, callback) ->
