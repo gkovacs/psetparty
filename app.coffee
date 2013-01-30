@@ -366,7 +366,12 @@ eventToIcal = (event) ->
   output.push 'SUMMARY:' + eventSummary.join(' - ')
   output.push 'DESCRIPTION:' + eventSummary.join(' - ')
   for participant in event.participants
-    output.push 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=' + participant.fullname + ';X-NUM-GUESTS=0:' + participant.email
+    useremail = participant.email
+    if not useremail?
+      useremail = 'somebody'
+    if useremail.indexOf('http://') != -1
+      useremail = abbreviatedUserName(useremail) + '@facebook.com'
+    output.push 'ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;CN=' + participant.fullname + ';X-NUM-GUESTS=0:' + useremail
   output.push 'LOCATION:' + event.location
   output.push 'END:VEVENT'
   return output.join('\r\n')
