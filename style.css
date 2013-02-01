@@ -17,19 +17,8 @@
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 
-	background: rgb(153,50,50); /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%, rgba(153,29,29,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(153,50,50,1)), color-stop(100%,rgba(153,29,29,1))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(153,50,50,1) 0%,rgba(153,29,29,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#993232', endColorstr='#991d1d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-
-	/*background-color: #380000;	#544937*/
 	
-
+    background-color: #f8f8f8;
 
   }
 
@@ -115,14 +104,14 @@
 input[type="range"] {
 	-webkit-appearance: none;
 	width: 30%;
-	height: 10px;
+	height: 5px;
 	padding: 3px;
 	-webkit-border-radius: 15px;
 	border-radius: 15px;
-	border: 2px solid rgb(251, 165, 44);
-	background-image: -webkit-gradient(
-		linear, left top, left bottom, color-stop(0, #000000), color-stop(1, #222222)
-	);
+	border: 1px solid #999;
+	background-color: #cccccc;
+	-webkit-box-shadow: inset 0px 1px 1px 0px rgba(51, 51, 51, 0.3);
+        box-shadow: inset 0px 1px 1px 0px rgba(51, 51, 51, 0.3);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -130,31 +119,16 @@ input[type="range"]::-webkit-slider-thumb {
 	position: relative;
 	/*top: -1px;*/
 	z-index: 1;
-	width: 30px;
-	height: 30px;
+	width: 23px;
+	height: 23px;
 
 	-webkit-border-radius: 35px;
 	-moz-border-radius: 35px.;
 	border-radius: 35px;
- 	
-
-/* IE10 Consumer Preview */ 
-background-image: -ms-radial-gradient(center, circle farthest-corner, #FFA200 0%, #FFE294 100%);
-
-/* Mozilla Firefox */ 
-background-image: -moz-radial-gradient(center, circle farthest-corner, #FFA200 0%, #FFE294 100%);
-
-/* Opera */ 
-background-image: -o-radial-gradient(center, circle farthest-corner, #FFA200 0%, #FFE294 100%);
-
-/* Webkit (Safari/Chrome 10) */ 
-background-image: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, #FFA200), color-stop(1, #FFE294));
-
-/* Webkit (Chrome 11+) */ 
-background-image: -webkit-radial-gradient(center, circle farthest-corner, #FFA200 0%, #FFE294 100%);
-
-/* W3C Markup, IE10 Release Preview */ 
-background-image: radial-gradient(circle farthest-corner at center, #FFA200 0%, #FFE294 100%);
+ 	background-color: #ffa200;
+	-webkit-box-shadow:  0px 1px 2px 1px rgba(51, 51, 51, 0.5);
+        
+        box-shadow:  0px 1px 2px 1px rgba(51, 51, 51, 0.5);
 }
 
 #scrollwrap {
@@ -165,7 +139,8 @@ background-image: radial-gradient(circle farthest-corner at center, #FFA200 0%, 
 	position: absolute;
 	right: 100px;
 	top: 155px;
-	min-width: 700px;
+	min-width: 700px; 
+	
 }
 
 #scroll {
@@ -188,9 +163,9 @@ background-image: radial-gradient(circle farthest-corner at center, #FFA200 0%, 
 
 
 #scrolldisplay {
-	font: bold 1em sans-serif; 
-	color: #fff;
-	text-shadow: 0px -1px 1px #704811;
+	font: bold 1.2em sans-serif; 
+	color: rgba(51, 51, 51, 0.9);
+	text-shadow: 0px -1px 1px #eeeeee;
 	margin-left: 5px;
 	margin-bottom: 5px;
 	overflow:hidden;
