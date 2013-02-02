@@ -280,7 +280,10 @@ function getLatLngForEvent(event, callback) {
       places[0] = 'Building 10, MIT, Cambridge, MA'
     if (getBuildingNumber(event.location) == 'Building 32')
       places[0] = 'Stata Center, MIT, Cambridge, MA'
-    
+    if (getBuildingNumber(event.location) == 'Building 54')
+      places[0] = 'Green Building, MIT, Cambridge, MA'
+    if (getBuildingNumber(event.location) == 'Building 56')
+      places[0] = 'Whitaker Building, MIT, Cambridge, MA'
   }
   getLatLng(places[0], function(result1) {
     if (isdefined(result1)) {
