@@ -115,14 +115,14 @@
 5-233	55  Massachusetts Avenue
 5-234	55  Massachusetts Avenue
 50-340	142  Memorial Drive
-54-100	21  Ames St
-56-114	21  Ames St
-56-154	21  Ames St
-56-162	21  Ames St
-56-167	21  Ames St
-56-169	21  Ames St
-56-180	21  Ames St
-56-191	21  Ames St
+54-100	Green Building
+56-114	Whitaker Building
+56-154	Whitaker Building
+56-162	Whitaker Building
+56-167	Whitaker Building
+56-169	Whitaker Building
+56-180	Whitaker Building
+56-191	Whitaker Building
 6-120	182  Memorial Drive
 66-110	25  Ames Street
 66-144	25  Ames Street
