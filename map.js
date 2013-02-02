@@ -346,19 +346,24 @@ function addMarkerForEvent(event) {
 		        //  'position': latlng,
 		        'icon': getMarkerIconForClass(event.subjectname),
 		        })
+		      oms.addMarker(marker)
 		      //marker.setMap(getGoogleMap())
 		      markersById[event.id] = marker
 
           google.maps.event.addListener(marker, 'click', function() {
+          //oms.addListener('click', function(nmarker) {
             if (isdefined(currentlyOpenInfoWindow) && isdefined(currentlyOpenInfoWindow.close)) {
               currentlyOpenInfoWindow.close()
             }
+            var nmarker = this
+            console.log(nmarker)
             currentlyOpenInfoWindowEventId = event.id
-            currentlyOpenMarker = this
+            
+            currentlyOpenMarker = nmarker
             currentlyOpenInfoWindow = new google.maps.InfoWindow({
               'content': getEventHtmlBox(getLatestEvent(event)),
             })
-            currentlyOpenInfoWindow.open(getGoogleMap(), this)
+            currentlyOpenInfoWindow.open(getGoogleMap(), nmarker)
           })
         
         setMarkerPositionForEvent(event)
@@ -444,6 +449,7 @@ function setGeoLocationMarker() {
 
 mapInitialized = false
 geocoder = null
+oms = null
 
 function initializeMap() {
 if (mapInitialized) return
@@ -457,6 +463,8 @@ mapInitialized = true
         };
         mapContainer.googmap = googleMap = new google.maps.Map(document.getElementById("map_canvas"),
             mapOptions);
+        oms = new OverlappingMarkerSpiderfier(googleMap,
+          {markersWontMove: false, markersWontHide: false, keepSpiderfied: true});
         //$('#map_canvas').height(500)
         setGeoLocationMarker()
       
