@@ -179,6 +179,17 @@ function emailNamePair(x) {
     .text(x.fullname)
 }
 
+function toEmailList(participantList) {
+  var output = []
+  for (var i = 0; i < participantList.length; ++i) {
+    var currentEmail = participantList[i].email
+    if (currentEmail.indexOf('http://www.facebook.com/') == 0)
+      currentEmail = currentEmail.split('http://www.facebook.com/').join('') + '@facebook.com'
+    output.push(currentEmail)
+  }
+  return output
+}
+
 function printParticipants(participants) {
   if (participants == null) {
     return $('<span>')
@@ -187,6 +198,12 @@ function printParticipants(participants) {
     for (var i = 0; i < participants.length; ++i) {
       var currentParticipant = emailNamePair(participants[i])
       output.append(currentParticipant).append(' ')
+    }
+    if (participants.length > 1) {
+      var mailToAll = $('<a>')
+        .attr('href', 'mailto:' + toEmailList(participants).join(','))
+        .text('Email All')
+      output.append(mailToAll)
     }
     return output
   }
