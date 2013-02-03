@@ -517,7 +517,7 @@ everyone.now.getClasses = getClasses = (username, callback) ->
 everyone.now.addClass = (username, classname, callback) ->
   if not classes[username]?
     classes[username] = []
-  if classes[username].indexOf(classname) == -1
+  if classlist_set[classname]? and classes[username].indexOf(classname) == -1
     classes[username].push classname
   if callback?
     callback(classes[username])
