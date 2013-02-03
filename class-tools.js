@@ -168,9 +168,9 @@ function classlistCallback( request, response ) {
     var active = activeClasses()
     if (active.length > 0 && active.indexOf(classname) != -1)
       return false
-    if (!isdefined(classlist[classname])) {
-      return false
+    if (classlist.indexOf(classname) == -1) {
       //now.addClassType(classname)
+      return false
     }
     addClassWidget(classname)
     now.addClass(email, classname, function() {
