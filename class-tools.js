@@ -169,7 +169,8 @@ function classlistCallback( request, response ) {
     if (active.length > 0 && active.indexOf(classname) != -1)
       return false
     if (!isdefined(classlist[classname])) {
-      now.addClassType(classname)
+      return false
+      //now.addClassType(classname)
     }
     addClassWidget(classname)
     now.addClass(email, classname, function() {
